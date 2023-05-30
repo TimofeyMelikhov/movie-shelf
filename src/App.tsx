@@ -22,8 +22,6 @@ const App: React.FC = () => {
 
       { movies.map(movie => <MoviesCard key={movie.kinopoiskId} movie={movie} />) }
 
-      <p>{JSON.stringify(movies)}</p>
-
     </div>
   );
 }

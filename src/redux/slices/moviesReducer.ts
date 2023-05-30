@@ -1,10 +1,14 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { IMovie } from "../../models/IMovie"
+import { IMovie } from "../../models/IMovieModels"
 
 interface IMoviesState {
   movies: IMovie[]
   isLoading: boolean
   isError: string,
+}
+
+export interface IPayloadAction {
+  items: IMovie[]
 }
 
 const initialState: IMoviesState = {
@@ -20,10 +24,10 @@ export const movieSlice = createSlice({
     moviesFetching(state) {
       state.isLoading = true
     },
-    moviesFetchingSuccess(state, action: PayloadAction<IMovie[]>) {
+    moviesFetchingSuccess(state, action: PayloadAction<IPayloadAction>) {
       state.isLoading = false
       state.isError = ''
-      state.movies = action.payload
+      state.movies = action.payload.items
     },
     moviesFetchingError(state, action: PayloadAction<Error>) {
       state.isLoading = false

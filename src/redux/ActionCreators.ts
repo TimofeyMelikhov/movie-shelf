@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { AppDispatch } from './index';
 import { moviesFetching, moviesFetchingSuccess, moviesFetchingError } from './slices/moviesReducer'
-import { IMovie } from '../models/IMovie';
+// import { IMovie } from '../models/IMovie';
+import { IPayloadAction } from './slices/moviesReducer'
 
 export const fetchMovies = () => async (dispatch: AppDispatch) => {
   try {
     dispatch(moviesFetching())
-    const response = await axios.get<IMovie[]>('https://kinopoiskapiunofficial.tech/api/v2.2/films/301', 
+    const response = await axios.get<IPayloadAction>('https://kinopoiskapiunofficial.tech/api/v2.2/films', 
       {
         headers: {
           'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
