@@ -1,29 +1,26 @@
-import React, { useEffect } from 'react';
-import { useAppSelector, useAppDispatch } from './hooks/redux';
-import { fetchMovies } from './redux/ActionCreators'
-import { MoviesCard } from './components/MoviesCard'
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom'
+import { privateRoutes, publicRoutes } from './router/index';
+import { Navigation } from './components/Navigation'
 
-const App: React.FC = () => {
 
-  const dispatch = useAppDispatch()
-  const { movies, isLoading, isError } = useAppSelector(state => state.moviesReducer)
+const App = () => {
 
-  useEffect(() => {
-    dispatch(fetchMovies())
-  }, [dispatch])
+  const auth = true
 
-  console.log(movies)
-
-  return (
-    <div>
-
-      { isLoading && <p>Loading...</p> }
-      { isError && <p>{isError}</p> }
-
-      { movies.map(movie => <MoviesCard key={movie.kinopoiskId} movie={movie} />) }
-
-    </div>
-  );
+  return ( 
+    <>
+      <Navigation />
+      <Routes> 
+        {auth ? 
+          privateRoutes.map(route => <Route key={route.path} path={route.path} element={<route.component />} />) 
+          : 
+          publicRoutes.map(route => <Route key={route.path} path={route.path} element={<route.component />} />)
+        } 
+      </Routes> 
+    </>
+  ) 
+  
 }
 
 export default App;
