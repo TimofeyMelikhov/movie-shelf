@@ -11,8 +11,6 @@ export const MainPage: React.FC = () => {
     dispatch(fetchMovies())
   }, [dispatch])
 
-  console.log(movies)
-
   return (
     <div>
 

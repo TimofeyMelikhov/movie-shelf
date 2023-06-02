@@ -1,16 +1,12 @@
 import React from 'react'
+import classes from './login.module.css'
+import { LoginForm } from '../components/LoginForm'
 
 export const Login: React.FC = () => {
-
-  const submitHandler = (event: React.FormEvent) => {
-    event.preventDefault()
-  }
-
+  
   return (
-  <form
-    onSubmit={submitHandler}
-  >
-
-  </form>
+    <div className={classes.container}>
+      <LoginForm />
+    </div>
   )
 }
