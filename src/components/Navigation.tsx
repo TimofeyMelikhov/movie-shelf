@@ -26,6 +26,7 @@ export const Navigation: React.FC = () => {
         :
           <div className={classes.navBar}>
             <Link to='/'>Главная</Link>
+            <Link to='/login'>Авторизация</Link>
           </div>
       }
 

@@ -1,19 +1,26 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route} from 'react-router-dom'
 import { privateRoutes, publicRoutes } from './router/index';
 import { Navigation } from './components/Navigation'
 import { useAppSelector } from './hooks/redux';
 
-
-const App = () => {
+const App: React.FC = () => {
 
   const {isAuth} = useAppSelector(state => state.authReducer)
-  
-  // const authFromStorage = localStorage.getItem('auth')
 
   return (  
     <> 
       <Navigation /> 
+
+      { !isAuth ?
+          <div style={{textAlign: 'center'}}>
+          <h1>Добро пожаловать!</h1>
+          <p>Здесь вы можете найти информацию о различных фильмах имеющихся в базе Кинопоиска.</p>
+          <p>Чтобы получить более подробную информацию о фильме и воспользоваться другими функциями сайта, пожалуйста, авторизуйтесь</p>
+        </div>
+        :
+        null
+      }
  
       <Routes>  
         {isAuth ?  
