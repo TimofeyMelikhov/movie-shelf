@@ -1,11 +1,12 @@
 import { Login } from '../pages/Login'
 import { MainPage } from '../pages/MainPage'
+import { MovieDetails } from '../pages/MovieDetails'
+
 import { IRoute, RouteNames } from './routeModel'
 
 export const publicRoutes: IRoute[] = [
   {
     path: RouteNames.LOGIN,
-    exact: true,
     component: Login
   }
 ]
@@ -13,7 +14,10 @@ export const publicRoutes: IRoute[] = [
 export const privateRoutes: IRoute[] = [
   {
     path: RouteNames.MAIN,
-    exact: true,
     component: MainPage
+  },
+  {
+    path: RouteNames.DETAILS,
+    component: MovieDetails
   }
 ]

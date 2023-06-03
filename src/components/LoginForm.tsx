@@ -11,7 +11,7 @@ export const LoginForm: React.FC = () => {
   const navigate = useNavigate()
 
   const dispatch = useAppDispatch()
-  const { isError, isAuth } = useAppSelector(state => state.authReducer)
+  const { isError } = useAppSelector(state => state.authReducer)
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault()
