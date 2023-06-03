@@ -11,7 +11,6 @@ export const Navigation: React.FC = () => {
   const dispatch = useAppDispatch()
 
   const logout = () => {
-    
     dispatch(logoutUser())
   }
 

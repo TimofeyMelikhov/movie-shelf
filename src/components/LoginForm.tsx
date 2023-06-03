@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import { loginUser } from '../redux/ActionCreators'
 
@@ -8,13 +8,15 @@ export const LoginForm: React.FC = () => {
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
+  const navigate = useNavigate()
+
   const dispatch = useAppDispatch()
   const { isError } = useAppSelector(state => state.authReducer)
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault()
     dispatch(loginUser(username, password))
-    return <Navigate to='/' replace />
+    !isError && navigate('/')
   }
 
   return (
@@ -31,7 +33,7 @@ export const LoginForm: React.FC = () => {
           style={{ margin: '5px' }} 
           placeholder='Введите логин' 
         />
-        
+
         <input 
           type="password" 
           value={password} 

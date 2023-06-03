@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { AppDispatch } from './index';
 import { moviesFetching, moviesFetchingSuccess, moviesFetchingError } from './slices/moviesReducer'
-// import { IMovie } from '../models/IMovie';
 import { IPayloadAction } from './slices/moviesReducer'
 import { IUser, setAuth, setError, setLoading, setUser } from './slices/userSlice';
 
