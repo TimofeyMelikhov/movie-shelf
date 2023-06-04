@@ -1,5 +1,5 @@
 export interface IMovie {
-  kinopoiskId: number
+  kinopoiskId: string
   nameRu: string
   posterUrl: string
   posterUrlPreview: string

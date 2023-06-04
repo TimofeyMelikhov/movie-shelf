@@ -1,6 +1,5 @@
 import React from 'react'
-import { IMovie } from '../models/IMovieModels'
-import classes from './navigation.module.css'
+import { IMovie } from '../../models/IMovieModels'
 import { useNavigate } from 'react-router-dom'
 
 interface moviesProps {
@@ -15,7 +14,7 @@ export const Movies = ({movie}: moviesProps) => {
   const genres = movie.genres.map(c => c.genre).join(', ')
 
   return (
-    <div className={classes.container}>
+    <div >
       <p style={{fontSize: '32px', fontWeight: '700', cursor: 'pointer'}} onClick={() => navigate(`/film/${movie.kinopoiskId}`)} >{movie.nameRu}</p>
       <img src={movie.posterUrlPreview} alt="poster" />
       <p style={{fontSize: '32px'}}>О фильме</p>

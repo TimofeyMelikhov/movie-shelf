@@ -1,6 +1,6 @@
-import { Login } from '../pages/Login'
-import { MainPage } from '../pages/MainPage'
-import { MovieDetails } from '../pages/MovieDetails'
+import { Login } from '../pages/loginPage/Login'
+import { MainPage } from '../pages/MainPage/Main'
+import { MovieDetails } from '../pages/MovieDetailPage/MovieDetails'
 
 import { IRoute, RouteNames } from './routeModel'
 

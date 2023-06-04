@@ -1,0 +1,16 @@
+.wrapper {
+  @apply p-16 rounded-sm m-8 bg-slate-700 shadow-2xl 
+}
+.header {
+  @apply text-2xl font-bold text-center text-white
+}
+.button {
+  @apply block bg-orange-500 text-white mx-auto py-2 w-full hover:bg-orange-600 transition-all delay-100 ease-out text-lg font-bold
+}
+form {
+  @apply rounded-md mt-[30px]
+}
+input {
+  @apply block w-full bg-white bg-opacity-10 border-r-2 border-transparent focus:border-slate-400 py-3 px-4
+   placeholder:text-slate-500 outline-none text-slate-50 transition-colors
+}

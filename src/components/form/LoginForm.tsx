@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
+import classes from './loginForm.module.css'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../hooks/redux'
-import { loginUser } from '../redux/ActionCreators'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { loginUser } from '../../redux/actions/LoginAction'
 
 export const LoginForm: React.FC = () => {
 
@@ -20,28 +21,29 @@ export const LoginForm: React.FC = () => {
   }
 
   return (
-    <div style={{textAlign: 'center'}}>
-      Авторизация
+    <div className={classes.wrapper}>
+      <h3 className={classes.header}>Авторизация</h3>
       <form
-        style={{padding: '5px'}}
         onSubmit={submitHandler}
       >
         <input 
+          className='block p-4'
           type="text" 
           value={username} 
           onChange={e => setUsername(e.currentTarget.value)} 
-          style={{ margin: '5px' }} 
           placeholder='Введите логин' 
         />
 
         <input 
+          className='block p-4'
           type="password" 
           value={password} 
           onChange={e => setPassword(e.currentTarget.value)} 
-          style={{ margin: '5px' }} 
           placeholder='Введите пароль' 
         />
-        <button>Войти</button>
+        <button 
+          className={classes.button}
+        >Войти</button>
       </form>
       {isError && <div style={{color: 'red'}}> {isError} </div>}
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route} from 'react-router-dom'
 import { privateRoutes, publicRoutes } from './router/index';
-import { Navigation } from './components/Navigation'
+import { Navigation } from './components/navbar/Navigation'
 import { useAppSelector } from './hooks/redux';
 
 const App: React.FC = () => {
