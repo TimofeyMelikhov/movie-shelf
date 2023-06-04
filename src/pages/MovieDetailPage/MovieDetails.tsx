@@ -6,7 +6,7 @@ export const MovieDetails: React.FC = () => {
   const params = useParams<'id'>()
 
   return (
-    <div>
+    <div className='container mx-auto pt-5 max-w-[760px]'>
       <h2>Здесь будет детальное описание фильма {params.id}</h2>
     </div>
   )

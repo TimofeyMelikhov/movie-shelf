@@ -12,7 +12,7 @@ export const MainPage: React.FC = () => {
   }, [dispatch])
 
   return (
-    <div className='container mx-auto max-w-[760px] pt-5'>
+    <div className='flex flex-wrap container mx-auto max-w-[960px] pt-5 justify-around'>
 
       { isLoading && <p>Loading...</p> }
       { isError && <p>{isError}</p> }
