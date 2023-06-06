@@ -1,0 +1,11 @@
+@layer utilities {
+  .h_calc {
+    height: calc(100vh - 54px);
+  }
+}
+
+.main_container {
+  @apply flex flex-wrap container mx-auto max-w-[960px] pt-5 justify-around h_calc
+}
+
+@tailwind utilities;

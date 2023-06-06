@@ -1,37 +1,32 @@
 import React from 'react';
 import { Routes, Route} from 'react-router-dom'
-import { privateRoutes, publicRoutes } from './router/index';
-import { Navigation } from './components/navbar/Navigation'
-import { useAppSelector } from './hooks/redux';
+import { RouteNames } from './router/routeModel';
+import { MainPage } from './pages/MainPage/Main';
+import { Login } from './pages/loginPage/Login';
+import { MovieDetails } from './pages/MovieDetailPage/MovieDetails';
+import { NotfoundPage } from './pages/notfound/NotfoundPage';
+import { RequireAuth } from './hoc/RequireAuth';
+import { Layout } from './components/layout/Layout';
 
 const App: React.FC = () => {
 
-  const {isAuth} = useAppSelector(state => state.authReducer)
-
   return (  
-    <> 
-      <Navigation /> 
-
-      { !isAuth ?
-          <div style={{textAlign: 'center'}}>
-          <h1>Добро пожаловать!</h1>
-          <p>Здесь вы можете найти информацию о различных фильмах имеющихся в базе Кинопоиска.</p>
-          <p>Чтобы получить более подробную информацию о фильме и воспользоваться другими функциями сайта, пожалуйста, авторизуйтесь</p>
-        </div>
-        :
-        null
-      }
- 
+    <>  
       <Routes>  
-        {isAuth ?  
-          privateRoutes.map(route => <Route key={route.path} path={route.path} element={<route.component />} />)  
-          :
-          publicRoutes.map(route => <Route key={route.path} path={route.path} element={<route.component />} />)
-        }
-      </Routes>  
+        <Route path='/' element={ <Layout /> }>
+          <Route index element={ 
+              <RequireAuth> 
+                <MainPage/> 
+              </RequireAuth> 
+            } 
+          />
+          <Route path={RouteNames.LOGIN} element={ <Login/> } />
+          <Route path={RouteNames.DETAILS} element={ <MovieDetails/> } />
+          <Route path='*' element={ <NotfoundPage/> } />
+        </Route>  
+      </Routes>
     </> 
-  )  
-  
+  )
 }
 
 export default App;

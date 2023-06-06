@@ -23,18 +23,17 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setLoading(state) {
-      state.isLoading = true
+    setLoading(state, action: PayloadAction<boolean>) {
+      state.isLoading = action.payload
     },
     setAuth(state, action: PayloadAction<boolean>) {
       state.isAuth = action.payload
-      state.isLoading = false
+      state.isLoading = action.payload
     },
     setUser(state, action: PayloadAction<IUser>) {
       state.user = action.payload
     },
     setError(state, action) {
-      state.isLoading = false
       state.isError = action.payload
     }
   }

@@ -1,51 +1,89 @@
-import React, {useState} from 'react'
+import React, {useState, KeyboardEvent, ChangeEvent } from 'react'
 import classes from './loginForm.module.css'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { loginUser } from '../../redux/actions/LoginAction'
+import { setError } from '../../redux/slices/userSlice'
 
 export const LoginForm: React.FC = () => {
 
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-
+  const [errorName, setErrorName] = useState<boolean | null>(null)
+  const [errorPass, setErrorPass] = useState<boolean | null>(null)
+  
   const navigate = useNavigate()
+  // const location = useLocation()
+  // const fromPage = location.state?.from?.pathname || '/'
 
   const dispatch = useAppDispatch()
-  const { isError } = useAppSelector(state => state.authReducer)
+  const { isError, isAuth, isLoading } = useAppSelector(state => state.authReducer)
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault()
-    dispatch(loginUser(username, password))
-    navigate('/')
+    setErrorName(username === '');
+    setErrorPass(password === '');
+    if (username !== '' && password !== '') {
+      dispatch(loginUser(username, password, navigate));
+      dispatch(setError(''))
+    }
+  }
+
+  const onChangeUsernameHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.currentTarget.value)
+    setErrorName(false)
+  }
+  const onChangePasswordHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.currentTarget.value)
+    setErrorPass(false)
+  }
+
+  const oneKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      submitHandler(e)
+    }
   }
 
   return (
-    <div className={classes.wrapper}>
-      <h3 className={classes.header}>Авторизация</h3>
-      <form
-        onSubmit={submitHandler}
-      >
-        <input 
-          className='block p-4'
-          type="text" 
-          value={username} 
-          onChange={e => setUsername(e.currentTarget.value)} 
-          placeholder='Введите логин' 
-        />
+    <div className={classes.content}>
+      { !isAuth && 
+        <div className='text-center text-[16px]'>
+          <h1>Добро пожаловать!</h1>
+          <p>Здесь вы можете найти информацию о различных фильмах имеющихся в базе Кинопоиска.</p>
+          <p>Чтобы получить более подробную информацию о фильме и воспользоваться другими функциями сайта, пожалуйста, авторизуйтесь</p>
+        </div>
+      }
 
-        <input 
-          className='block p-4'
-          type="password" 
-          value={password} 
-          onChange={e => setPassword(e.currentTarget.value)} 
-          placeholder='Введите пароль' 
-        />
-        <button 
-          className={classes.button}
-        >Войти</button>
-      </form>
-      {isError && <div style={{color: 'red'}}> {isError} </div>}
+      <div className={classes.wrapper}>
+        <h3 className={classes.header}>Авторизация</h3>
+        <form
+          onSubmit={submitHandler}
+        >
+          <input 
+            className='block p-4'
+            type="text" 
+            value={username} 
+            onChange={onChangeUsernameHandler}
+            onKeyDown={oneKeyPressHandler}
+            placeholder='Введите логин' 
+          />
+          { errorName && <div className={classes.error_message}>Введите логин</div> }
+
+          <input 
+            className='block p-4'
+            type="password" 
+            value={password} 
+            onChange={onChangePasswordHandler}
+            onKeyDown={oneKeyPressHandler}
+            placeholder='Введите пароль' 
+          />
+          { errorPass && <div className={classes.error_message}>Введите пароль</div> }
+          <button 
+            className={classes.button}
+          > { isLoading ? 'Загрузка...' : 'Войти' } </button>
+        </form>
+        {isError && <div style={{color: 'red'}}> {isError} </div>}
+      </div>
     </div>
   )
 }

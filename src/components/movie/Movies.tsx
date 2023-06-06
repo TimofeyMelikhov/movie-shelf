@@ -20,7 +20,7 @@ export const Movies = ({movie}: moviesProps) => {
 
   return (
     <div className={classes.wrapper} onClick={clickHandler}>
-      <h4 style={{fontSize: '32px', fontWeight: '700', cursor: 'pointer'}}>{movie.nameRu}</h4>
+      <p style={{fontSize: '28px', fontWeight: '700', cursor: 'pointer'}}>{movie.nameRu}</p>
       <img src={movie.posterUrlPreview} alt="poster" />
       <p style={{fontSize: '32px'}}>О фильме</p>
       <p>Год производства: {movie.year} </p>

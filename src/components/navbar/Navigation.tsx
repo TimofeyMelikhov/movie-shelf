@@ -19,14 +19,13 @@ export const Navigation: React.FC = () => {
 
       { isAuth ? 
           <div className={classes.navBar}>
-            <Link to='/'>Главная</Link>
+            <Link to='/'>Кинополка</Link>
             <div style={{color: 'white', fontWeight: 700}}>{user.username}</div>
             <Link to='/login' onClick={logout}>Выйти</Link>
           </div>
         :
           <div className={classes.navBar}>
-            <Link to='/'>Главная</Link>
-            <Link to='/login'>Авторизация</Link>
+            <Link to='/'>Кинополка</Link>
           </div>
       }
 

@@ -1,3 +1,6 @@
 .wrapper {
   @apply border rounded-md py-4 px-6 mb-2 hover:shadow-md hover:transition-all cursor-pointer w-[360px]
 }
+img {
+  @apply w-[300px]
+}

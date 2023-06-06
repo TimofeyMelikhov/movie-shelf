@@ -1,5 +1,13 @@
+@layer utilities {
+  .h_calc {
+    height: calc(100vh - 54px);
+  }
+}
+.content {
+  @apply flex flex-col justify-center items-center h_calc
+}
 .wrapper {
-  @apply p-16 rounded-sm m-8 bg-slate-700 shadow-2xl 
+  @apply flex flex-col p-16 rounded-sm m-8 bg-slate-700 shadow-2xl 
 }
 .header {
   @apply text-2xl font-bold text-center text-white
@@ -14,3 +22,8 @@ input {
   @apply block w-full bg-white bg-opacity-10 border-r-2 border-transparent focus:border-slate-400 py-3 px-4
    placeholder:text-slate-500 outline-none text-slate-50 transition-colors
 }
+.error_message {
+  @apply text-red-600
+}
+
+@tailwind utilities;
