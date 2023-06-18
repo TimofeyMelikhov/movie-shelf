@@ -1,0 +1,6 @@
+.header {
+  @apply text-[30px] font-bold tracking-[-.5px]
+}
+.origName {
+  @apply text-gray-600
+}

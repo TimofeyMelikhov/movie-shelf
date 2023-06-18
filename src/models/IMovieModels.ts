@@ -22,3 +22,28 @@ interface ICountry {
 interface IGenre {
   genre: string
 }
+
+export interface IMovieDetail {
+    kinopoiskId: number
+    nameRu: string
+    nameOriginal: string
+    posterUrl: string
+    posterUrlPreview: string
+    coverUrl: string
+    reviewsCount: number,
+    ratingKinopoisk: number
+    ratingImdb: number
+    ratingFilmCritics: number
+    webUrl: string
+    year: number
+    filmLength: number
+    slogan: string
+    description: string
+    shortDescription: string
+    type: string
+    ratingMpaa: string
+    ratingAgeLimits: string
+    ratingKinopoiskVoteCount: number
+    countries: ICountry[]
+    genres: IGenre[]
+}
