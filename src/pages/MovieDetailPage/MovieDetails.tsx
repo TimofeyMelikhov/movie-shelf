@@ -1,32 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { IMovieDetail } from '../../models/IMovieModels'
-import axios from 'axios'
 import classes from './MovieDetails.module.css'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { fetchDetailsMovie } from '../../redux/actions/MoviesDetailAction'
 
 export const MovieDetails: React.FC = () => {
 
   const {id} = useParams<'id'>()
-  const [details, setDetails] = useState<IMovieDetail | null>(null)
+  const dispatch = useAppDispatch()
+  const details = useAppSelector(state => state.movieDetailReducer.detailMovie)
 
-  async function fetchingMovieDetail() {
-    try {
-      const response = await axios<IMovieDetail>(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}`, 
-        {
-          headers: {
-            'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
-            'Content-Type': 'application/json',
-          }
-        }
-      )
-      setDetails(response.data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
   useEffect(() => {
-    fetchingMovieDetail()
-  }, [id])
+    dispatch(fetchDetailsMovie(id))
+  }, [dispatch, id])
 
   function convertMinutesToHours(minutes: number ) {
     let hours = Math.floor(minutes / 60);
@@ -36,7 +22,7 @@ export const MovieDetails: React.FC = () => {
 
   const countries = details?.countries.map(c => c.country).join(', ')
   const genres = details?.genres.map(c => c.genre).join(', ')
-  const movieTime = details?.filmLength ? `${details.filmLength} мин. / ${convertMinutesToHours(details.filmLength)}` : 'Неизвестно'
+  const movieTime = details?.filmLength ? `${details?.filmLength} мин. / ${convertMinutesToHours(details?.filmLength)}` : 'Неизвестно'
   const slogan = details?.slogan ? `«${details?.slogan}»` : '—'
   const ratingCount = details?.ratingKinopoiskVoteCount.toLocaleString('ru-RU')
   

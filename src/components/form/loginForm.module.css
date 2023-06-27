@@ -18,7 +18,7 @@
 form {
   @apply rounded-md mt-[30px]
 }
-input {
+.input_login {
   @apply block w-full bg-white bg-opacity-10 border-r-2 border-transparent focus:border-slate-400 py-3 px-4
    placeholder:text-slate-500 outline-none text-slate-50 transition-colors
 }

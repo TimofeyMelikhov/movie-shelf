@@ -1,6 +1,6 @@
 import React, {useState, KeyboardEvent, ChangeEvent } from 'react'
 import classes from './loginForm.module.css'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { loginUser } from '../../redux/actions/LoginAction'
 import { setError } from '../../redux/slices/userSlice'
@@ -13,8 +13,6 @@ export const LoginForm: React.FC = () => {
   const [errorPass, setErrorPass] = useState<boolean | null>(null)
   
   const navigate = useNavigate()
-  // const location = useLocation()
-  // const fromPage = location.state?.from?.pathname || '/'
 
   const dispatch = useAppDispatch()
   const { isError, isAuth, isLoading } = useAppSelector(state => state.authReducer)
@@ -60,7 +58,7 @@ export const LoginForm: React.FC = () => {
           onSubmit={submitHandler}
         >
           <input 
-            className='block p-4'
+            className={classes.input_login}
             type="text" 
             value={username} 
             onChange={onChangeUsernameHandler}
@@ -70,7 +68,7 @@ export const LoginForm: React.FC = () => {
           { errorName && <div className={classes.error_message}>Введите логин</div> }
 
           <input 
-            className='block p-4'
+            className={classes.input_login}
             type="password" 
             value={password} 
             onChange={onChangePasswordHandler}
