@@ -5,6 +5,9 @@
 }
 
 .main_container {
+  @apply container mx-auto max-w-[960px] pt-5
+}
+.movie_container {
   @apply flex flex-wrap container mx-auto max-w-[960px] pt-5 justify-around h_calc
 }
 
