@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from '../../axios/index';
 import { AppDispatch } from '../index';
 import { IMovieDetail } from '../../models/IMovieModels'
 import { moviesDetailFetchingError, moviesDetailFetchingSuccess, IMovieDetailPayload } from '../slices/movieDetailSlice';
 
 export const fetchDetailsMovie = (id: string | undefined) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios<IMovieDetail>(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}`, 
+    const response = await axios.get<IMovieDetail>(`v2.2/films/${id}`, 
         {
           headers: {
             'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',

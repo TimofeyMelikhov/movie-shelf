@@ -4,3 +4,6 @@
 .origName {
   @apply text-gray-600
 }
+.rating {
+  @apply text-high_rating
+}

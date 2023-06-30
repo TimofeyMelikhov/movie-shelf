@@ -25,7 +25,8 @@ export const MovieDetails: React.FC = () => {
   const movieTime = details?.filmLength ? `${details?.filmLength} мин. / ${convertMinutesToHours(details?.filmLength)}` : 'Неизвестно'
   const slogan = details?.slogan ? `«${details?.slogan}»` : '—'
   const ratingCount = details?.ratingKinopoiskVoteCount.toLocaleString('ru-RU')
-  const ageRaiting = Number(details?.ratingAgeLimits.match(/\d+/))
+  const ageRaiting = details?.ratingAgeLimits ? Number(details?.ratingAgeLimits?.match(/\d+/)) + '+' : null
+  const highlitedRating = details?.ratingKinopoisk && details.ratingKinopoisk >= 7 ? classes.rating : '';
   
   return (
     <div className='container flex mx-auto pt-5 max-w-[960px]'>
@@ -34,8 +35,8 @@ export const MovieDetails: React.FC = () => {
       </div>
       <div className='flex flex-col ml-[40px] max-w-[50%]'>
         <h1 className={classes.header}>{ details?.nameRu } ({details?.year})</h1>
-        <div className={classes.origName}>{details?.nameOriginal} {`${ageRaiting}+`}</div>
-        <div>Рейтинг Кинопоиска: { details?.ratingKinopoisk }</div>
+        <div className={classes.origName}>{details?.nameOriginal} {ageRaiting}</div>
+        <div>Рейтинг Кинопоиска: <span className={highlitedRating}>{ details?.ratingKinopoisk }</span></div>
         <div className='text-[14px]'> { ratingCount } оценок </div>
         <div className='mt-[50px] text-[22px]'>О Фильме</div>
         <div className='mt-[5px]'>Год производства: { details?.year }</div>

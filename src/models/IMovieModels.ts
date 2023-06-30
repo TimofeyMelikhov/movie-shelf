@@ -47,3 +47,18 @@ export interface IMovieDetail {
     countries: ICountry[]
     genres: IGenre[]
 }
+
+export interface ISearchMovie {
+  filmId: number
+  nameRu: string
+  nameEn: string
+  type: string
+  year: string
+  description: string
+  filmLength: string
+  rating: string
+  ratingVoteCount: number
+  posterUrlPreview: string
+  countries: ICountry[]
+  genres: IGenre[]
+}

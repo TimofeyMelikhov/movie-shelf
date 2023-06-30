@@ -5,7 +5,11 @@ module.exports = {
     fontFamily: {
       rubik:['Rubik', 'sans-serif']
     },
-    extend: {},
+    extend: {
+      colors: {
+        high_rating: '#3bb33b'
+      }
+    },
   },
   plugins: [],
 }

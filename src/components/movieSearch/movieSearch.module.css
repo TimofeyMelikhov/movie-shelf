@@ -5,5 +5,11 @@
   @apply py-2 px-4 outline-0 w-full h-[42px]
 }
 .drop_down {
-  @apply absolute left-0 right-0 h-[200px] top-[42px] shadow-md
+  @apply absolute left-0 right-0 h-[200px] top-[42px] shadow-md list-none bg-white overflow-y-scroll
+}
+.item_container {
+  @apply flex py-2 px-4 mb-2 hover:bg-gray-500 hover:transition-colors cursor-pointer hover:text-white
+}
+.rating {
+  @apply text-high_rating
 }
