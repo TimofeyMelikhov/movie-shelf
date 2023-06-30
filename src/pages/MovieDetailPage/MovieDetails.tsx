@@ -8,7 +8,7 @@ export const MovieDetails: React.FC = () => {
 
   const {id} = useParams<'id'>()
   const dispatch = useAppDispatch()
-  const details = useAppSelector(state => state.movieDetailReducer.detailMovie)
+  const { detailMovie, isError, isLoading} = useAppSelector(state => state.movieDetailReducer)
 
   useEffect(() => {
     dispatch(fetchDetailsMovie(id))
@@ -20,35 +20,40 @@ export const MovieDetails: React.FC = () => {
     return (hours < 10 ? "0" : "") + hours + ":" + (mins < 10 ? "0" : "") + mins;
   }
 
-  const countries = details?.countries.map(c => c.country).join(', ')
-  const genres = details?.genres.map(c => c.genre).join(', ')
-  const movieTime = details?.filmLength ? `${details?.filmLength} мин. / ${convertMinutesToHours(details?.filmLength)}` : 'Неизвестно'
-  const slogan = details?.slogan ? `«${details?.slogan}»` : '—'
-  const ratingCount = details?.ratingKinopoiskVoteCount.toLocaleString('ru-RU')
-  const ageRaiting = details?.ratingAgeLimits ? Number(details?.ratingAgeLimits?.match(/\d+/)) + '+' : null
-  const highlitedRating = details?.ratingKinopoisk && details.ratingKinopoisk >= 7 ? classes.rating : '';
+  const countries = detailMovie?.countries.map(c => c.country).join(', ')
+  const genres = detailMovie?.genres.map(c => c.genre).join(', ')
+  const movieTime = detailMovie?.filmLength ? `${detailMovie?.filmLength} мин. / ${convertMinutesToHours(detailMovie?.filmLength)}` : 'Неизвестно'
+  const slogan = detailMovie?.slogan ? `«${detailMovie?.slogan}»` : '—'
+  const ratingCount = detailMovie?.ratingKinopoiskVoteCount.toLocaleString('ru-RU')
+  const ageRaiting = detailMovie?.ratingAgeLimits ? Number(detailMovie?.ratingAgeLimits?.match(/\d+/)) + '+' : null
+  const highlitedRating = detailMovie?.ratingKinopoisk && detailMovie.ratingKinopoisk >= 7 ? classes.rating : '';
   
   return (
-    <div className='container flex mx-auto pt-5 max-w-[960px]'>
-      <div className='flex flex-col'>
-        <img src={details?.posterUrl} alt="poster" />
+    <>
+      { isLoading && <p>Loading...</p> }
+      { isError && <p>{isError}</p> }
+
+      <div className='container flex mx-auto pt-5 max-w-[960px]'>
+        <div className='flex flex-col'>
+          <img src={detailMovie?.posterUrl} alt="poster" />
+        </div>
+        <div className='flex flex-col ml-[40px] max-w-[50%]'>
+          <h1 className={classes.header}>{ detailMovie?.nameRu } ({detailMovie?.year})</h1>
+          <div className={classes.origName}>{detailMovie?.nameOriginal} {ageRaiting}</div>
+          <div>Рейтинг Кинопоиска: <span className={highlitedRating}>{ detailMovie?.ratingKinopoisk }</span></div>
+          <div className='text-[14px]'> { ratingCount } оценок </div>
+          <div className='mt-[50px] text-[22px]'>О Фильме</div>
+          <div className='mt-[5px]'>Год производства: { detailMovie?.year }</div>
+          <div className='mt-[5px]'>Страна: { countries }</div>
+          <div className='mt-[5px]'>Жанр: { genres }</div>
+          <div className='mt-[5px]'>Слоган: { slogan }</div>
+          <div className='mt-[5px]'> Описание: { detailMovie?.description } </div>
+          <div className='mt-[5px]'>Время: { movieTime }</div>
+          <span className='w-[200px] bg-orange-500 py-[10px] px-[20px] rounded-2xl text-center mt-[10px] text-white'>
+            <a href={`https://flicksbar.club/film/${id}/`} target='_blank' rel="noreferrer">Смотреть фильм</a>
+          </span>
+        </div>
       </div>
-      <div className='flex flex-col ml-[40px] max-w-[50%]'>
-        <h1 className={classes.header}>{ details?.nameRu } ({details?.year})</h1>
-        <div className={classes.origName}>{details?.nameOriginal} {ageRaiting}</div>
-        <div>Рейтинг Кинопоиска: <span className={highlitedRating}>{ details?.ratingKinopoisk }</span></div>
-        <div className='text-[14px]'> { ratingCount } оценок </div>
-        <div className='mt-[50px] text-[22px]'>О Фильме</div>
-        <div className='mt-[5px]'>Год производства: { details?.year }</div>
-        <div className='mt-[5px]'>Страна: { countries }</div>
-        <div className='mt-[5px]'>Жанр: { genres }</div>
-        <div className='mt-[5px]'>Слоган: { slogan }</div>
-        <div className='mt-[5px]'> Описание: { details?.description } </div>
-        <div className='mt-[5px]'>Время: { movieTime }</div>
-        <span className='w-[200px] bg-orange-500 py-[10px] px-[20px] rounded-2xl text-center mt-[10px] text-white'>
-          <a href={`https://flicksbar.club/film/${id}/`} target='_blank' rel="noreferrer">Смотреть фильм</a>
-        </span>
-      </div>
-    </div>
+    </>
   )
 }
