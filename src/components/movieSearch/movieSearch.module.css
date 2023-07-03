@@ -10,6 +10,12 @@
 .item_container {
   @apply flex py-2 px-4 mb-2 hover:bg-gray-500 hover:transition-colors cursor-pointer hover:text-white
 }
-.rating {
+.high_rating {
   @apply text-high_rating
+}
+.low_rating {
+  @apply text-low_rating
+}
+.medium_rating {
+  @apply text-medium_rating
 }

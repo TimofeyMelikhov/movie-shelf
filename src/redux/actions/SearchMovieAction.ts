@@ -6,17 +6,17 @@ export const fetchSearchMovie = (debounced: string) => async (dispatch: AppDispa
   try {
     dispatch(searchFetching(true))
     const response = await axios.get<IPayloadAction>(`/v2.1/films/search-by-keyword`, 
-    {
-      headers: {
-        'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
-        'Content-Type': 'application/json',
-      },
-      params: {
-        keyword: debounced,
-        page: 1
+      {
+        headers: {
+          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
+          'Content-Type': 'application/json',
+        },
+        params: {
+          keyword: debounced,
+          page: 1
+        }
       }
-    }
-  )
+    )
   dispatch(searchMovieFetchingSuccess(response.data))
   } catch (error) {
     const errorPayload: ISearchMovieErrorPayload = {
@@ -24,5 +24,25 @@ export const fetchSearchMovie = (debounced: string) => async (dispatch: AppDispa
       error: error as Error,
     }
     dispatch(searchMovieFetchingError(errorPayload))
+  }
+}
+
+export const fetchSearchPerson = (debounced: string) => async (dispatch: AppDispatch) => {
+  try {
+    const response = await axios.get('/v1/persons',
+      {
+        headers: {
+          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
+          'Content-Type': 'application/json',
+        },
+        params: {
+          name: debounced,
+          page: 1
+        }
+      }
+    )
+    dispatch(searchMovieFetchingSuccess(response.data))
+  } catch (error) {
+    
   }
 }

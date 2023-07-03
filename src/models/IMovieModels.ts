@@ -62,3 +62,10 @@ export interface ISearchMovie {
   countries: ICountry[]
   genres: IGenre[]
 }
+
+export interface ISearchPerson {
+  kinopoiskId: number
+  nameRu: string
+  nameEn: string
+  posterUrl: string
+}

@@ -10,6 +10,17 @@ export const fetchMovies = () => async (dispatch: AppDispatch) => {
         headers: {
           'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
           'Content-Type': 'application/json',
+        },
+        params: {
+          countries: 1,
+          genres: 2,
+          order: 'RATING',
+          type: 'FILM',
+          ratingFrom: 0,
+          ratingTo: 10,
+          yearFrom: 1000,
+          yearTo: 3000,
+          page: 1
         }
       }
     )

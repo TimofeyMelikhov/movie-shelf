@@ -26,7 +26,8 @@ export const MovieDetails: React.FC = () => {
   const slogan = detailMovie?.slogan ? `«${detailMovie?.slogan}»` : '—'
   const ratingCount = detailMovie?.ratingKinopoiskVoteCount.toLocaleString('ru-RU')
   const ageRaiting = detailMovie?.ratingAgeLimits ? Number(detailMovie?.ratingAgeLimits?.match(/\d+/)) + '+' : null
-  const highlitedRating = detailMovie?.ratingKinopoisk && detailMovie.ratingKinopoisk >= 7 ? classes.rating : '';
+  const highlitedRating = detailMovie?.ratingKinopoisk && detailMovie.ratingKinopoisk >= 7 ? classes.high_rating : detailMovie?.ratingKinopoisk &&
+   detailMovie.ratingKinopoisk >= 5.1 && detailMovie.ratingKinopoisk <= 6.9 ? classes.medium_rating : classes.low_rating
   
   return (
     <>

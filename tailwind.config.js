@@ -7,7 +7,9 @@ module.exports = {
     },
     extend: {
       colors: {
-        high_rating: '#3bb33b'
+        high_rating: '#3bb33b',
+        low_rating: 'red',
+        medium_rating: '#777'
       }
     },
   },

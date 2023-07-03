@@ -4,7 +4,6 @@ import { useInput } from '../../hooks/input'
 import { useDebounce } from '../../hooks/debounce'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { fetchSearchMovie } from '../../redux/actions/SearchMovieAction'
-import { useNavigate } from 'react-router-dom'
 import { SearchResultElem } from './SearchResultElem'
 
 export function MovieSearch() {
@@ -17,19 +16,16 @@ export function MovieSearch() {
 
   const input = useInput('')
 
-  const navigate = useNavigate()
-
   const debounced = useDebounce<string>(input.value, 550)
 
   useEffect(() => {
-    if (debounced.length > 3) {
+    if (debounced.length >= 3) {
       dispatch(fetchSearchMovie(debounced)).then(() => setDropdown(true))
+      // dispatch(fetchSearchPerson(debounced))
     } else {
       setDropdown(false)
     }
   }, [debounced, dispatch])
-
-  console.log(films)
 
   return (
     <div className={classes.serarch_container}>

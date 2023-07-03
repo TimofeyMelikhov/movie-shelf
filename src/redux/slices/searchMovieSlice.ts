@@ -1,8 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { ISearchMovie } from "../../models/IMovieModels"
+import { ISearchMovie, ISearchPerson } from "../../models/IMovieModels"
 
 interface ISearchMovies {
   films: ISearchMovie[]
+  items: ISearchPerson[]
   isLoading: boolean
   isError: string
   pagesCount: number
@@ -11,6 +12,7 @@ interface ISearchMovies {
 
 export interface IPayloadAction {
   films: ISearchMovie[],
+  items: ISearchPerson[],
   pagesCount: number,
   searchFilmsCountResult: number
 }
@@ -22,6 +24,7 @@ export interface ISearchMovieErrorPayload {
 
 const initialState: ISearchMovies = {
   films: [],
+  items: [],
   pagesCount: 0,
   searchFilmsCountResult: 0,
   isLoading: false,
@@ -39,6 +42,7 @@ export const searchMovieSlice = createSlice({
       state.isLoading = false
       state.isError = ''
       state.films = action.payload.films
+      state.items = action.payload.items
     },
     searchMovieFetchingError(state, action: PayloadAction<ISearchMovieErrorPayload>) {
       state.isLoading = action.payload.isLoading
