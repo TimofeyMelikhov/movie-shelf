@@ -7,6 +7,8 @@ import { MovieDetails } from './pages/MovieDetailPage/MovieDetails';
 import { NotfoundPage } from './pages/notfound/NotfoundPage';
 import { RequireAuth } from './hoc/RequireAuth';
 import { Layout } from './components/layout/Layout';
+import Movie from './pages/moviePage/Movie';
+import Series from './pages/series/Series';
 
 const App: React.FC = () => {
 
@@ -21,6 +23,8 @@ const App: React.FC = () => {
             } 
           />
           <Route path={RouteNames.LOGIN} element={ <Login/> } />
+          <Route path={RouteNames.FILM} element={ <Movie/> } />
+          <Route path={RouteNames.SERIES} element={ <Series/> } />
           <Route path={RouteNames.DETAILS} element={ <MovieDetails/> } />
           <Route path='*' element={ <NotfoundPage/> } />
         </Route>  

@@ -1,8 +1,9 @@
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useState, Dispatch } from "react"
 
 interface IInputReturn {
   value: string
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void,
+  setvalue: Dispatch<string>
 }
 
 export function useInput(initialValue = ''): IInputReturn {
@@ -14,7 +15,8 @@ export function useInput(initialValue = ''): IInputReturn {
 
   return {
     value,
-    onChange
+    onChange,
+    setvalue: setValue
   }
 
 }

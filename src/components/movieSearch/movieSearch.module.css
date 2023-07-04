@@ -1,14 +1,14 @@
 .serarch_container {
-  @apply mb-4 relative
+  @apply relative
 }
 .input_search {
-  @apply py-2 px-4 outline-0 w-full h-[42px]
+  @apply py-2 px-4 outline-0 w-[350px] h-[30px] text-sm rounded-md text-black
 }
 .drop_down {
-  @apply absolute left-0 right-0 h-[200px] top-[42px] shadow-md list-none bg-white overflow-y-scroll
+  @apply absolute left-0 right-0 h-[720px] top-[32px] shadow-md list-none bg-white rounded-md overflow-y-scroll
 }
 .item_container {
-  @apply flex py-2 px-4 mb-2 hover:bg-gray-500 hover:transition-colors cursor-pointer hover:text-white
+  @apply flex py-2 px-4 mb-2 text-zinc-900 hover:bg-bgc_color hover:transition-colors cursor-pointer
 }
 .high_rating {
   @apply text-high_rating

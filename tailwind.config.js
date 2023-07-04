@@ -9,7 +9,8 @@ module.exports = {
       colors: {
         high_rating: '#3bb33b',
         low_rating: 'red',
-        medium_rating: '#777'
+        medium_rating: '#777',
+        bgc_color: '#f4f4f4;'
       }
     },
   },

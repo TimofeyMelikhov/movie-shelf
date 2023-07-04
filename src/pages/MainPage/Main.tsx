@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { fetchMovies } from '../../redux/actions/MoviesAction'
 import { Movies } from '../../components/movie/Movies'
-import { MovieSearch } from '../../components/movieSearch/MovieSearch'
 import classes from './main.module.css'
+import { Menu } from '../../components/menu/Menu'
 
 export const MainPage: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -15,7 +15,7 @@ export const MainPage: React.FC = () => {
 
   return (
     <div className={classes.main_container}>
-      <MovieSearch />
+      <Menu />
       <div className={classes.movie_container}>
         { isLoading && <p>Loading...</p> }
         { isError && <p>{isError}</p> }
