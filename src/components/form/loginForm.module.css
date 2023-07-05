@@ -4,7 +4,7 @@
   }
 }
 .content {
-  @apply flex flex-col justify-center items-center h_calc
+  @apply flex flex-col justify-center items-center
 }
 .wrapper {
   @apply flex flex-col p-16 rounded-sm m-8 bg-slate-700 shadow-2xl 

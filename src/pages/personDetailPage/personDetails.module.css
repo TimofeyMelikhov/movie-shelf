@@ -1,0 +1,15 @@
+.header {
+  @apply text-[30px] font-bold tracking-[-.5px]
+}
+.origName {
+  @apply text-gray-600
+}
+.high_rating {
+  @apply text-high_rating
+}
+.low_rating {
+  @apply text-low_rating
+}
+.medium_rating {
+  @apply text-medium_rating
+}

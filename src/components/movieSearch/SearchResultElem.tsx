@@ -5,7 +5,7 @@ import classes from './movieSearch.module.css'
 
 interface searchProp {
   film: ISearchMovie,
-  person?: ISearchPerson
+  // person?: ISearchPerson
   onClick: () => void
 }
 

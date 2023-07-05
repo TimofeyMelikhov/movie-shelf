@@ -10,11 +10,13 @@ interface ISearchMovies {
   searchFilmsCountResult: number
 }
 
-export interface IPayloadAction {
+export interface IMoviePayloadAction {
   films: ISearchMovie[],
-  items: ISearchPerson[],
-  pagesCount: number,
-  searchFilmsCountResult: number
+  isLoading: boolean;
+}
+export interface IPersonPayloadAction {
+  items: ISearchPerson[]
+  isLoading: boolean;
 }
 
 export interface ISearchMovieErrorPayload {
@@ -38,10 +40,14 @@ export const searchMovieSlice = createSlice({
     searchFetching(state, action: PayloadAction<boolean>) {
       state.isLoading = action.payload
     },
-    searchMovieFetchingSuccess(state, action: PayloadAction<IPayloadAction>) {
-      state.isLoading = false
+    searchMovieFetchingSuccess(state, action: PayloadAction<IMoviePayloadAction>) {
+      state.isLoading = action.payload.isLoading
       state.isError = ''
       state.films = action.payload.films
+    },
+    searchPersonFetchingSuccess(state, action: PayloadAction<IPersonPayloadAction>) {
+      state.isLoading = action.payload.isLoading
+      state.isError = ''
       state.items = action.payload.items
     },
     searchMovieFetchingError(state, action: PayloadAction<ISearchMovieErrorPayload>) {
@@ -51,4 +57,4 @@ export const searchMovieSlice = createSlice({
   }
 })
 export default searchMovieSlice.reducer
-export const { searchFetching, searchMovieFetchingSuccess, searchMovieFetchingError } = searchMovieSlice.actions
+export const { searchFetching, searchMovieFetchingSuccess, searchMovieFetchingError, searchPersonFetchingSuccess } = searchMovieSlice.actions

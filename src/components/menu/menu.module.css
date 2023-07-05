@@ -1,4 +1,4 @@
 
 .main_container {
-  @apply flex container max-w-[250px] bg-white
+  @apply flex min-w-[250px] bg-white
 }

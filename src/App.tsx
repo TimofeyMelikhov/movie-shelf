@@ -4,6 +4,7 @@ import { RouteNames } from './router/routeModel';
 import { MainPage } from './pages/MainPage/Main';
 import { Login } from './pages/loginPage/Login';
 import { MovieDetails } from './pages/MovieDetailPage/MovieDetails';
+import { PersonDetails } from './pages/personDetailPage/PersonDetails'
 import { NotfoundPage } from './pages/notfound/NotfoundPage';
 import { RequireAuth } from './hoc/RequireAuth';
 import { Layout } from './components/layout/Layout';
@@ -26,6 +27,7 @@ const App: React.FC = () => {
           <Route path={RouteNames.FILM} element={ <Movie/> } />
           <Route path={RouteNames.SERIES} element={ <Series/> } />
           <Route path={RouteNames.DETAILS} element={ <MovieDetails/> } />
+          <Route path={RouteNames.PERSON_DETAIL} element={ <PersonDetails/> } />
           <Route path='*' element={ <NotfoundPage/> } />
         </Route>  
       </Routes>

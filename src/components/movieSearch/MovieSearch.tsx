@@ -28,6 +28,8 @@ export function MovieSearch() {
     }
   }, [debounced, dispatch])
 
+  console.log(films)
+
   const clickHandler = () => {
     setDropdown(false)
     input.setvalue('')
@@ -47,7 +49,7 @@ export function MovieSearch() {
         <div className={classes.drop_down}>
         { isLoading && <p className='text-black'>Loading...</p> }
         <p className='mb-[5px] ml-[15px] text-[14px] text-black'>Возможно, вы искали</p>
-          { films.length ?
+          { items.length ?
             films.map(film => (
               <SearchResultElem key={film.filmId} film={film} onClick={() => clickHandler()}/>
             ))

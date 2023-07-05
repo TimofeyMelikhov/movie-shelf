@@ -1,11 +1,11 @@
 import axios from '../../axios/index';
 import { AppDispatch } from '../index';
-import { IPayloadAction, ISearchMovieErrorPayload, searchFetching, searchMovieFetchingError, searchMovieFetchingSuccess } from '../slices/searchMovieSlice';
+import { IMoviePayloadAction, ISearchMovieErrorPayload, searchFetching, searchMovieFetchingError, searchMovieFetchingSuccess, IPersonPayloadAction, searchPersonFetchingSuccess } from '../slices/searchMovieSlice';
 
 export const fetchSearchMovie = (debounced: string) => async (dispatch: AppDispatch) => {
   try {
     dispatch(searchFetching(true))
-    const response = await axios.get<IPayloadAction>(`/v2.1/films/search-by-keyword`, 
+    const response = await axios.get<IMoviePayloadAction>(`/v2.1/films/search-by-keyword`, 
       {
         headers: {
           'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
@@ -29,7 +29,7 @@ export const fetchSearchMovie = (debounced: string) => async (dispatch: AppDispa
 
 export const fetchSearchPerson = (debounced: string) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get<IPayloadAction>('/v1/persons',
+    const response = await axios.get<IPersonPayloadAction>('/v1/persons',
       {
         headers: {
           'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
@@ -41,7 +41,7 @@ export const fetchSearchPerson = (debounced: string) => async (dispatch: AppDisp
         }
       }
     )
-    dispatch(searchMovieFetchingSuccess(response.data))
+    dispatch(searchPersonFetchingSuccess(response.data))
   } catch (error) {
     const errorPayload: ISearchMovieErrorPayload = {
       isLoading: false,

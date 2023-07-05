@@ -1,6 +1,10 @@
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
+@layer utilities {
+  .h_calc {
+    height: calc(100vh - 54px);
+  }
 }
+.container {
+  @apply flex justify-center items-center content-center flex-col h_calc
+}
+
+@tailwind utilities;

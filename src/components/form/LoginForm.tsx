@@ -15,7 +15,7 @@ export const LoginForm: React.FC = () => {
   const navigate = useNavigate()
 
   const dispatch = useAppDispatch()
-  const { isError, isAuth, isLoading } = useAppSelector(state => state.authReducer)
+  const { isError, isLoading } = useAppSelector(state => state.authReducer)
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault()
@@ -44,14 +44,6 @@ export const LoginForm: React.FC = () => {
 
   return (
     <div className={classes.content}>
-      { !isAuth && 
-        <div className='text-center text-[16px]'>
-          <h1>Добро пожаловать!</h1>
-          <p>Здесь вы можете найти информацию о различных фильмах имеющихся в базе Кинопоиска.</p>
-          <p>Чтобы получить более подробную информацию о фильме и воспользоваться другими функциями сайта, пожалуйста, авторизуйтесь</p>
-        </div>
-      }
-
       <div className={classes.wrapper}>
         <h3 className={classes.header}>Авторизация</h3>
         <form

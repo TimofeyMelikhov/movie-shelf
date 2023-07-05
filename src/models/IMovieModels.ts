@@ -24,43 +24,60 @@ interface IGenre {
 }
 
 export interface IMovieDetail {
-    kinopoiskId: number
-    nameRu: string
-    nameOriginal: string
-    posterUrl: string
-    posterUrlPreview: string
-    coverUrl: string
-    reviewsCount: number,
-    ratingKinopoisk: number
-    ratingImdb: number
-    ratingFilmCritics: number
-    webUrl: string
-    year: number
-    filmLength: number
-    slogan: string
-    description: string
-    shortDescription: string
-    type: string
-    ratingMpaa: string
-    ratingAgeLimits: string
-    ratingKinopoiskVoteCount: number
-    countries: ICountry[]
-    genres: IGenre[]
+  kinopoiskId: number
+  nameRu: string
+  nameOriginal: string
+  posterUrl: string
+  posterUrlPreview: string
+  coverUrl: string
+  reviewsCount: number,
+  ratingKinopoisk: number
+  ratingImdb: number
+  ratingFilmCritics: number
+  webUrl: string
+  year: number
+  filmLength: number
+  slogan: string
+  description: string
+  shortDescription: string
+  type: string
+  ratingMpaa: string
+  ratingAgeLimits: string
+  ratingKinopoiskVoteCount: number
+  countries: ICountry[]
+  genres: IGenre[]
+}
+
+export interface IPersonDetail {
+  personId: number
+  nameRu: string
+  nameEn: string
+  sex: string
+  posterUrl: string
+  growth: string
+  birthday: string
+  age: number
+  birthplace: string
+  profession: string
+  
+}
+
+export interface IStaff {
+  staffId: number
+  nameRu: string
+  nameEn: string
+  posterUrl: string
+  professionText: string
+  professionKey: string
 }
 
 export interface ISearchMovie {
   filmId: number
   nameRu: string
   nameEn: string
-  type: string
   year: string
-  description: string
-  filmLength: string
   rating: string
-  ratingVoteCount: number
   posterUrlPreview: string
-  countries: ICountry[]
-  genres: IGenre[]
 }
 
 export interface ISearchPerson {

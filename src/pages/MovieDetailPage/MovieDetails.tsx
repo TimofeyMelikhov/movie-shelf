@@ -2,16 +2,17 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import classes from './MovieDetails.module.css'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { fetchDetailsMovie } from '../../redux/actions/MoviesDetailAction'
+import { fetchDetailsMovie, fetchStaffMovie } from '../../redux/actions/MoviesDetailAction'
 
 export const MovieDetails: React.FC = () => {
 
   const {id} = useParams<'id'>()
   const dispatch = useAppDispatch()
-  const { detailMovie, isError, isLoading} = useAppSelector(state => state.movieDetailReducer)
+  const { detailMovie, isError, isLoading, staff} = useAppSelector(state => state.movieDetailReducer)
 
   useEffect(() => {
     dispatch(fetchDetailsMovie(id))
+    dispatch(fetchStaffMovie(id))
   }, [dispatch, id])
 
   function convertMinutesToHours(minutes: number ) {
@@ -48,6 +49,13 @@ export const MovieDetails: React.FC = () => {
           <div className='mt-[5px]'>Страна: { countries }</div>
           <div className='mt-[5px]'>Жанр: { genres }</div>
           <div className='mt-[5px]'>Слоган: { slogan }</div>
+          <div className='mt-[5px]'>Режиссер: { slogan }</div>
+          <div className='mt-[5px]'>Сценарий: { slogan }</div>
+          <div className='mt-[5px]'>Продюсер: { slogan }</div>
+          <div className='mt-[5px]'>Оператор: { slogan }</div>
+          <div className='mt-[5px]'>Композитор: { slogan }</div>
+          <div className='mt-[5px]'>Художник: { slogan }</div>
+          <div className='mt-[5px]'>Монтаж: { slogan }</div>
           <div className='mt-[5px]'> Описание: { detailMovie?.description } </div>
           <div className='mt-[5px]'>Время: { movieTime }</div>
           <span className='w-[200px] bg-orange-500 py-[10px] px-[20px] rounded-2xl text-center mt-[10px] text-white'>
