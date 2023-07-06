@@ -10,7 +10,8 @@ module.exports = {
         high_rating: '#3bb33b',
         low_rating: 'red',
         medium_rating: '#777',
-        bgc_color: '#f4f4f4;'
+        bgc_color: '#f4f4f4;',
+        active_staff_link: '#f50'
       }
     },
   },

@@ -13,3 +13,6 @@
 .medium_rating {
   @apply text-medium_rating
 }
+.hov_staff {
+  @apply hover:text-active_staff_link
+}

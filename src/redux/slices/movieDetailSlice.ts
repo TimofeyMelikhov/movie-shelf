@@ -3,7 +3,7 @@ import { IMovieDetail, IStaff } from '../../models/IMovieModels'
 
 interface IMovieDetailState {
   detailMovie: IMovieDetail | null
-  staff: IStaff | null
+  staff: IStaff[] | null
   isLoading: boolean
   isError: string,
 }
