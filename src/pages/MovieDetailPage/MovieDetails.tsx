@@ -42,10 +42,7 @@ export const MovieDetails: React.FC = () => {
 
   const getterBudget = (typeBudget: string) => {
     return budget?.filter(item => item.type === typeBudget)
-      .map(item => {
-        const amount = item.amount.toLocaleString()
-        return item.symbol + amount
-      })
+      .map(item => item.symbol + item.amount).toLocaleString()
   }
 
   const countries = detailMovie?.countries.map(c => c.country).join(', ')
@@ -69,6 +66,8 @@ export const MovieDetails: React.FC = () => {
   const usaBudget = getterBudget('USA')
   const worldBudget = getterBudget('WORLD')
   const ruBudget = getterBudget('RUS')
+
+  console.log(movieBudget)
   
   return (
     <>
