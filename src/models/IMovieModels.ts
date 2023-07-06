@@ -59,9 +59,15 @@ export interface IPersonDetail {
   age: number
   birthplace: string
   profession: string
-  
 }
 
+export interface IBudget {
+  type: string
+  amount: number
+  currencyCode: string
+  name: string
+  symbol: string
+}
 export interface IStaff {
   staffId: number
   nameRu: string

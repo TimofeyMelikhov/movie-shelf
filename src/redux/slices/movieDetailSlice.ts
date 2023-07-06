@@ -1,9 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { IMovieDetail, IStaff } from '../../models/IMovieModels' 
+import { IBudget, IMovieDetail, IStaff } from '../../models/IMovieModels' 
 
 interface IMovieDetailState {
   detailMovie: IMovieDetail | null
   staff: IStaff[] | null
+  budget: IBudget[] | null
   isLoading: boolean
   isError: string,
 }
@@ -13,10 +14,14 @@ export interface IMovieDetailPayload {
   error: Error;
 }
 
+export interface IBudgetPayload {
+  items: IBudget[]
+}
 
 const initialState: IMovieDetailState = {
   detailMovie: null,
   staff: null,
+  budget: null,
   isLoading: false,
   isError: ''
 }
@@ -38,6 +43,11 @@ export const movieDetailSlice = createSlice({
       state.isError = ''
       state.staff = action.payload
     },
+    movieBudgetFetchingSuccess (state, action: PayloadAction<IBudgetPayload>) {
+      state.isLoading = false
+      state.isError = ''
+      state.budget = action.payload.items
+    },
     moviesDetailFetchingError(state, action: PayloadAction<IMovieDetailPayload>) {
       state.isLoading = action.payload.isLoading
       state.isError = action.payload.error.message
@@ -46,4 +56,4 @@ export const movieDetailSlice = createSlice({
 })
 
 export default movieDetailSlice.reducer
-export const { movieDetailFetching, moviesDetailFetchingSuccess, moviesDetailFetchingError, movieStaffFetchingSuccess } = movieDetailSlice.actions
+export const { movieDetailFetching, moviesDetailFetchingSuccess, moviesDetailFetchingError, movieStaffFetchingSuccess, movieBudgetFetchingSuccess } = movieDetailSlice.actions

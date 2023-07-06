@@ -2,18 +2,19 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import classes from './MovieDetails.module.css'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { fetchDetailsMovie, fetchStaffMovie } from '../../redux/actions/MoviesDetailAction'
+import { fetchBudgetMovie, fetchDetailsMovie, fetchStaffMovie } from '../../redux/actions/MoviesDetailAction'
 import { NavLink } from 'react-router-dom'
 
 export const MovieDetails: React.FC = () => {
 
   const {id} = useParams<'id'>()
   const dispatch = useAppDispatch()
-  const { detailMovie, isError, isLoading, staff } = useAppSelector(state => state.movieDetailReducer)
+  const { detailMovie, isError, isLoading, staff, budget } = useAppSelector(state => state.movieDetailReducer)
 
   useEffect(() => {
     dispatch(fetchDetailsMovie(id))
     dispatch(fetchStaffMovie(id))
+    dispatch(fetchBudgetMovie(id))
   }, [dispatch, id])
 
   function convertMinutesToHours(minutes: number ) {
@@ -36,8 +37,13 @@ export const MovieDetails: React.FC = () => {
         :
           null
       ));
-      return filteredStaff?.filter(item => item !== null);
+    return filteredStaff?.filter(item => item !== null);
   };
+
+  const getterBudget = (typeBudget: string) => {
+    return budget?.filter(item => item.type === typeBudget)
+      .map(item => item.symbol + item.amount).toLocaleString()
+  }
 
   const countries = detailMovie?.countries.map(c => c.country).join(', ')
   const genres = detailMovie?.genres.map(g => g.genre).join(', ')
@@ -56,7 +62,11 @@ export const MovieDetails: React.FC = () => {
   const design = generateStaffLinks('DESIGN');
   const editor = generateStaffLinks('EDITOR');
 
-  console.log(design)
+  const movieBudget = getterBudget('BUDGET')
+  const usaBudget = getterBudget('USA')
+  const worldBudget = getterBudget('WORLD')
+
+  console.log(movieBudget)
   
   return (
     <>
@@ -118,12 +128,23 @@ export const MovieDetails: React.FC = () => {
             <span className='pl-[30px]'>{ editor }</span>
           </div>
           <div className='mt-[5px] text-[13px]'>
-            <span className='text-gray-600'>Описание: </span> 
-            <span className='pl-[30px]'>{ detailMovie?.description } </span>
+            <span className='text-gray-600'>Бюджет: </span> 
+            <span className='pl-[30px]'>{ movieBudget }</span>
+          </div>
+          <div className='mt-[5px] text-[13px]'>
+            <span className='text-gray-600'>Сборы в США: </span> 
+            <span className='pl-[30px]'>{ usaBudget }</span>
+          </div>
+          <div className='mt-[5px] text-[13px]'>
+            <span className='text-gray-600'>Сборы в мире: </span> 
+            <span className='pl-[30px]'>{ worldBudget }</span>
           </div>
           <div className='mt-[5px] text-[13px]'>
             <span className='text-gray-600'>Время: </span> 
             <span className='pl-[30px]'>{ movieTime }</span>
+          </div>
+          <div className='mt-[25px] text-[13px]'>
+            { detailMovie?.description } 
           </div>
           <span className='w-[200px] bg-orange-500 py-[10px] px-[20px] rounded-2xl text-center mt-[10px] text-white'>
             <a href={`https://flicksbar.club/film/${id}/`} target='_blank' rel="noreferrer">Смотреть фильм</a>
