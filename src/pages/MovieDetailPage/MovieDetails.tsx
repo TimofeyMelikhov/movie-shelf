@@ -65,6 +65,7 @@ export const MovieDetails: React.FC = () => {
   const movieBudget = getterBudget('BUDGET')
   const usaBudget = getterBudget('USA')
   const worldBudget = getterBudget('WORLD')
+  const ruBudget = getterBudget('RUS')
 
   console.log(movieBudget)
   
@@ -138,6 +139,10 @@ export const MovieDetails: React.FC = () => {
           <div className='mt-[5px] text-[13px]'>
             <span className='text-gray-600'>Сборы в мире: </span> 
             <span className='pl-[30px]'>{ worldBudget }</span>
+          </div>
+          <div className='mt-[5px] text-[13px]'>
+            <span className='text-gray-600'>Сборы в России: </span> 
+            <span className='pl-[30px]'>{ ruBudget }</span>
           </div>
           <div className='mt-[5px] text-[13px]'>
             <span className='text-gray-600'>Время: </span> 
