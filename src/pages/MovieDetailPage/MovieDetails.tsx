@@ -37,7 +37,7 @@ export const MovieDetails: React.FC = () => {
         :
           null
       ));
-    return filteredStaff?.filter(item => item !== null);
+    return filteredStaff?.filter(item => item !== null).splice(0, 3);
   };
   const generateActorLinks = (professionKey: string) => {
     const filteredStaff = staff
@@ -110,80 +110,80 @@ export const MovieDetails: React.FC = () => {
           <div className='text-[14px]'> { ratingCount } оценок </div>
           <div className='mt-[50px] text-[22px]'>О Фильме</div>
           <div className='mt-[10px] text-[13px]'>
-            <span className='text-gray-600'> Год производства  </span>
-            <span className='pl-[30px]'> { detailMovie?.year } </span> 
+            <span className='text-gray-600 inline-flex w-[180px]'> Год производства  </span>
+            <span > { detailMovie?.year } </span> 
           </div>
           <div className='mt-[10px] text-[13px]'>
-            <span className='text-gray-600'> Страна </span> 
-            <span className='pl-[30px]'> { countries } </span>
+            <span className='text-gray-600 inline-flex w-[180px]'> Страна </span> 
+            <span > { countries } </span>
           </div>
           <div className='mt-[10px] text-[13px]'>
-            <span className='text-gray-600'>Жанр </span> 
-            <span className='pl-[30px]'>{ genres }</span>
+            <span className='text-gray-600 inline-flex w-[180px]'>Жанр </span> 
+            <span >{ genres }</span>
           </div>
           <div className='mt-[10px] text-[13px] text-gray-600'>
-            <span className=''>Слоган </span> 
-            <span className='pl-[30px]'>{ slogan }</span>
+            <span className='inline-flex w-[180px]'>Слоган </span> 
+            <span >{ slogan }</span>
           </div>
           <div className='mt-[10px] text-[13px]'>
-            <span className='text-gray-600'>Режиссер </span> 
-            <span className='pl-[30px]'>{ director }</span>
+            <span className='text-gray-600 inline-flex w-[180px]'>Режиссер </span> 
+            <span >{ director }</span>
             </div>
           <div className='mt-[10px] text-[13px]'>
-            <span className='text-gray-600'>Сценарий </span> 
-            <span className='pl-[30px]'>{ writer }</span>
+            <span className='text-gray-600 inline-flex w-[180px]'>Сценарий </span> 
+            <span >{ writer }</span>
           </div>
           <div className='mt-[10px] text-[13px]'>
-            <span className='text-gray-600'>Продюсер </span> 
-            <span className='pl-[30px]'>{ producer }</span>
+            <span className='text-gray-600 inline-flex w-[180px]'>Продюсер </span> 
+            <span >{ producer }</span>
           </div>
           <div className='mt-[10px] text-[13px]'>
-            <span className='text-gray-600'>Оператор </span> 
-            <span className='pl-[30px]'>{ operator }</span>
+            <span className='text-gray-600 inline-flex w-[180px]'>Оператор </span> 
+            <span >{ operator }</span>
           </div>
           <div className='mt-[10px] text-[13px]'>
-            <span className='text-gray-600'>Композитор </span> 
-            <span className='pl-[30px]'>{ composer }</span>
+            <span className='text-gray-600 inline-flex w-[180px]'>Композитор </span> 
+            <span >{ composer }</span>
           </div>
           <div className='mt-[10px] text-[13px]'>
-            <span className='text-gray-600'>Художник </span> 
-            <span className='pl-[30px]'>{ design }</span>
+            <span className='text-gray-600 inline-flex w-[180px]'>Художник </span> 
+            <span >{ design }</span>
           </div>
           <div className='mt-[10px] text-[13px]'>
-            <span className='text-gray-600'>Монтаж </span> 
-            <span className='pl-[30px]'>{ editor }</span>
+            <span className='text-gray-600 inline-flex w-[180px]'>Монтаж </span> 
+            <span >{ editor }</span>
           </div>
           <div className='mt-[10px] text-[13px]'>
-            <span className='text-gray-600'>Бюджет </span> 
-            <span className='pl-[30px]'>{ movieBudget }</span>
+            <span className='text-gray-600 inline-flex w-[180px]'>Бюджет </span> 
+            <span >{ movieBudget }</span>
           </div>
           <div className='mt-[10px] text-[13px]'>
-            <span className='text-gray-600'>Сборы в США </span> 
-            <span className='pl-[30px]'>{ usaBudget }</span>
+            <span className='text-gray-600 inline-flex w-[180px]'>Сборы в США </span> 
+            <span >{ usaBudget }</span>
           </div>
           <div className='mt-[10px] text-[13px]'>
-            <span className='text-gray-600'>Сборы в мире </span> 
-            <span className='pl-[30px]'>{ worldBudget }</span>
+            <span className='text-gray-600 inline-flex w-[180px]'>Сборы в мире </span> 
+            <span >{ worldBudget }</span>
           </div>
           <div className='mt-[10px] text-[13px]'>
-            <span className='text-gray-600'>Сборы в России </span> 
-            <span className='pl-[30px]'>{ ruBudget }</span>
+            <span className='text-gray-600 inline-flex w-[180px]'>Сборы в России </span> 
+            <span >{ ruBudget }</span>
           </div>
           <div className='mt-[10px] text-[13px]'>
-            <span className='text-gray-600'>Премьера в России </span> 
-            <span className='pl-[30px]'> — </span>
+            <span className='text-gray-600 inline-flex w-[180px]'>Премьера в России </span> 
+            <span > — </span>
           </div>
           <div className='mt-[10px] text-[13px]'>
-            <span className='text-gray-600'>Премьера в мире </span> 
-            <span className='pl-[30px]'> — </span>
+            <span className='text-gray-600 inline-flex w-[180px]'>Премьера в мире </span> 
+            <span > — </span>
           </div>
           <div className='mt-[10px] text-[13px]'>
-            <span>Возраст</span> 
-            <span className='pl-[30px] border'>{ ageRaiting }</span>
+            <span className='inline-flex w-[180px]'>Возраст</span> 
+            <span className=' border-2 p-[5px]'>{ ageRaiting }</span>
           </div>
           <div className='mt-[10px] text-[13px] text-gray-600'>
-            <span>Время</span> 
-            <span className='pl-[30px] '>{ movieTime }</span>
+            <span className='inline-flex w-[180px]'>Время</span> 
+            <span className=' '>{ movieTime }</span>
           </div>
           <div className='mt-[25px] text-[13px]'>
             { detailMovie?.description } 
