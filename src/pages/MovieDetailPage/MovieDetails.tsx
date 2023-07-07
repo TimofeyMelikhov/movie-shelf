@@ -109,69 +109,81 @@ export const MovieDetails: React.FC = () => {
           <div>Рейтинг Кинопоиска: <span className={highlitedRating}>{ detailMovie?.ratingKinopoisk }</span></div>
           <div className='text-[14px]'> { ratingCount } оценок </div>
           <div className='mt-[50px] text-[22px]'>О Фильме</div>
-          <div className='mt-[5px] text-[13px]'>
-            <span className='text-gray-600'> Год производства:  </span>
+          <div className='mt-[10px] text-[13px]'>
+            <span className='text-gray-600'> Год производства  </span>
             <span className='pl-[30px]'> { detailMovie?.year } </span> 
           </div>
-          <div className='mt-[5px] text-[13px]'>
-            <span className='text-gray-600'> Страна: </span> 
+          <div className='mt-[10px] text-[13px]'>
+            <span className='text-gray-600'> Страна </span> 
             <span className='pl-[30px]'> { countries } </span>
           </div>
-          <div className='mt-[5px] text-[13px]'>
-            <span className='text-gray-600'>Жанр: </span> 
+          <div className='mt-[10px] text-[13px]'>
+            <span className='text-gray-600'>Жанр </span> 
             <span className='pl-[30px]'>{ genres }</span>
           </div>
-          <div className='mt-[5px] text-[13px]'>
-            <span className='text-gray-600'>Слоган: </span> 
-            <span className='pl-[30px] text-gray-600'>{ slogan }</span>
+          <div className='mt-[10px] text-[13px] text-gray-600'>
+            <span className=''>Слоган </span> 
+            <span className='pl-[30px]'>{ slogan }</span>
           </div>
-          <div className='mt-[5px] text-[13px]'>
-            <span className='text-gray-600'>Режиссер: </span> 
+          <div className='mt-[10px] text-[13px]'>
+            <span className='text-gray-600'>Режиссер </span> 
             <span className='pl-[30px]'>{ director }</span>
             </div>
-          <div className='mt-[5px] text-[13px]'>
-            <span className='text-gray-600'>Сценарий: </span> 
+          <div className='mt-[10px] text-[13px]'>
+            <span className='text-gray-600'>Сценарий </span> 
             <span className='pl-[30px]'>{ writer }</span>
           </div>
-          <div className='mt-[5px] text-[13px]'>
-            <span className='text-gray-600'>Продюсер: </span> 
+          <div className='mt-[10px] text-[13px]'>
+            <span className='text-gray-600'>Продюсер </span> 
             <span className='pl-[30px]'>{ producer }</span>
           </div>
-          <div className='mt-[5px] text-[13px]'>
-            <span className='text-gray-600'>Оператор: </span> 
+          <div className='mt-[10px] text-[13px]'>
+            <span className='text-gray-600'>Оператор </span> 
             <span className='pl-[30px]'>{ operator }</span>
           </div>
-          <div className='mt-[5px] text-[13px]'>
-            <span className='text-gray-600'>Композитор: </span> 
+          <div className='mt-[10px] text-[13px]'>
+            <span className='text-gray-600'>Композитор </span> 
             <span className='pl-[30px]'>{ composer }</span>
           </div>
-          <div className='mt-[5px] text-[13px]'>
-            <span className='text-gray-600'>Художник: </span> 
+          <div className='mt-[10px] text-[13px]'>
+            <span className='text-gray-600'>Художник </span> 
             <span className='pl-[30px]'>{ design }</span>
           </div>
-          <div className='mt-[5px] text-[13px]'>
-            <span className='text-gray-600'>Монтаж: </span> 
+          <div className='mt-[10px] text-[13px]'>
+            <span className='text-gray-600'>Монтаж </span> 
             <span className='pl-[30px]'>{ editor }</span>
           </div>
-          <div className='mt-[5px] text-[13px]'>
-            <span className='text-gray-600'>Бюджет: </span> 
+          <div className='mt-[10px] text-[13px]'>
+            <span className='text-gray-600'>Бюджет </span> 
             <span className='pl-[30px]'>{ movieBudget }</span>
           </div>
-          <div className='mt-[5px] text-[13px]'>
-            <span className='text-gray-600'>Сборы в США: </span> 
+          <div className='mt-[10px] text-[13px]'>
+            <span className='text-gray-600'>Сборы в США </span> 
             <span className='pl-[30px]'>{ usaBudget }</span>
           </div>
-          <div className='mt-[5px] text-[13px]'>
-            <span className='text-gray-600'>Сборы в мире: </span> 
+          <div className='mt-[10px] text-[13px]'>
+            <span className='text-gray-600'>Сборы в мире </span> 
             <span className='pl-[30px]'>{ worldBudget }</span>
           </div>
-          <div className='mt-[5px] text-[13px]'>
-            <span className='text-gray-600'>Сборы в России: </span> 
+          <div className='mt-[10px] text-[13px]'>
+            <span className='text-gray-600'>Сборы в России </span> 
             <span className='pl-[30px]'>{ ruBudget }</span>
           </div>
-          <div className='mt-[5px] text-[13px]'>
-            <span className='text-gray-600'>Время: </span> 
-            <span className='pl-[30px]'>{ movieTime }</span>
+          <div className='mt-[10px] text-[13px]'>
+            <span className='text-gray-600'>Премьера в России </span> 
+            <span className='pl-[30px]'> — </span>
+          </div>
+          <div className='mt-[10px] text-[13px]'>
+            <span className='text-gray-600'>Премьера в мире </span> 
+            <span className='pl-[30px]'> — </span>
+          </div>
+          <div className='mt-[10px] text-[13px]'>
+            <span>Возраст</span> 
+            <span className='pl-[30px] border'>{ ageRaiting }</span>
+          </div>
+          <div className='mt-[10px] text-[13px] text-gray-600'>
+            <span>Время</span> 
+            <span className='pl-[30px] '>{ movieTime }</span>
           </div>
           <div className='mt-[25px] text-[13px]'>
             { detailMovie?.description } 
