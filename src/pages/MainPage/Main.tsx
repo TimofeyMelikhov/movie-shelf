@@ -4,6 +4,7 @@ import { fetchMovies } from '../../redux/actions/MoviesAction'
 import { Movies } from '../../components/movie/Movies'
 import classes from './main.module.css'
 import { Menu } from '../../components/menu/Menu'
+import { Preloader } from '../../components/preloader/Preloader'
 
 export const MainPage: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -17,9 +18,12 @@ export const MainPage: React.FC = () => {
     <div className={classes.main_container}>
       <Menu />
       <div className={classes.movie_container}>
-        { isLoading && <p>Loading...</p> }
+        { isLoading ? 
+            <Preloader/> 
+          : 
+            movies.map(movie => <Movies key={movie.kinopoiskId} movie={movie} />) 
+        }
         { isError && <p>{isError}</p> }
-        { movies.map(movie => <Movies key={movie.kinopoiskId} movie={movie} />) }
       </div>
     </div>
   );
