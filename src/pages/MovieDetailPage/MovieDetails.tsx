@@ -39,6 +39,21 @@ export const MovieDetails: React.FC = () => {
       ));
     return filteredStaff?.filter(item => item !== null);
   };
+  const generateActorLinks = (professionKey: string) => {
+    const filteredStaff = staff
+      ?.filter(item => item.professionKey === professionKey)
+      .map(item => (
+        item.nameRu ? 
+          <React.Fragment key={item.staffId}>
+            <NavLink to={`/name/${item.staffId}`} className={classes.hov_staff}>
+              {item.nameRu}
+            </NavLink>
+          </React.Fragment>
+        :
+          null
+      ));
+    return filteredStaff?.filter(item => item !== null).splice(0, 10);
+  };
 
   const getterBudget = (typeBudget: string) => {
     return budget?.filter(item => item.type === typeBudget)
@@ -64,6 +79,7 @@ export const MovieDetails: React.FC = () => {
   const composer = generateStaffLinks('COMPOSER');
   const design = generateStaffLinks('DESIGN');
   const editor = generateStaffLinks('EDITOR');
+  const mainActor = generateActorLinks('ACTOR')
 
   const movieBudget = getterBudget('BUDGET')
   const usaBudget = getterBudget('USA')
@@ -75,11 +91,19 @@ export const MovieDetails: React.FC = () => {
       { isLoading && <p>Loading...</p> }
       { isError && <p>{isError}</p> }
 
-      <div className='container flex mx-auto pt-5 max-w-[1200px]'>
-        <div className='flex flex-col'>
-          <img src={detailMovie?.posterUrl} alt="poster" />
+      <div className='container flex mx-auto pt-5 max-w-[1300px] bg-white'>
+        <div className='flex flex-col ml-[40px]'>
+          <img src={detailMovie?.posterUrl} alt="poster" className='mb-[25px]'/>
+          <iframe
+            width="300"
+            height="200"
+            src={`https://www.youtube.com/embed/jfPWtgQdb_Y`}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
         </div>
-        <div className='flex flex-col ml-[40px] max-w-[50%]'>
+        <div className='flex flex-col ml-[40px] max-w-[45%]'>
           <h1 className={classes.header}>{ detailMovie?.nameRu } ({detailMovie?.year})</h1>
           <div className={classes.origName}>{detailMovie?.nameOriginal} {ageRaiting}</div>
           <div>Рейтинг Кинопоиска: <span className={highlitedRating}>{ detailMovie?.ratingKinopoisk }</span></div>
@@ -99,7 +123,7 @@ export const MovieDetails: React.FC = () => {
           </div>
           <div className='mt-[5px] text-[13px]'>
             <span className='text-gray-600'>Слоган: </span> 
-            <span className='pl-[30px]'>{ slogan }</span>
+            <span className='pl-[30px] text-gray-600'>{ slogan }</span>
           </div>
           <div className='mt-[5px] text-[13px]'>
             <span className='text-gray-600'>Режиссер: </span> 
@@ -152,9 +176,15 @@ export const MovieDetails: React.FC = () => {
           <div className='mt-[25px] text-[13px]'>
             { detailMovie?.description } 
           </div>
-          <span className='w-[200px] bg-orange-500 py-[10px] px-[20px] rounded-2xl text-center mt-[10px] text-white'>
+          <span className='w-[200px] bg-orange-500 py-[10px] px-[20px] rounded-2xl text-center mt-[10px] mb-[30px] text-white'>
             <a href={`https://flicksbar.club/film/${id}/`} target='_blank' rel="noreferrer">Смотреть фильм</a>
           </span>
+        </div>
+        <div className='flex flex-col ml-[40px] mt-[180px]'>
+          <h4> В главных ролях ›</h4>
+          <div className='flex flex-col mt-[10px] text-[13px]'>
+            { mainActor }
+          </div>
         </div>
       </div>
     </>
