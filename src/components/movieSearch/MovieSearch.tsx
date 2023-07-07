@@ -28,8 +28,6 @@ export function MovieSearch() {
     }
   }, [debounced, dispatch])
 
-  console.log(films)
-
   const clickHandler = () => {
     setDropdown(false)
     input.setvalue('')
