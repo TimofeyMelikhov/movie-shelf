@@ -2,19 +2,21 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import classes from './MovieDetails.module.css'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { fetchBudgetMovie, fetchDetailsMovie, fetchStaffMovie } from '../../redux/actions/MoviesDetailAction'
+import { fetchBudgetMovie, fetchDetailsMovie, fetchDistributionMovie, fetchStaffMovie } from '../../redux/actions/MoviesDetailAction'
 import { NavLink } from 'react-router-dom'
+import { formatDate } from '../../utils/formatDate'
 
 export const MovieDetails: React.FC = () => {
 
   const {id} = useParams<'id'>()
   const dispatch = useAppDispatch()
-  const { detailMovie, isError, isLoading, staff, budget } = useAppSelector(state => state.movieDetailReducer)
+  const { detailMovie, isError, isLoading, staff, budget, distribution } = useAppSelector(state => state.movieDetailReducer)
 
   useEffect(() => {
     dispatch(fetchDetailsMovie(id))
     dispatch(fetchStaffMovie(id))
     dispatch(fetchBudgetMovie(id))
+    dispatch(fetchDistributionMovie(id))
   }, [dispatch, id])
 
   function convertMinutesToHours(minutes: number ) {
@@ -65,12 +67,14 @@ export const MovieDetails: React.FC = () => {
 
   const countries = detailMovie?.countries.map(c => c.country).join(', ')
   const genres = detailMovie?.genres.map(g => g.genre).join(', ')
-  const movieTime = detailMovie?.filmLength ? `${detailMovie?.filmLength} мин. / ${convertMinutesToHours(detailMovie?.filmLength)}` : 'Неизвестно'
-  const slogan = detailMovie?.slogan ? `«${detailMovie?.slogan}»` : '—'
+  const movieTime = detailMovie?.filmLength ? `${detailMovie.filmLength} мин. / ${convertMinutesToHours(detailMovie.filmLength)}` : 'Неизвестно'
+  const slogan = detailMovie?.slogan ? `«${detailMovie.slogan}»` : '—'
   const ratingCount = detailMovie?.ratingKinopoiskVoteCount.toLocaleString('ru-RU')
-  const ageRaiting = detailMovie?.ratingAgeLimits ? Number(detailMovie?.ratingAgeLimits?.match(/\d+/)) + '+' : null
+  const ageRaiting = detailMovie?.ratingAgeLimits ? Number(detailMovie.ratingAgeLimits?.match(/\d+/)) + '+' : null
   const highlitedRating = detailMovie?.ratingKinopoisk && detailMovie.ratingKinopoisk >= 7 ? classes.high_rating : detailMovie?.ratingKinopoisk &&
    detailMovie.ratingKinopoisk >= 5.1 && detailMovie.ratingKinopoisk <= 6.9 ? classes.medium_rating : classes.low_rating
+  const premierInRussia = distribution?.filter(item => item.type === 'PREMIERE' && item.country && item.country.country === "Россия").map(item => item.date)
+  const worldPremier = distribution?.filter(item => item.type === 'WORLD_PREMIER').map(item => item.date)
 
   const director = generateStaffLinks('DIRECTOR');
   const writer = generateStaffLinks('WRITER');
@@ -85,6 +89,9 @@ export const MovieDetails: React.FC = () => {
   const usaBudget = getterBudget('USA')
   const worldBudget = getterBudget('WORLD')
   const ruBudget = getterBudget('RUS')
+
+  const formatWorldPremier = formatDate(String(worldPremier))
+  const formatRussianPremier = formatDate(String(premierInRussia))
   
   return (
     <>
@@ -171,11 +178,11 @@ export const MovieDetails: React.FC = () => {
           </div>
           <div className='mt-[10px] text-[13px]'>
             <span className='text-gray-600 inline-flex w-[180px]'>Премьера в России </span> 
-            <span > — </span>
+            <span > { formatRussianPremier } </span>
           </div>
           <div className='mt-[10px] text-[13px]'>
             <span className='text-gray-600 inline-flex w-[180px]'>Премьера в мире </span> 
-            <span > — </span>
+            <span > { formatWorldPremier } </span>
           </div>
           <div className='mt-[10px] text-[13px]'>
             <span className='inline-flex w-[180px]'>Возраст</span> 

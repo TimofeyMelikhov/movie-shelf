@@ -77,6 +77,19 @@ export interface IStaff {
   professionKey: string
 }
 
+export interface IDistribution {
+  type: string
+  subType: string
+  date: string
+  reRelease: boolean
+  country: null | ICountry
+  companies: ICompanies[]
+}
+
+interface ICompanies {
+  name: string
+}
+
 export interface ISearchMovie {
   filmId: number
   nameRu: string
