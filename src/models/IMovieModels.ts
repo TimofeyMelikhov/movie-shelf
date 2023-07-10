@@ -83,7 +83,7 @@ export interface IDistribution {
   date: string
   reRelease: boolean
   country: null | ICountry
-  companies: ICompanies[]
+  companies: ICompanies
 }
 
 interface ICompanies {
@@ -104,4 +104,12 @@ export interface ISearchPerson {
   nameRu: string
   nameEn: string
   posterUrl: string
+}
+
+export interface ISequelPrequel {
+  filmId: number
+  nameRu: string
+  nameOriginal: string
+  posterUrlPreview: string
+  relationType: string
 }
