@@ -1,7 +1,7 @@
 import axios from '../../axios/index';
 import { AppDispatch } from '../index';
 import { IMovieDetail, ISequelPrequel, IStaff } from '../../models/IMovieModels'
-import { moviesDetailFetchingError, moviesDetailFetchingSuccess, IMovieDetailPayload, movieStaffFetchingSuccess, IBudgetPayload, movieBudgetFetchingSuccess, IDistributionPayload, movieDistributionFetchingSuccess, moviePrequelFetchingSuccess } from '../slices/movieDetailSlice';
+import { moviesDetailFetchingError, moviesDetailFetchingSuccess, IMovieDetailPayload, movieStaffFetchingSuccess, IBudgetPayload, movieBudgetFetchingSuccess, IDistributionPayload, movieDistributionFetchingSuccess, moviePrequelFetchingSuccess, IFactsPayload, movieFactsFetchingSuccess } from '../slices/movieDetailSlice';
 
 export const fetchDetailsMovie = (id: string | undefined) => async (dispatch: AppDispatch) => {
   try {
@@ -98,6 +98,26 @@ export const fetchPrequelMovies = (id: string | undefined, setHasSequelsAndPrequ
     )
     dispatch(moviePrequelFetchingSuccess(response.data))
     setHasSequelsAndPrequels(true)
+  } catch (error) {
+    const errorPayload: IMovieDetailPayload = {
+      isLoading: false,
+      error: error as Error,
+    }
+    dispatch(moviesDetailFetchingError(errorPayload))
+  }
+}
+
+export const fetchFactsMovie = (id: string | undefined) => async (dispatch: AppDispatch) => {
+  try {
+    const response = await axios.get<IFactsPayload>(`/v2.2/films/${id}/facts`,
+      {
+        headers: {
+          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
+          'Content-Type': 'application/json',
+        }
+      }
+    )
+    dispatch(movieFactsFetchingSuccess(response.data))
   } catch (error) {
     const errorPayload: IMovieDetailPayload = {
       isLoading: false,

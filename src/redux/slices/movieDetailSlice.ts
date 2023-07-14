@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { IBudget, IDistribution, IMovieDetail, ISequelPrequel, IStaff } from '../../models/IMovieModels' 
+import { IBudget, IDistribution, IFacts, IMovieDetail, ISequelPrequel, IStaff } from '../../models/IMovieModels' 
 
 interface IMovieDetailState {
   detailMovie: IMovieDetail | null
@@ -7,6 +7,7 @@ interface IMovieDetailState {
   budget: IBudget[] | null
   distribution: IDistribution[] | null
   prequelMovies: ISequelPrequel[] | null
+  facts: IFacts[] | null
   isLoading: boolean
   isError: string,
 }
@@ -24,12 +25,17 @@ export interface IDistributionPayload {
   items: IDistribution[]
 }
 
+export interface IFactsPayload {
+  items: IFacts[]
+}
+
 const initialState: IMovieDetailState = {
   detailMovie: null,
   staff: null,
   budget: null,
   distribution: null,
   prequelMovies: null,
+  facts: null,
   isLoading: false,
   isError: ''
 }
@@ -66,6 +72,11 @@ export const movieDetailSlice = createSlice({
       state.isError = ''
       state.prequelMovies = action.payload
     },
+    movieFactsFetchingSuccess (state, action: PayloadAction<IFactsPayload>) {
+      state.isLoading = false
+      state.isError = ''
+      state.facts = action.payload.items
+    },
     moviesDetailFetchingError(state, action: PayloadAction<IMovieDetailPayload>) {
       state.isLoading = action.payload.isLoading
       state.isError = action.payload.error.message
@@ -81,5 +92,6 @@ export const {
   movieStaffFetchingSuccess, 
   movieBudgetFetchingSuccess, 
   movieDistributionFetchingSuccess,
-  moviePrequelFetchingSuccess
+  moviePrequelFetchingSuccess,
+  movieFactsFetchingSuccess
 } = movieDetailSlice.actions

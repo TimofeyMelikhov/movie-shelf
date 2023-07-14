@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import classes from './MovieDetails.module.css'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { fetchBudgetMovie, fetchDetailsMovie, fetchDistributionMovie, fetchPrequelMovies, fetchStaffMovie } from '../../redux/actions/MoviesDetailAction'
+import { fetchBudgetMovie, fetchDetailsMovie, fetchDistributionMovie, fetchPrequelMovies, fetchStaffMovie, fetchFactsMovie } from '../../redux/actions/MoviesDetailAction'
 import { NavLink } from 'react-router-dom'
 import { formatDate, convertMinutesToHours,} from '../../utils/formatter'
 import { PrequelsMovies } from './PrequelsMovies'
@@ -12,7 +12,7 @@ export const MovieDetails: React.FC = () => {
 
   const {id} = useParams<'id'>()
   const dispatch = useAppDispatch()
-  const { detailMovie, isLoading, staff, budget, distribution, prequelMovies } = useAppSelector(state => state.movieDetailReducer)
+  const { detailMovie, isLoading, staff, budget, distribution, prequelMovies, facts } = useAppSelector(state => state.movieDetailReducer)
 
   const [hasSequelsAndPrequels, setHasSequelsAndPrequels] = useState(false);
 
@@ -22,6 +22,7 @@ export const MovieDetails: React.FC = () => {
     dispatch(fetchBudgetMovie(id))
     dispatch(fetchDistributionMovie(id))
     dispatch(fetchPrequelMovies(id, setHasSequelsAndPrequels))
+    dispatch(fetchFactsMovie(id))
   }, [dispatch, id])
 
   const generateStaffLinks = (professionKey: string) => {
@@ -220,8 +221,11 @@ export const MovieDetails: React.FC = () => {
                 </div>
               </div>
             }
-            <div className='flex-none mb-[15px] font-[18px]'>
+            <div className='flex-none mb-[15px]'>
               <h3>Знаете ли вы, что…</h3>
+              {
+                facts?.map((fact, index) => <div key={index} dangerouslySetInnerHTML={{ __html: fact.text }} className='border-b-2 mb-[25px] pb-[15px]'></div>)
+              }
             </div>
           </div>
           <div className='flex flex-col mt-[180px] max-h-[500px]'>
