@@ -15,13 +15,18 @@ export function PrequelsMovies({prequelMovies}: ISequelPrequelProps) {
   }
 
   return (
-    <div className='flex flex-col max-w-[200px] cursor-pointer' onClick={clickHandler}>
-      <div>
-				<img src={prequelMovies.posterUrlPreview} className='w-[150px] h-[200px]' alt="poster"/>
-			</div>
-			<div>
-				<p className='text-[15px]'> {prequelMovies.nameRu} </p>
-			</div>
-		</div>
+<div className='flex flex-col max-w-[200px] cursor-pointer' onClick={clickHandler}>
+      <div className='relative'>
+        <img
+          src={prequelMovies.posterUrlPreview}
+          className='max-w-[150px] max-h-[200px]'
+          alt='poster'
+        />
+        <div className='absolute inset-0 bg-black opacity-0 transition-opacity duration-300 hover:opacity-20'></div>
+      </div>
+      <div className='max-w-[150px]'>
+        <p className='text-[15px]'>{prequelMovies.nameRu}</p>
+      </div>
+    </div>
   )
 }

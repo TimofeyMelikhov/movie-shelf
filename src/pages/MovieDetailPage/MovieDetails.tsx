@@ -12,7 +12,7 @@ export const MovieDetails: React.FC = () => {
 
   const {id} = useParams<'id'>()
   const dispatch = useAppDispatch()
-  const { detailMovie, isError, isLoading, staff, budget, distribution, prequelMovies } = useAppSelector(state => state.movieDetailReducer)
+  const { detailMovie, isLoading, staff, budget, distribution, prequelMovies } = useAppSelector(state => state.movieDetailReducer)
 
   const [hasSequelsAndPrequels, setHasSequelsAndPrequels] = useState(false);
 
@@ -72,8 +72,8 @@ export const MovieDetails: React.FC = () => {
   const ageRaiting = detailMovie?.ratingAgeLimits ? Number(detailMovie.ratingAgeLimits?.match(/\d+/)) + '+' : null
   const highlitedRating = detailMovie?.ratingKinopoisk && detailMovie.ratingKinopoisk >= 7 ? classes.high_rating : detailMovie?.ratingKinopoisk &&
     detailMovie.ratingKinopoisk >= 5.1 && detailMovie.ratingKinopoisk <= 6.9 ? classes.medium_rating : classes.low_rating
-  const premierInRussiaDate = distribution?.filter(item => (item.type === 'PREMIERE') || (item.type === 'COUNTRY_SPECIFIC') && 
-    item.country && item.country.country === "Россия").map(item => item.date)[0]
+    const premierInRussiaDate = distribution?.filter(item => (item.type === 'PREMIERE' || item.type === 'COUNTRY_SPECIFIC') &&  
+    (item.country && item.country.country === "Россия")).map(item => item.date)[0]
   const worldPremierDate = distribution?.filter(item => item.type === 'WORLD_PREMIER').map(item => item.date)
   const distributionOnBluDate = distribution?.filter(item => item.subType === 'BLURAY').map(item => item.date)[0]
   const distributionOnDvdDate = distribution?.filter(item => item.subType === 'DVD').map(item => item.date)[0]
@@ -207,11 +207,11 @@ export const MovieDetails: React.FC = () => {
             <div className='mt-[25px] text-[13px]'>
               { detailMovie?.description } 
             </div>
-            <span className='w-[200px] bg-orange-500 py-[10px] px-[20px] rounded-2xl text-center mt-[10px] mb-[30px] text-white'>
+            <span className='w-[200px] bg-orange-500 py-[10px] px-[20px] rounded-2xl text-center mt-[10px] mb-[10px] text-white'>
               <a href={`https://flicksbar.club/film/${id}/`} target='_blank' rel="noreferrer">Смотреть фильм</a>
             </span>
             { hasSequelsAndPrequels &&
-                <div className='mb-[30px]'>
+                <div className='mb-[30px] w-[123%]'>
                   <h1 className='text-[22px]'>Сиквелы и приквелы ›</h1>
                   <div className='flex justify-between'>
                     {
