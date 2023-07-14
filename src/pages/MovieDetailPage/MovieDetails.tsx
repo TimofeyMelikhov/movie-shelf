@@ -211,15 +211,18 @@ export const MovieDetails: React.FC = () => {
               <a href={`https://flicksbar.club/film/${id}/`} target='_blank' rel="noreferrer">Смотреть фильм</a>
             </span>
             { hasSequelsAndPrequels &&
-                <div className='mb-[30px] w-[123%]'>
-                  <h1 className='text-[22px]'>Сиквелы и приквелы ›</h1>
-                  <div className='flex justify-between'>
-                    {
-                      prequelMovies?.map(item => <PrequelsMovies key={item.filmId} prequelMovies={item} />)
-                    }
-                  </div>
+              <div className='mb-[30px] w-[110%]'>
+                <h1 className='text-[22px]'>Сиквелы и приквелы ›</h1>
+                <div className='flex justify-between'>
+                  {
+                    prequelMovies?.map(item => <PrequelsMovies key={item.filmId} prequelMovies={item} />)
+                  }
                 </div>
+              </div>
             }
+            <div className='flex-none mb-[15px] font-[18px]'>
+              <h3>Знаете ли вы, что…</h3>
+            </div>
           </div>
           <div className='flex flex-col mt-[180px] max-h-[500px]'>
             <h4> В главных ролях ›</h4>

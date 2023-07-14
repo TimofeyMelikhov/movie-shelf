@@ -90,6 +90,12 @@ interface ICompanies {
   name: string
 }
 
+export interface IFacts {
+  text: string
+  type: string
+  spoiler: boolean
+}
+
 export interface ISearchMovie {
   filmId: number
   nameRu: string
