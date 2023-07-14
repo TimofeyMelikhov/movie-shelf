@@ -17,7 +17,7 @@ export function PrequelsMovies({prequelMovies}: ISequelPrequelProps) {
   return (
     <div className='flex flex-col max-w-[200px] cursor-pointer' onClick={clickHandler}>
       <div>
-				<img src={prequelMovies.posterUrlPreview} alt="poster"/>
+				<img src={prequelMovies.posterUrlPreview} className='w-[150px] h-[200px]' alt="poster"/>
 			</div>
 			<div>
 				<p className='text-[15px]'> {prequelMovies.nameRu} </p>

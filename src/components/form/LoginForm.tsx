@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { loginUser } from '../../redux/actions/LoginAction'
 import { setError } from '../../redux/slices/userSlice'
+import { Preloader } from '../preloader/Preloader'
 
 export const LoginForm: React.FC = () => {
 
@@ -70,7 +71,9 @@ export const LoginForm: React.FC = () => {
           { errorPass && <div className={classes.error_message}>Введите пароль</div> }
           <button 
             className={classes.button}
-          > { isLoading ? 'Загрузка...' : 'Войти' } </button>
+          > 
+            { isLoading ? <Preloader small /> : 'Войти' } 
+          </button>
         </form>
         {isError && <div style={{color: 'red'}}> {isError} </div>}
       </div>

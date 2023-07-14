@@ -86,7 +86,7 @@ export const fetchDistributionMovie = (id: string | undefined) => async (dispatc
   }
 }
 
-export const fetchPrequelMovies = (id: string | undefined) => async (dispatch: AppDispatch) => {
+export const fetchPrequelMovies = (id: string | undefined, setHasSequelsAndPrequels: Function) => async (dispatch: AppDispatch) => {
   try {
     const response = await axios.get<ISequelPrequel>(`v2.1/films/${id}/sequels_and_prequels`,
       {
@@ -97,6 +97,7 @@ export const fetchPrequelMovies = (id: string | undefined) => async (dispatch: A
       }
     )
     dispatch(moviePrequelFetchingSuccess(response.data))
+    setHasSequelsAndPrequels(true)
   } catch (error) {
     const errorPayload: IMovieDetailPayload = {
       isLoading: false,

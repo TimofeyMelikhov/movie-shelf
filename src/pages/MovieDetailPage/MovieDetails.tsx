@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import classes from './MovieDetails.module.css'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
@@ -14,15 +14,15 @@ export const MovieDetails: React.FC = () => {
   const dispatch = useAppDispatch()
   const { detailMovie, isError, isLoading, staff, budget, distribution, prequelMovies } = useAppSelector(state => state.movieDetailReducer)
 
+  const [hasSequelsAndPrequels, setHasSequelsAndPrequels] = useState(false);
+
   useEffect(() => {
     dispatch(fetchDetailsMovie(id))
     dispatch(fetchStaffMovie(id))
     dispatch(fetchBudgetMovie(id))
     dispatch(fetchDistributionMovie(id))
-    dispatch(fetchPrequelMovies(id))
+    dispatch(fetchPrequelMovies(id, setHasSequelsAndPrequels))
   }, [dispatch, id])
-
-  console.log(prequelMovies)
 
   const generateStaffLinks = (professionKey: string) => {
     const filteredStaff = staff
@@ -71,8 +71,9 @@ export const MovieDetails: React.FC = () => {
   const ratingCount = detailMovie?.ratingKinopoiskVoteCount.toLocaleString('ru-RU')
   const ageRaiting = detailMovie?.ratingAgeLimits ? Number(detailMovie.ratingAgeLimits?.match(/\d+/)) + '+' : null
   const highlitedRating = detailMovie?.ratingKinopoisk && detailMovie.ratingKinopoisk >= 7 ? classes.high_rating : detailMovie?.ratingKinopoisk &&
-   detailMovie.ratingKinopoisk >= 5.1 && detailMovie.ratingKinopoisk <= 6.9 ? classes.medium_rating : classes.low_rating
-  const premierInRussiaDate = distribution?.filter(item => (item.type === 'PREMIERE') || (item.type === 'COUNTRY_SPECIFIC') && item.country && item.country.country === "Россия").map(item => item.date)[0]
+    detailMovie.ratingKinopoisk >= 5.1 && detailMovie.ratingKinopoisk <= 6.9 ? classes.medium_rating : classes.low_rating
+  const premierInRussiaDate = distribution?.filter(item => (item.type === 'PREMIERE') || (item.type === 'COUNTRY_SPECIFIC') && 
+    item.country && item.country.country === "Россия").map(item => item.date)[0]
   const worldPremierDate = distribution?.filter(item => item.type === 'WORLD_PREMIER').map(item => item.date)
   const distributionOnBluDate = distribution?.filter(item => item.subType === 'BLURAY').map(item => item.date)[0]
   const distributionOnDvdDate = distribution?.filter(item => item.subType === 'DVD').map(item => item.date)[0]
@@ -201,7 +202,7 @@ export const MovieDetails: React.FC = () => {
             </div>
             <div className='mt-[10px] text-[13px] text-gray-600'>
               <span className='inline-flex w-[180px]'>Время</span> 
-              <span className=' '>{ movieTime }</span>
+              <span>{ movieTime }</span>
             </div>
             <div className='mt-[25px] text-[13px]'>
               { detailMovie?.description } 
@@ -209,7 +210,7 @@ export const MovieDetails: React.FC = () => {
             <span className='w-[200px] bg-orange-500 py-[10px] px-[20px] rounded-2xl text-center mt-[10px] mb-[30px] text-white'>
               <a href={`https://flicksbar.club/film/${id}/`} target='_blank' rel="noreferrer">Смотреть фильм</a>
             </span>
-            { prequelMovies?.length ?
+            { hasSequelsAndPrequels &&
                 <div className='mb-[30px]'>
                   <h1 className='text-[22px]'>Сиквелы и приквелы ›</h1>
                   <div className='flex justify-between'>
@@ -218,8 +219,6 @@ export const MovieDetails: React.FC = () => {
                     }
                   </div>
                 </div>
-              :
-              null
             }
           </div>
           <div className='flex flex-col mt-[180px] max-h-[500px]'>
