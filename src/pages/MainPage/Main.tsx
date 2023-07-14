@@ -10,6 +10,7 @@ export const MainPage: React.FC = () => {
   const dispatch = useAppDispatch()
   const { movies, isLoading, isError } = useAppSelector(state => state.moviesReducer)
 
+
   useEffect(() => {
     dispatch(fetchMovies())
   }, [dispatch])
@@ -23,7 +24,7 @@ export const MainPage: React.FC = () => {
           : 
             movies.map(movie => <Movies key={movie.kinopoiskId} movie={movie} />) 
         }
-        { isError && <p>{isError}</p> }
+        { isError && <img src="https://http.cat/402" className='w-[550px]' alt="" /> }
       </div>
     </div>
   );

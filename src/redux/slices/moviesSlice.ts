@@ -32,6 +32,7 @@ export const movieSlice = createSlice({
     moviesFetchingError(state, action: PayloadAction<Error>) {
       state.isLoading = false
       state.isError = action.payload.message
+      
     }
   }
 })
