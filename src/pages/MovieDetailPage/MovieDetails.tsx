@@ -22,7 +22,7 @@ export const MovieDetails: React.FC = () => {
     dispatch(fetchBudgetMovie(id))
     dispatch(fetchDistributionMovie(id))
     dispatch(fetchPrequelMovies(id, setHasSequelsAndPrequels))
-    dispatch(fetchFactsMovie(id))
+    // dispatch(fetchFactsMovie(id))
   }, [dispatch, id])
 
   const generateStaffLinks = (professionKey: string) => {
@@ -221,12 +221,12 @@ export const MovieDetails: React.FC = () => {
                 </div>
               </div>
             }
-            <div className='flex-none mb-[15px]'>
+            {/* <div className='flex-none mb-[15px]'>
               <h3>Знаете ли вы, что…</h3>
               {
                 facts?.map((fact, index) => <div key={index} dangerouslySetInnerHTML={{ __html: fact.text }} className='border-b-2 mb-[25px] pb-[15px]'></div>)
               }
-            </div>
+            </div> */}
           </div>
           <div className='flex flex-col mt-[180px] max-h-[500px]'>
             <h4> В главных ролях ›</h4>
