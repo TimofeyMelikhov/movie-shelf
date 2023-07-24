@@ -1,19 +1,13 @@
-import React, { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { fetchMovies } from '../../redux/actions/MoviesAction'
+import React from 'react'
 import { Movies } from '../../components/movie/Movies'
 import classes from './main.module.css'
 import { Menu } from '../../components/menu/Menu'
 import { Preloader } from '../../components/preloader/Preloader'
+import { useMainMoviesQuery } from '../../redux/movies.api'
 
 export const MainPage: React.FC = () => {
-  const dispatch = useAppDispatch()
-  const { movies, isLoading, isError } = useAppSelector(state => state.moviesReducer)
 
-
-  useEffect(() => {
-    dispatch(fetchMovies())
-  }, [dispatch])
+  const { data: movies, isLoading, isError } = useMainMoviesQuery('')
 
   return (
     <div className={classes.main_container}>
@@ -22,7 +16,7 @@ export const MainPage: React.FC = () => {
         { isLoading ? 
             <Preloader/> 
           : 
-            movies.map(movie => <Movies key={movie.kinopoiskId} movie={movie} />) 
+            movies?.items?.map(movie => <Movies key={movie.kinopoiskId} movie={movie} />) 
         }
         { isError && <img src="https://http.cat/402" className='w-[550px]' alt="" /> }
       </div>

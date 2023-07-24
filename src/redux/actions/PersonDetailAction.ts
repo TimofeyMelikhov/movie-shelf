@@ -1,7 +1,7 @@
 import axios from '../../axios/index';
 import { AppDispatch } from '../index';
 import { IPersonDetail } from '../../models/IMovieModels'
-import { personDetailFetchingError, personDetailFetchingSuccess, IPersonDetailPayload } from '../slices/personDetailSlicee';
+import { personDetailFetchingError, personDetailFetchingSuccess, IPersonDetailPayload } from '../slices/personDetailSlice';
 
 export const fetchDetailsPerson = (id: string | undefined) => async (dispatch: AppDispatch) => {
   try {

@@ -23,6 +23,19 @@ interface IGenre {
   genre: string
 }
 
+export interface ServerResponse<T> {
+  total: number
+  totalPages: number
+  items: T[]
+}
+
+export interface ServerSearchResponse<T> {
+  keyword: string
+  pagesCount: number
+  searchFilmsCountResult: number
+  films: T[]
+}
+
 export interface IMovieDetail {
   kinopoiskId: number
   nameRu: string

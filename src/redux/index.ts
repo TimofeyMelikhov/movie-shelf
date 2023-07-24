@@ -1,21 +1,22 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import moviesReducer from './slices/moviesSlice'
 import authReducer from './slices/userSlice'
 import movieDetailReducer from './slices/movieDetailSlice'
 import searchMovieReducer from './slices/searchMovieSlice'
-import personDetailReducer from './slices/personDetailSlicee'
+import personDetailReducer from './slices/personDetailSlice'
+import { movieApi } from './movies.api'
 
 const rootReducer = combineReducers({
-  moviesReducer,
   authReducer,
   movieDetailReducer,
   searchMovieReducer,
-  personDetailReducer
+  personDetailReducer,
+  [movieApi.reducerPath]: movieApi.reducer
 })
 
 export const setupStore = () =>{
   return configureStore({
-    reducer: rootReducer
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(movieApi.middleware)
   })
 } 
 
