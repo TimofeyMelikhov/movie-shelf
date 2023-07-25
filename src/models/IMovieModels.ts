@@ -23,7 +23,7 @@ interface IGenre {
   genre: string
 }
 
-export interface ServerResponse<T> {
+export interface ServerMoviesResponse<T> {
   total: number
   totalPages: number
   items: T[]
@@ -34,6 +34,11 @@ export interface ServerSearchResponse<T> {
   pagesCount: number
   searchFilmsCountResult: number
   films: T[]
+}
+
+export interface ServerResponse<T> {
+  total: number,
+  items: T[]
 }
 
 export interface IMovieDetail {
@@ -71,7 +76,8 @@ export interface IPersonDetail {
   birthday: string
   age: number
   birthplace: string
-  profession: string
+  profession: string,
+  facts: [string]
 }
 
 export interface IBudget {

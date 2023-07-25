@@ -1,5 +1,18 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { IMovie, ServerResponse, ServerSearchResponse, ISearchMovie } from '../models/IMovieModels'
+import { 
+  IMovie, 
+  ServerMoviesResponse, 
+  ServerSearchResponse, 
+  ISearchMovie, 
+  IMovieDetail,
+  IStaff,
+  ServerResponse,
+  IBudget,
+  IDistribution,
+  ISequelPrequel,
+  IFacts,
+  IPersonDetail
+} from '../models/IMovieModels'
 
 export const movieApi = createApi({
   reducerPath: 'movieApi',
@@ -7,7 +20,7 @@ export const movieApi = createApi({
     baseUrl: 'https://kinopoiskapiunofficial.tech/api'
   }),
   endpoints: build => ({
-    mainMovies: build.query<ServerResponse<IMovie>, string>({
+    mainMovies: build.query<ServerMoviesResponse<IMovie>, string>({
       query: () => ({
         url: `/v2.2/films`,
         headers: {
@@ -39,8 +52,84 @@ export const movieApi = createApi({
           page: 1
         }
       })
+    }),
+    getMovieDetails: build.query<IMovieDetail, string | undefined>({
+      query: (id: string) => ({
+        url: `v2.2/films/${id}`,
+        headers: {
+          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
+          'Content-Type': 'application/json',
+        },
+      })
+    }),
+    getStaffMovie: build.query<IStaff[], string | undefined>({
+      query: (id: string) => ({
+        url: `v1/staff`,
+        headers: {
+          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
+          'Content-Type': 'application/json',
+        },
+        params: {
+          filmId: id
+        }
+      })
+    }),
+    getBudgetMovie: build.query<ServerResponse<IBudget>, string | undefined>({
+      query: (id: string) => ({
+        url: `/v2.2/films/${id}/box_office`,
+        headers: {
+          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
+          'Content-Type': 'application/json',
+        }
+      })
+    }),
+    getDistributionMovie: build.query<ServerResponse<IDistribution>, string | undefined>({
+      query: (id: string) => ({
+        url: `/v2.2/films/${id}/distributions`,
+        headers: {
+          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
+          'Content-Type': 'application/json',
+        }
+      })
+    }),
+    getPrequelMovies: build.query<ISequelPrequel[], string | undefined>({
+      query: (id: string) => ({
+        url: `v2.1/films/${id}/sequels_and_prequels`,
+        headers: {
+          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
+          'Content-Type': 'application/json',
+        }
+      })
+    }),
+    getFactsMovie: build.query<ServerResponse<IFacts>, string | undefined>({
+      query: (id: string) => ({
+        url: `/v2.2/films/${id}/facts`,
+        headers: {
+          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
+          'Content-Type': 'application/json',
+        }
+      })
+    }),
+    getDetailsPerson: build.query<IPersonDetail, string | undefined>({
+      query: (id: string) => ({
+        url: `/v1/staff/${id}`,
+        headers: {
+          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
+          'Content-Type': 'application/json',
+        }
+      })
     })
   })
 })
 
-export const { useMainMoviesQuery, useMoviesSearchQuery } = movieApi
+export const { 
+  useMainMoviesQuery, 
+  useMoviesSearchQuery, 
+  useGetMovieDetailsQuery, 
+  useGetStaffMovieQuery,
+  useGetBudgetMovieQuery,
+  useGetDistributionMovieQuery,
+  useGetPrequelMoviesQuery,
+  useGetFactsMovieQuery,
+  useGetDetailsPersonQuery
+} = movieApi

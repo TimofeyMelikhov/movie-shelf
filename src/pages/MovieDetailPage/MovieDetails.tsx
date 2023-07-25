@@ -1,29 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import classes from './MovieDetails.module.css'
-import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { fetchBudgetMovie, fetchDetailsMovie, fetchDistributionMovie, fetchPrequelMovies, fetchStaffMovie, fetchFactsMovie } from '../../redux/actions/MoviesDetailAction'
 import { NavLink } from 'react-router-dom'
 import { formatDate, convertMinutesToHours,} from '../../utils/formatter'
 import { PrequelsMovies } from './PrequelsMovies'
 import { Preloader } from '../../components/preloader/Preloader'
+import {
+  useGetMovieDetailsQuery,
+  useGetStaffMovieQuery,
+  useGetBudgetMovieQuery,
+  useGetDistributionMovieQuery,
+  useGetPrequelMoviesQuery,
+  useGetFactsMovieQuery
+} from '../../redux/movies.api'
 
 export const MovieDetails: React.FC = () => {
 
   const {id} = useParams<'id'>()
-  const dispatch = useAppDispatch()
-  const { detailMovie, isLoading, staff, budget, distribution, prequelMovies, facts } = useAppSelector(state => state.movieDetailReducer)
+
+  const { data: detailMovie, isLoading } = useGetMovieDetailsQuery(id)
+  const { data: staff } = useGetStaffMovieQuery(id)
+  const { data: budget } = useGetBudgetMovieQuery(id)
+  const { data: distribution } = useGetDistributionMovieQuery(id)
+  const { data: prequelMovies } = useGetPrequelMoviesQuery(id)
+  const { data: facts } = useGetFactsMovieQuery(id)
 
   const [hasSequelsAndPrequels, setHasSequelsAndPrequels] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchDetailsMovie(id))
-    dispatch(fetchStaffMovie(id))
-    dispatch(fetchBudgetMovie(id))
-    dispatch(fetchDistributionMovie(id))
-    dispatch(fetchPrequelMovies(id, setHasSequelsAndPrequels))
-    // dispatch(fetchFactsMovie(id))
-  }, [dispatch, id])
+    if (prequelMovies?.length) setHasSequelsAndPrequels(true)
+  }, [prequelMovies?.length])
 
   const generateStaffLinks = (professionKey: string) => {
     const filteredStaff = staff
@@ -58,7 +64,7 @@ export const MovieDetails: React.FC = () => {
   };
 
   const getterBudget = (typeBudget: string) => {
-    return budget?.filter(item => item.type === typeBudget)
+    return budget?.items.filter(item => item.type === typeBudget)
       .map(item => {
         const amount = item.amount.toLocaleString()
         return item.symbol + amount
@@ -73,11 +79,11 @@ export const MovieDetails: React.FC = () => {
   const ageRaiting = detailMovie?.ratingAgeLimits ? Number(detailMovie.ratingAgeLimits?.match(/\d+/)) + '+' : null
   const highlitedRating = detailMovie?.ratingKinopoisk && detailMovie.ratingKinopoisk >= 7 ? classes.high_rating : detailMovie?.ratingKinopoisk &&
     detailMovie.ratingKinopoisk >= 5.1 && detailMovie.ratingKinopoisk <= 6.9 ? classes.medium_rating : classes.low_rating
-    const premierInRussiaDate = distribution?.filter(item => (item.type === 'PREMIERE' || item.type === 'COUNTRY_SPECIFIC') &&  
+    const premierInRussiaDate = distribution?.items.filter(item => (item.type === 'PREMIERE' || item.type === 'COUNTRY_SPECIFIC') &&  
     (item.country && item.country.country === "Россия")).map(item => item.date)[0]
-  const worldPremierDate = distribution?.filter(item => item.type === 'WORLD_PREMIER').map(item => item.date)
-  const distributionOnBluDate = distribution?.filter(item => item.subType === 'BLURAY').map(item => item.date)[0]
-  const distributionOnDvdDate = distribution?.filter(item => item.subType === 'DVD').map(item => item.date)[0]
+  const worldPremierDate = distribution?.items.filter(item => item.type === 'WORLD_PREMIER').map(item => item.date)
+  const distributionOnBluDate = distribution?.items.filter(item => item.subType === 'BLURAY').map(item => item.date)[0]
+  const distributionOnDvdDate = distribution?.items.filter(item => item.subType === 'DVD').map(item => item.date)[0]
 
   const director = generateStaffLinks('DIRECTOR');
   const writer = generateStaffLinks('WRITER');
@@ -100,20 +106,18 @@ export const MovieDetails: React.FC = () => {
   
   return (
     <>
-      { isLoading ? 
-          <Preloader /> 
-        :
+      { isLoading ? <Preloader /> :
         <div className='container flex mx-auto pt-5 max-w-[1300px] bg-white justify-evenly'>
           <div className='flex flex-col'>
             <img src={detailMovie?.posterUrl} alt="poster" className='mb-[25px]'/>
-            <iframe
+            {/* <iframe
               width="300"
               height="200"
               src={`https://www.youtube.com/embed/jfPWtgQdb_Y`}
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-            ></iframe>
+            ></iframe> */}
           </div>
           <div className='flex flex-col ml-[40px] max-w-[55%]'>
             <h1 className={classes.header}>{ detailMovie?.nameRu } ({detailMovie?.year})</h1>
@@ -221,12 +225,12 @@ export const MovieDetails: React.FC = () => {
                 </div>
               </div>
             }
-            {/* <div className='flex-none mb-[15px]'>
+            <div className='flex-none mb-[15px]'>
               <h3>Знаете ли вы, что…</h3>
               {
-                facts?.map((fact, index) => <div key={index} dangerouslySetInnerHTML={{ __html: fact.text }} className='border-b-2 mb-[25px] pb-[15px]'></div>)
+                facts?.items.map((fact, index) => <div key={index} dangerouslySetInnerHTML={{ __html: fact.text }} className='border-b-2 mb-[25px] pb-[15px]'></div>)
               }
-            </div> */}
+            </div>
           </div>
           <div className='flex flex-col mt-[180px] max-h-[500px]'>
             <h4> В главных ролях ›</h4>

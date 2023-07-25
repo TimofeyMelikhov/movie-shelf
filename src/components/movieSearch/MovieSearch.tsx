@@ -7,20 +7,17 @@ import { Preloader } from '../preloader/Preloader';
 import { useMoviesSearchQuery } from '../../redux/movies.api';
 
 export function MovieSearch() {
-  // const { films, items, isLoading } = useAppSelector(state => state.searchMovieReducer);
   const [dropdown, setDropdown] = useState(false);
   const input = useInput('');
   const debounced = useDebounce<string>(input.value, 550);
-  const { isLoading, isError, data: searchResult } = useMoviesSearchQuery(debounced)
+  const { isLoading, isError, data: searchResult } = useMoviesSearchQuery(debounced, {
+    skip: debounced.length < 3
+  })
 
 
   useEffect(() => {
-    if (debounced.length >= 3) {
-      setDropdown(true);
-    } else {
-      setDropdown(false);
-    }
-  }, [debounced,]);
+    setDropdown(debounced.length >= 3)
+  }, [debounced]);
 
   const clickHandler = () => {
     setDropdown(false);
@@ -40,9 +37,10 @@ export function MovieSearch() {
       {dropdown &&
         <div className={`${classes.drop_down} sm:w-64`}>
           <p className='mb-[5px] ml-[15px] text-[14px] text-black'>Возможно, вы искали</p>
-          {isLoading && <Preloader/> }
           {isError && <p>Произошла ошибка...</p> }
-          {
+          {isLoading ? 
+            <Preloader/> 
+            :
             searchResult?.films?.map(film => (
               <SearchResultElem key={film.filmId} film={film} onClick={() => clickHandler()} />
             ))

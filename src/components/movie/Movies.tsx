@@ -11,7 +11,7 @@ export const Movies = ({movie}: moviesProps) => {
 
   const navigate = useNavigate()
 
-  const clickHandler = () => {
+  const clickHandler = (id: string) => {
     navigate(`/film/${movie.kinopoiskId}`)
   }
 
@@ -19,7 +19,7 @@ export const Movies = ({movie}: moviesProps) => {
   const genres = movie.genres.map(c => c.genre).join(', ')
 
   return (
-    <div className={classes.wrapper} onClick={clickHandler}>
+    <div className={classes.wrapper} onClick={() => clickHandler(movie.kinopoiskId)}>
       <p style={{fontSize: '28px', fontWeight: '700', cursor: 'pointer'}}>{movie.nameRu}</p>
       <img src={movie.posterUrlPreview} alt="poster" />
       <p style={{fontSize: '32px'}}>О фильме</p>
