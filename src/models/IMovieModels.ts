@@ -131,7 +131,7 @@ export interface ISearchPerson {
   posterUrl: string
 }
 
-export interface ISequelPrequel {
+export interface IRelatedFilms {
   filmId: number
   nameRu: string
   nameOriginal: string

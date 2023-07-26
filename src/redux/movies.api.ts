@@ -9,7 +9,7 @@ import {
   ServerResponse,
   IBudget,
   IDistribution,
-  ISequelPrequel,
+  IRelatedFilms,
   IFacts,
   IPersonDetail
 } from '../models/IMovieModels'
@@ -92,7 +92,7 @@ export const movieApi = createApi({
         }
       })
     }),
-    getPrequelMovies: build.query<ISequelPrequel[], string | undefined>({
+    getPrequelMovies: build.query<IRelatedFilms[], string | undefined>({
       query: (id: string) => ({
         url: `v2.1/films/${id}/sequels_and_prequels`,
         headers: {
@@ -118,6 +118,15 @@ export const movieApi = createApi({
           'Content-Type': 'application/json',
         }
       })
+    }),
+    getSimilarsMovie: build.query<ServerResponse<IRelatedFilms>, string | undefined>({
+      query: (id: string) => ({
+        url: `/v2.2/films/${id}/similars`,
+        headers: {
+          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
+          'Content-Type': 'application/json',
+        }
+      })
     })
   })
 })
@@ -131,5 +140,6 @@ export const {
   useGetDistributionMovieQuery,
   useGetPrequelMoviesQuery,
   useGetFactsMovieQuery,
-  useGetDetailsPersonQuery
+  useGetDetailsPersonQuery,
+  useGetSimilarsMovieQuery
 } = movieApi
