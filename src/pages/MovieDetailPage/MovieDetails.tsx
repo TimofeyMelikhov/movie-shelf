@@ -113,14 +113,14 @@ export const MovieDetails: React.FC = () => {
           <div className=' flex justify-evenly'>
             <div className='flex flex-col'>
               <img src={detailMovie?.posterUrl} alt="poster" className='mb-[25px]'/>
-              <iframe
+              {/* <iframe
                 width="300"
                 height="200"
                 src={`https://www.youtube.com/embed/jfPWtgQdb_Y`}
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-              ></iframe>
+              ></iframe> */}
             </div>
             <div className='flex flex-col ml-[40px] max-w-[55%]'>
               <h1 className={classes.header}>{ detailMovie?.nameRu } ({detailMovie?.year})</h1>
@@ -244,7 +244,7 @@ export const MovieDetails: React.FC = () => {
             <div className='pb-[25px] max-w-[70%]'>
               <h3 className='text-[24px]'>Знаете ли вы, что…</h3>
               {
-                facts?.items.map((fact, index) => <div key={index} dangerouslySetInnerHTML={{ __html: fact.text }} className='border-b-2 mt-[25px] pb-[15px]'></div>)
+                facts?.items.slice(0, 10).map((fact, index) => <div key={index} dangerouslySetInnerHTML={{ __html: fact.text }} className='border-b-2 mt-[25px] pb-[15px]'></div>)
               }
             </div>
           </div>

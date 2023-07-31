@@ -14,6 +14,11 @@ import {
   IPersonDetail
 } from '../models/IMovieModels'
 
+const headers = {
+  'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
+  'Content-Type': 'application/json',
+}
+
 export const movieApi = createApi({
   reducerPath: 'movieApi',
   baseQuery: fetchBaseQuery({
@@ -23,10 +28,7 @@ export const movieApi = createApi({
     mainMovies: build.query<ServerMoviesResponse<IMovie>, string>({
       query: () => ({
         url: `/v2.2/films`,
-        headers: {
-          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
-          'Content-Type': 'application/json',
-        },
+        headers,
         params: {
           countries: 1,
           genres: 2,
@@ -43,10 +45,7 @@ export const movieApi = createApi({
     moviesSearch: build.query<ServerSearchResponse<ISearchMovie>, string>({
       query: (debounced: string) => ({
         url: `/v2.1/films/search-by-keyword`,
-        headers: {
-          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
-          'Content-Type': 'application/json',
-        },
+        headers,
         params: {
           keyword: debounced,
           page: 1
@@ -56,19 +55,14 @@ export const movieApi = createApi({
     getMovieDetails: build.query<IMovieDetail, string | undefined>({
       query: (id: string) => ({
         url: `v2.2/films/${id}`,
-        headers: {
-          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
-          'Content-Type': 'application/json',
-        },
+        headers
       })
     }),
+
     getStaffMovie: build.query<IStaff[], string | undefined>({
       query: (id: string) => ({
         url: `v1/staff`,
-        headers: {
-          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
-          'Content-Type': 'application/json',
-        },
+        headers,
         params: {
           filmId: id
         }
@@ -77,55 +71,37 @@ export const movieApi = createApi({
     getBudgetMovie: build.query<ServerResponse<IBudget>, string | undefined>({
       query: (id: string) => ({
         url: `/v2.2/films/${id}/box_office`,
-        headers: {
-          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
-          'Content-Type': 'application/json',
-        }
+        headers
       })
     }),
     getDistributionMovie: build.query<ServerResponse<IDistribution>, string | undefined>({
       query: (id: string) => ({
         url: `/v2.2/films/${id}/distributions`,
-        headers: {
-          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
-          'Content-Type': 'application/json',
-        }
+        headers
       })
     }),
     getPrequelMovies: build.query<IRelatedFilms[], string | undefined>({
       query: (id: string) => ({
         url: `v2.1/films/${id}/sequels_and_prequels`,
-        headers: {
-          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
-          'Content-Type': 'application/json',
-        }
+        headers
       })
     }),
     getFactsMovie: build.query<ServerResponse<IFacts>, string | undefined>({
       query: (id: string) => ({
         url: `/v2.2/films/${id}/facts`,
-        headers: {
-          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
-          'Content-Type': 'application/json',
-        }
+        headers
       })
     }),
     getDetailsPerson: build.query<IPersonDetail, string | undefined>({
       query: (id: string) => ({
         url: `/v1/staff/${id}`,
-        headers: {
-          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
-          'Content-Type': 'application/json',
-        }
+        headers
       })
     }),
     getSimilarsMovie: build.query<ServerResponse<IRelatedFilms>, string | undefined>({
       query: (id: string) => ({
         url: `/v2.2/films/${id}/similars`,
-        headers: {
-          'X-API-KEY': '03b257a3-99b3-43ff-be90-2f7b5b72e260',
-          'Content-Type': 'application/json',
-        }
+        headers
       })
     })
   })

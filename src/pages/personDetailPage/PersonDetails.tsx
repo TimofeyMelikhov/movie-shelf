@@ -33,7 +33,7 @@ export function PersonDetails() {
         <div className='mt-[30px]'>
           <h2> Знаете ли вы, что… </h2>
           {
-            personDetail?.facts.map(f => <p className='mt-[7px] border-b-2'> {f} </p>)
+            personDetail?.facts.map((f, index) => <p key={index} className='mt-[7px] border-b-2'> {f} </p>)
           }
         </div>
       </div>
