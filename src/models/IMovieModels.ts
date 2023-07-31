@@ -138,3 +138,13 @@ export interface IRelatedFilms {
   posterUrlPreview: string
   relationType: string
 }
+
+export interface CombinedData {
+  movieDetails: IMovieDetail
+  budget: ServerResponse<IBudget>
+  distribution: ServerResponse<IDistribution>
+  staff: IStaff[]
+  PrequelMovies: IRelatedFilms[]
+  FactsMovie: ServerResponse<IFacts>
+  SimilarsMovie: ServerResponse<IRelatedFilms>
+}

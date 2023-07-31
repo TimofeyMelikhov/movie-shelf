@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { 
   IMovie, 
   ServerMoviesResponse, 
@@ -11,7 +12,8 @@ import {
   IDistribution,
   IRelatedFilms,
   IFacts,
-  IPersonDetail
+  IPersonDetail,
+  CombinedData
 } from '../models/IMovieModels'
 
 const headers = {
@@ -52,6 +54,22 @@ export const movieApi = createApi({
         }
       })
     }),
+
+    // getCombineDataOnMovie: build.query<CombinedData, void>({
+    //   async queryFn(id: string, _queryApi, _extraOptions, fetchWithBQ) {
+    //     const baseDetailMovie = await fetchWithBQ(`v2.2/films/${id}`)
+    //     if(baseDetailMovie.error)
+    //       return {error: baseDetailMovie.error as FetchBaseQueryError}
+        
+    //     const budgetMovie = await fetchWithBQ(`/v2.2/films/${id}/box_office`, headers)
+
+    //     const combinedData: CombinedData = {
+    //       movieDetails: baseDetailMovie.data as IMovieDetail,
+    //       budget: budgetMovie.data as ServerResponse<IBudget>
+    //     }
+    //     return combinedData
+    //   }
+    // }),
     getMovieDetails: build.query<IMovieDetail, string | undefined>({
       query: (id: string) => ({
         url: `v2.2/films/${id}`,
