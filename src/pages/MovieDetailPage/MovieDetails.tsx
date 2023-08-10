@@ -19,8 +19,8 @@ export const MovieDetails: React.FC = () => {
 
 
   useEffect(() => {
-    if (data?.PrequelMovies.length) setHasSequelsAndPrequels(true)
-  }, [data?.PrequelMovies.length])
+    if (data?.PrequelMovies?.length) setHasSequelsAndPrequels(true)
+  }, [data?.PrequelMovies?.length])
 
   const generateStaffLinks = (professionKey: string) => {
     const filteredStaff = data?.staff

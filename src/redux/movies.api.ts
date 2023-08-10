@@ -54,45 +54,35 @@ export const movieApi = createApi({
 
     getCombineDataOnMovie: build.query<CombinedData, string | undefined>({
       async queryFn(id: string, _queryApi, _extraOptions, fetchWithBQ) {
-
-        const baseDetailMovie = await fetchWithBQ(`v2.2/films/${id}`)
-        if(baseDetailMovie.error)
-          return {error: baseDetailMovie.error as FetchBaseQueryError}
-        
-        const budgetMovie = await fetchWithBQ(`/v2.2/films/${id}/box_office`)
-        if(budgetMovie.error)
-          return {error: budgetMovie.error as FetchBaseQueryError}
-
-        const StaffMovie = await fetchWithBQ(`/v1/staff?filmId=${id}`)
-        if(StaffMovie.error)
-          return {error: StaffMovie.error as FetchBaseQueryError}  
-
-        const DistributionMovie = await fetchWithBQ(`/v2.2/films/${id}/distributions`)
-        if(DistributionMovie.error)
-          return {error: DistributionMovie.error as FetchBaseQueryError}  
-
-        const PrequelMovies = await fetchWithBQ(`v2.1/films/${id}/sequels_and_prequels`)
-        if(PrequelMovies.error)
-          return {data: undefined, error: PrequelMovies.error as FetchBaseQueryError}  
-
-        const FactsMovie = await fetchWithBQ(`/v2.2/films/${id}/facts`)
-        if(FactsMovie.error)
-          return {error: FactsMovie.error as FetchBaseQueryError}  
-
-        const SimilarsMovie = await fetchWithBQ(`/v2.2/films/${id}/similars`)
-        if(SimilarsMovie.error)
-          return {error: SimilarsMovie.error as FetchBaseQueryError}  
-
-        const combinedData: CombinedData = {
-          movieDetails: baseDetailMovie.data as IMovieDetail,
-          budget: budgetMovie.data as ServerResponse<IBudget>,
-          staff: StaffMovie.data as IStaff[],
-          distribution: DistributionMovie.data as ServerResponse<IDistribution>,
-          FactsMovie: FactsMovie.data as ServerResponse<IFacts>,
-          PrequelMovies: PrequelMovies.data as IRelatedFilms[],
-          SimilarsMovie: SimilarsMovie.data as ServerResponse<IRelatedFilms>
+        try {
+          const baseDetailMovie = await fetchWithBQ(`v2.2/films/${id}`);
+          const budgetMovie = await fetchWithBQ(`/v2.2/films/${id}/box_office`);
+          const StaffMovie = await fetchWithBQ(`/v1/staff?filmId=${id}`);
+          const DistributionMovie = await fetchWithBQ(`/v2.2/films/${id}/distributions`);
+          const FactsMovie = await fetchWithBQ(`/v2.2/films/${id}/facts`);
+          const SimilarsMovie = await fetchWithBQ(`/v2.2/films/${id}/similars`);
+    
+          let PrequelMovies;
+          try {
+            PrequelMovies = await fetchWithBQ(`v2.1/films/${id}/sequels_and_prequels`);
+          } catch (error) {
+            PrequelMovies = undefined;
+          }
+    
+          const combinedData: CombinedData = {
+            movieDetails: baseDetailMovie.data as IMovieDetail,
+            budget: budgetMovie.data as ServerResponse<IBudget>,
+            staff: StaffMovie.data as IStaff[],
+            distribution: DistributionMovie.data as ServerResponse<IDistribution>,
+            FactsMovie: FactsMovie.data as ServerResponse<IFacts>,
+            PrequelMovies: PrequelMovies?.data as IRelatedFilms[],
+            SimilarsMovie: SimilarsMovie.data as ServerResponse<IRelatedFilms>,
+          };
+    
+          return { data: combinedData };
+        } catch (error) {
+          return { error: error as FetchBaseQueryError };
         }
-        return {data: combinedData}
       }
     }),
     getDetailsPerson: build.query<IPersonDetail, string | undefined>({
