@@ -1,15 +1,14 @@
 import React from 'react'
-import { ISearchMovie, ISearchPerson } from '../../models/IMovieModels'
+import { ISearchMovie } from '../../models/IMovieModels'
 import { useNavigate } from 'react-router-dom'
 import classes from './movieSearch.module.css'
 
 interface searchProp {
   film: ISearchMovie,
-  // person?: ISearchPerson
   onClick: () => void
 }
 
-export function SearchResultElem({film, onClick}: searchProp) {
+export function SearchResultMovie({film, onClick}: searchProp) {
 
   const navigate = useNavigate()
 

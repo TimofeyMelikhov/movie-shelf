@@ -79,7 +79,17 @@ export interface IPersonDetail {
   age: number
   birthplace: string
   profession: string,
-  facts: [string]
+  facts: [string],
+  films: IPersonFilms[]
+}
+
+export interface IPersonFilms {
+  filmId: number
+  nameRu: string
+  nameEn: string
+  rating: string
+  description: string
+  professionKey: string
 }
 
 export interface IBudget {

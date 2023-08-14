@@ -13,3 +13,20 @@
 .medium_rating {
   @apply text-medium_rating
 }
+.hov_staff {
+  @apply hover:text-active_staff_link
+}
+.buttonFav {
+  @apply flex justify-center items-center mt-[50px] h-[50px] py-2 px-4 text-black rounded-[30px] w-[75%] bg-opacity-5 bg-black font-semibold hover:scale-105 hover:bg-opacity-10 transition-all
+}
+
+.heart {
+  background: url(../../img/heart.svg) no-repeat center center ;
+  width: 2.4rem;
+  height: 2.4rem;
+}
+.heart_active {
+  background: url(../../img/heart_active.svg) no-repeat center center ;
+  width: 2.4rem;
+  height: 2.4rem;
+}

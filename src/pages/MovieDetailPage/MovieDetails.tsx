@@ -70,7 +70,7 @@ export const MovieDetails: React.FC = () => {
   const ageRaiting = data?.movieDetails.ratingAgeLimits ? Number(data?.movieDetails.ratingAgeLimits?.match(/\d+/)) + '+' : null
   const highlitedRating = data?.movieDetails.ratingKinopoisk && data?.movieDetails.ratingKinopoisk >= 7 ? classes.high_rating : data?.movieDetails.ratingKinopoisk &&
     data?.movieDetails.ratingKinopoisk >= 5.1 && data?.movieDetails.ratingKinopoisk <= 6.9 ? classes.medium_rating : classes.low_rating
-    const premierInRussiaDate = data?.distribution.items.filter(item => (item.type === 'PREMIERE' || item.type === 'COUNTRY_SPECIFIC') &&  
+  const premierInRussiaDate = data?.distribution.items.filter(item => (item.type === 'PREMIERE' || item.type === 'COUNTRY_SPECIFIC') &&  
     (item.country && item.country.country === "Россия")).map(item => item.date)[0]
   const worldPremierDate = data?.distribution.items.filter(item => item.type === 'WORLD_PREMIER').map(item => item.date)
   const distributionOnBluDate = data?.distribution.items.filter(item => item.subType === 'BLURAY').map(item => item.date)[0]

@@ -1,7 +1,7 @@
 
 export function formatDate(dateString: string) {
 	const parts = dateString.split("-");
-	const day = parts[2];
+	const day = parseInt(parts[2], 10);
   const month = parts[1];
   const year = parts[0];
 

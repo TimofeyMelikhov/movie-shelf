@@ -12,7 +12,8 @@ import {
   IRelatedFilms,
   IFacts,
   IPersonDetail,
-  CombinedData
+  CombinedData,
+  ISearchPerson
 } from '../models/IMovieModels'
 
 export const movieApi = createApi({
@@ -26,6 +27,7 @@ export const movieApi = createApi({
     }
   }),
   endpoints: build => ({
+
     mainMovies: build.query<ServerMoviesResponse<IMovie>, string>({
       query: () => ({
         url: `/v2.2/films`,
@@ -42,6 +44,7 @@ export const movieApi = createApi({
         }
       })
     }),
+
     moviesSearch: build.query<ServerSearchResponse<ISearchMovie>, string>({
       query: (debounced: string) => ({
         url: `/v2.1/films/search-by-keyword`,
@@ -49,6 +52,12 @@ export const movieApi = createApi({
           keyword: debounced,
           page: 1
         }
+      })
+    }),
+
+    searchPerson: build.query<ServerMoviesResponse<ISearchPerson>, string>({
+      query: (debounced: string) => ({
+        url: `/v1/persons?name=${debounced}`
       })
     }),
 
@@ -97,5 +106,6 @@ export const {
   useMainMoviesQuery, 
   useMoviesSearchQuery, 
   useGetDetailsPersonQuery,
-  useGetCombineDataOnMovieQuery
+  useGetCombineDataOnMovieQuery,
+  useSearchPersonQuery
 } = movieApi

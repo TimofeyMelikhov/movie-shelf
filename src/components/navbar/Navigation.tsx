@@ -15,6 +15,8 @@ export const Navigation: React.FC = () => {
     dispatch(logoutUser())
   }
 
+  
+
   return (
     <nav>
 
@@ -23,7 +25,7 @@ export const Navigation: React.FC = () => {
           <Link to='/'>Кинополка</Link>
           <MovieSearch />
           <div className="flex items-center">
-            <div style={{ color: 'white', fontWeight: 700, marginRight: '25px' }}> {user.username} </div>
+            <div style={{ color: 'white', fontWeight: 700, marginRight: '25px' }}> <Link to='/profile'> {user.username} </Link> </div>
             <Link to='/login' onClick={logout}> Выйти </Link>
           </div>
         </div>

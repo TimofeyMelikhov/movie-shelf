@@ -7,7 +7,7 @@
 
 .slider-content {
   display: flex;
-  transition: transform 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .slider-item {

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import classes from './movieSearch.module.css';
 import { useInput } from '../../hooks/input';
 import { useDebounce } from '../../hooks/debounce';
-import { SearchResultElem } from './SearchResultElem';
+import { SearchResultMovie } from './SearchResultMovie';
+import { SearchResultPerson } from './SearchResultPerson'
 import { Preloader } from '../preloader/Preloader';
-import { useMoviesSearchQuery } from '../../redux/movies.api';
+import { useMoviesSearchQuery, useSearchPersonQuery } from '../../redux/movies.api';
 
 export function MovieSearch() {
   const [dropdown, setDropdown] = useState(false);
@@ -14,6 +15,9 @@ export function MovieSearch() {
     skip: debounced.length < 3
   })
 
+  const { data: personSearch } = useSearchPersonQuery(debounced, {
+    skip: debounced.length < 3
+  })
 
   useEffect(() => {
     setDropdown(debounced.length >= 3)
@@ -36,16 +40,25 @@ export function MovieSearch() {
 
       {dropdown &&
         <div className={`${classes.drop_down} sm:w-64`}>
-          <p className='mb-[5px] ml-[15px] text-[14px] text-black'>Возможно, вы искали</p>
-          {isError && <p>Произошла ошибка...</p> }
+          <p className='mb-[5px] ml-[15px] text-[13px] text-black text-opacity-60'>Фильмы и сериалы</p>
           {isLoading ? 
             <Preloader/> 
             :
             searchResult?.films?.map(film => (
-              <SearchResultElem key={film.filmId} film={film} onClick={() => clickHandler()} />
-            ))
+              <SearchResultMovie key={film.filmId} film={film} onClick={() => clickHandler()} />
+            )).slice(0, 3)
           }
-          {/* <p className='text-black text-center'>По вашему запросу ничего не найдено</p> */}
+          <p className='mb-[5px] ml-[15px] text-[13px] text-black text-opacity-60'>Персоны</p>
+          {
+            personSearch?.items.map(person => (
+              <SearchResultPerson key={person.kinopoiskId} onClick={() => clickHandler()} person={person} />
+            )).slice(0, 3)
+          }
+
+          {
+            (!searchResult?.films.length && !personSearch?.items.length) && <p className='text-black text-center'>По вашему запросу ничего не найдено</p>
+          }
+
         </div>
       }
     </div>
