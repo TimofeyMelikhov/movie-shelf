@@ -133,10 +133,12 @@ export const MovieDetails: React.FC = () => {
                 <span className='inline-flex w-[180px]'>Слоган </span> 
                 <span >{ slogan }</span>
               </div>
-              <div className='mt-[10px] text-[13px]'>
-                <span className='text-gray-600 inline-flex w-[180px]'>Режиссер </span> 
-                <span >{ director }</span>
+              {director &&
+                <div className='mt-[10px] text-[13px]'>
+                  <span className='text-gray-600 inline-flex w-[180px]'>Режиссер </span> 
+                  <span >{ director }</span>
                 </div>
+              }
               <div className='mt-[10px] text-[13px]'>
                 <span className='text-gray-600 inline-flex w-[180px]'>Сценарий </span> 
                 <span >{ writer }</span>
@@ -179,7 +181,7 @@ export const MovieDetails: React.FC = () => {
               </div>
               <div className='mt-[10px] text-[13px]'>
                 <span className='text-gray-600 inline-flex w-[180px]'>Премьера в России </span> 
-                <span > { formatRussianPremier } </span>
+                <span > { formatRussianPremier ? formatRussianPremier : '—' } </span>
               </div>
               <div className='mt-[10px] text-[13px]'>
                 <span className='text-gray-600 inline-flex w-[180px]'>Премьера в мире </span> 

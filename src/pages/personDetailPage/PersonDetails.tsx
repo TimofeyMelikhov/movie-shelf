@@ -5,30 +5,33 @@ import { useGetDetailsPersonQuery } from '../../redux/movies.api'
 import { formatDate } from '../../utils/formatter'
 import { NavLink } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { addToFavoritePerson } from '../../redux/slices/favoritePersonSlice'
+import { addToFavoritePerson, removeFromFavorites } from '../../redux/slices/favoritePersonSlice'
 
 export function PersonDetails() {
 
   const {id} = useParams<'id'>()
-
+  const { data: personDetail, isLoading, isError } = useGetDetailsPersonQuery(id)
+  const favoritePerson = useAppSelector(state => state.favoritePerson)
   const dispatch = useAppDispatch()
 
-  // const { isLiked } = useAppSelector(state => state.favoritePerson.favoritePerson)
+  const isExistsInFavorite = favoritePerson.some(p => p.personId === personDetail?.personId)
 
-  // console.log(isLiked)
-
-  const { data: personDetail, isLoading, isError } = useGetDetailsPersonQuery(id)
-
-  const [favoritePerson, setFavoritePerson] = useState(false)
+  const [favoritePersonButton, setFavoritePersonButton] = useState(isExistsInFavorite)
 
   const clickHandler: MouseEventHandler<HTMLButtonElement> = (): void => {
-    localStorage.setItem('favoritePerson', JSON.stringify(personDetail))
-    setFavoritePerson(prev => !prev)
-    // dispatch(addToFavoritePerson(true))
+    setFavoritePersonButton(prev => !prev)
+    if(personDetail) {
+      if(!isExistsInFavorite) {
+        dispatch(addToFavoritePerson(personDetail))
+      } else {
+        dispatch(removeFromFavorites(personDetail.personId))
+      }
+    }
   }
 
   const generateMovieLinks = () => {
     const bestFilteredMovie = personDetail?.films
+      .filter(item => item.professionKey === 'ACTOR')
       .slice()
       .sort((a, b) => Number(b.rating) - Number(a.rating))
       .map(item => (
@@ -63,7 +66,7 @@ export function PersonDetails() {
               className={classes.buttonFav}
               onClick={clickHandler}
             >
-              <span className={ !favoritePerson ? classes.heart : classes.heart_active}></span>
+              <span className={ !favoritePersonButton ? classes.heart : classes.heart_active}></span>
               Любимая звезда
             </button>
             <div className='mt-[50px] text-[22px]'>О персоне</div>

@@ -81,7 +81,6 @@ export interface IPersonDetail {
   death: string
   birthplace: string
   profession: string
-  isLiked: boolean
   facts: [string]
   films: IPersonFilms[]
 }
