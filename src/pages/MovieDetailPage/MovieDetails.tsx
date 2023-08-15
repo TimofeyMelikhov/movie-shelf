@@ -133,90 +133,127 @@ export const MovieDetails: React.FC = () => {
                 <span className='inline-flex w-[180px]'>Слоган </span> 
                 <span >{ slogan }</span>
               </div>
-              {director &&
+              
+              {director?.length !== 0 &&
                 <div className='mt-[10px] text-[13px]'>
                   <span className='text-gray-600 inline-flex w-[180px]'>Режиссер </span> 
                   <span >{ director }</span>
                 </div>
               }
+
               <div className='mt-[10px] text-[13px]'>
                 <span className='text-gray-600 inline-flex w-[180px]'>Сценарий </span> 
                 <span >{ writer }</span>
               </div>
+
               <div className='mt-[10px] text-[13px]'>
                 <span className='text-gray-600 inline-flex w-[180px]'>Продюсер </span> 
                 <span >{ producer }</span>
               </div>
+
               <div className='mt-[10px] text-[13px]'>
                 <span className='text-gray-600 inline-flex w-[180px]'>Оператор </span> 
                 <span >{ operator }</span>
               </div>
+
               <div className='mt-[10px] text-[13px]'>
                 <span className='text-gray-600 inline-flex w-[180px]'>Композитор </span> 
                 <span >{ composer }</span>
               </div>
+
               <div className='mt-[10px] text-[13px]'>
                 <span className='text-gray-600 inline-flex w-[180px]'>Художник </span> 
                 <span >{ design }</span>
               </div>
+
               <div className='mt-[10px] text-[13px]'>
                 <span className='text-gray-600 inline-flex w-[180px]'>Монтаж </span> 
                 <span >{ editor }</span>
               </div>
+
               <div className='mt-[10px] text-[13px]'>
                 <span className='text-gray-600 inline-flex w-[180px]'>Бюджет </span> 
                 <span >{ movieBudget }</span>
               </div>
-              <div className='mt-[10px] text-[13px]'>
-                <span className='text-gray-600 inline-flex w-[180px]'>Сборы в США </span> 
-                <span >{ usaBudget }</span>
-              </div>
-              <div className='mt-[10px] text-[13px]'>
-                <span className='text-gray-600 inline-flex w-[180px]'>Сборы в мире </span> 
-                <span >{ worldBudget }</span>
-              </div>
-              <div className='mt-[10px] text-[13px]'>
-                <span className='text-gray-600 inline-flex w-[180px]'>Сборы в России </span> 
-                <span >{ ruBudget }</span>
-              </div>
-              <div className='mt-[10px] text-[13px]'>
-                <span className='text-gray-600 inline-flex w-[180px]'>Премьера в России </span> 
-                <span > { formatRussianPremier ? formatRussianPremier : '—' } </span>
-              </div>
+
+              {usaBudget?.length !== 0 &&
+                <div className='mt-[10px] text-[13px]'>
+                  <span className='text-gray-600 inline-flex w-[180px]'>Сборы в США </span> 
+                  <span >{ usaBudget }</span>
+                </div>
+              }
+ 
+              {worldBudget?.length !== 0 &&
+                <div className='mt-[10px] text-[13px]'>
+                  <span className='text-gray-600 inline-flex w-[180px]'>Сборы в мире </span> 
+                  <span >{ worldBudget }</span>
+                </div>
+              }
+
+              {ruBudget?.length !== 0 &&
+                <div className='mt-[10px] text-[13px]'>
+                  <span className='text-gray-600 inline-flex w-[180px]'>Сборы в России </span> 
+                  <span >{ ruBudget }</span>
+                </div>
+              }
+
+              {premierInRussiaDate &&
+                <div className='mt-[10px] text-[13px]'>
+                  <span className='text-gray-600 inline-flex w-[180px]'>Премьера в России </span> 
+                    <span > { formatRussianPremier } </span>
+                </div>
+              }
+
               <div className='mt-[10px] text-[13px]'>
                 <span className='text-gray-600 inline-flex w-[180px]'>Премьера в мире </span> 
-                <span > { formatWorldPremier } </span>
+                <span> { formatWorldPremier } </span>
               </div>
-              <div className='mt-[10px] text-[13px] text-gray-600'>
-                <span className='inline-flex w-[180px]'>Релиз на DVD </span> 
-                <span> { formatDistributionOnDvd } </span>
-              </div>
-              <div className='mt-[10px] text-[13px] text-gray-600'>
-                <span className='inline-flex w-[180px]'>Релиз на Blu-ray </span> 
-                <span > { formatDistributionOnBlu } </span>
-              </div>
-              <div className='mt-[10px] text-[13px]'>
-                <span className='inline-flex w-[180px]'>Возраст</span> 
-                <span className=' border-2 p-[5px]'>{ ageRaiting }</span>
-              </div>
+
+              {distributionOnDvdDate &&
+                <div className='mt-[10px] text-[13px] text-gray-600'>
+                  <span className='inline-flex w-[180px]'>Релиз на DVD </span> 
+                  <span> { formatDistributionOnDvd } </span>
+                </div>
+              }
+
+              {distributionOnBluDate &&
+                <div className='mt-[10px] text-[13px] text-gray-600'>
+                  <span className='inline-flex w-[180px]'>Релиз на Blu-ray </span> 
+                  <span > { formatDistributionOnBlu } </span>
+                </div>
+              }
+
+              {ageRaiting &&
+                <div className='mt-[10px] text-[13px]'>
+                  <span className='inline-flex w-[180px]'>Возраст</span> 
+                  <span className=' border-2 p-[5px]'>{ ageRaiting }</span>
+                </div>
+              }
+
               <div className='mt-[10px] text-[13px] text-gray-600'>
                 <span className='inline-flex w-[180px]'>Время</span> 
                 <span>{ movieTime }</span>
               </div>
+
               <div className='mt-[25px] text-[13px]'>
                 { data?.movieDetails?.description } 
               </div>
-              <span className='w-[200px] bg-orange-500 py-[10px] px-[20px] rounded-2xl text-center mt-[10px] mb-[10px] text-white'>
+
+              <span className='w-[200px] bg-orange-500 py-[10px] px-[20px] rounded-2xl text-center mt-[10px] mb-[40px] text-white'>
                 <a href={`https://flicksbar.club/film/${id}/`} target='_blank' rel="noreferrer">Смотреть фильм</a>
               </span>
+
             </div>
+
             <div className='flex flex-col mt-[180px] max-h-[500px]'>
               <h4> В главных ролях ›</h4>
               <div className='flex flex-col mt-[10px] text-[13px]'>
                 { mainActor }
               </div>
             </div>
+
           </div>
+
           <div className='flex-none ml-[30px] mr-[30px]'>
             { hasSequelsAndPrequels &&
               <div className='mb-[30px]'>
@@ -226,18 +263,25 @@ export const MovieDetails: React.FC = () => {
                 </div>
               </div>
             }
-            <div className='mb-[30px]'>
-              <h3 className='text-[24px]'>Если вам понравился этот фильм ›</h3>
-              <div className='flex ml=[30px] mt-[15px]'>
-              {data?.SimilarsMovie && <RelatedFilms relatedFilms={data?.SimilarsMovie.items} />}
+
+            {data?.SimilarsMovie.items.length !== 0 &&
+              <div className='mb-[30px]'>
+                <h3 className='text-[24px]'>Если вам понравился этот фильм ›</h3>
+                <div className='flex ml=[30px] mt-[15px]'>
+                {data?.SimilarsMovie && <RelatedFilms relatedFilms={data?.SimilarsMovie.items} />}
+                </div>
               </div>
-            </div>
-            <div className='pb-[25px] max-w-[70%]'>
-              <h3 className='text-[24px]'>Знаете ли вы, что…</h3>
-              {
-                data?.FactsMovie?.items.slice(0, 10).map((fact, index) => <div key={index} dangerouslySetInnerHTML={{ __html: fact.text }} className='border-b-2 mt-[25px] pb-[15px]'></div>)
-              }
-            </div>
+            }
+
+            {data?.FactsMovie?.items.length !== 0 &&
+              <div className='pb-[25px] max-w-[70%]'>
+                <h3 className='text-[24px]'>Знаете ли вы, что…</h3>
+                {
+                  data?.FactsMovie?.items.slice(0, 10).map((fact, index) => <div key={index} dangerouslySetInnerHTML={{ __html: fact.text }} className='border-b-2 mt-[25px] pb-[15px]'></div>)
+                }
+              </div>
+            }
+
           </div>
         </div>
       }
