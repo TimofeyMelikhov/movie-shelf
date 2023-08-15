@@ -76,10 +76,13 @@ export interface IPersonDetail {
   posterUrl: string
   growth: string
   birthday: string
+  deathplace: string
   age: number
+  death: string
   birthplace: string
-  profession: string,
-  facts: [string],
+  profession: string
+  isLiked: boolean
+  facts: [string]
   films: IPersonFilms[]
 }
 
