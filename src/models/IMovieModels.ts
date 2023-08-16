@@ -1,5 +1,3 @@
-import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query"
-
 export interface IMovie {
   kinopoiskId: string
   nameRu: string
@@ -85,6 +83,23 @@ export interface IPersonDetail {
   films: IPersonFilms[]
 }
 
+export interface IResponseReviews<T> extends ServerMoviesResponse<T> {
+  totalPositiveReviews: number
+  totalNegativeReviews: number
+  totalNeutralReviews: number
+}
+
+export interface IReviews {
+  kinopoiskId: number
+  type: string
+  date: string
+  positiveRating: number
+  negativeRating: number
+  author: string
+  title: string
+  description: string
+}
+
 export interface IPersonFilms {
   filmId: number
   nameRu: string
@@ -161,4 +176,5 @@ export interface CombinedData {
   PrequelMovies: IRelatedFilms[];
   FactsMovie: ServerResponse<IFacts>;
   SimilarsMovie: ServerResponse<IRelatedFilms>;
+  reviewsMovie: IResponseReviews<IReviews>
 }

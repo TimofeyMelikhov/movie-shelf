@@ -1,0 +1,19 @@
+.reviewContainer {
+  @apply bg-[#f2f2f2] mb-[20px] max-w-[60%]
+}
+.goodReview {
+  @apply bg-[#eaf8ec]
+}
+.negativeReview {
+  @apply bg-[#ffebec]
+}
+.like {
+  background: url(../../img/like.svg) no-repeat center center ;
+  width: 16px;
+  height: 16px;
+}
+.deslike {
+  background: url(../../img/deslike.svg) no-repeat center center ;
+  width: 16px;
+  height: 16px;
+}

@@ -8,6 +8,7 @@ import { Preloader } from '../../components/preloader/Preloader'
 import {
   useGetCombineDataOnMovieQuery
 } from '../../redux/movies.api'
+import { Reviews } from '../../components/reviews/Reviews'
 
 export const MovieDetails: React.FC = () => {
 
@@ -277,9 +278,15 @@ export const MovieDetails: React.FC = () => {
               <div className='pb-[25px] max-w-[70%]'>
                 <h3 className='text-[24px]'>Знаете ли вы, что…</h3>
                 {
-                  data?.FactsMovie?.items.slice(0, 10).map((fact, index) => <div key={index} dangerouslySetInnerHTML={{ __html: fact.text }} className='border-b-2 mt-[25px] pb-[15px]'></div>)
+                  data?.FactsMovie?.items.slice(0, 3).map((fact, index) => <div key={index} dangerouslySetInnerHTML={{ __html: fact.text }} className='border-b-2 mt-[25px] pb-[15px]'></div>)
                 }
               </div>
+            }
+
+            {
+              data?.reviewsMovie.items.map(review => (
+                <Reviews key={review.kinopoiskId} reviews={review}/>
+              ))
             }
 
           </div>

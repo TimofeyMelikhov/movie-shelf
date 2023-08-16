@@ -13,7 +13,9 @@ import {
   IFacts,
   IPersonDetail,
   CombinedData,
-  ISearchPerson
+  ISearchPerson,
+  IResponseReviews,
+  IReviews
 } from '../models/IMovieModels'
 
 export const movieApi = createApi({
@@ -70,6 +72,7 @@ export const movieApi = createApi({
           const DistributionMovie = await fetchWithBQ(`/v2.2/films/${id}/distributions`);
           const FactsMovie = await fetchWithBQ(`/v2.2/films/${id}/facts`);
           const SimilarsMovie = await fetchWithBQ(`/v2.2/films/${id}/similars`);
+          const reviews = await fetchWithBQ(`/v2.2/films/${id}/reviews?page=1&order=DATE_DESC`)
     
           let PrequelMovies;
           try {
@@ -86,6 +89,7 @@ export const movieApi = createApi({
             FactsMovie: FactsMovie.data as ServerResponse<IFacts>,
             PrequelMovies: PrequelMovies?.data as IRelatedFilms[],
             SimilarsMovie: SimilarsMovie.data as ServerResponse<IRelatedFilms>,
+            reviewsMovie: reviews.data as IResponseReviews<IReviews>
           };
     
           return { data: combinedData };
