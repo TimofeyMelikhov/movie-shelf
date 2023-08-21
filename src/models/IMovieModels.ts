@@ -41,6 +41,12 @@ export interface ServerResponse<T> {
   items: T[]
 }
 
+export interface IMovieTrailer {
+  url: string
+  name: string
+  site: string
+}
+
 export interface IMovieDetail {
   kinopoiskId: number
   nameRu: string
@@ -177,4 +183,5 @@ export interface CombinedData {
   FactsMovie: ServerResponse<IFacts>;
   SimilarsMovie: ServerResponse<IRelatedFilms>;
   reviewsMovie: IResponseReviews<IReviews>
+  movieTrailers: ServerResponse<IMovieTrailer>
 }

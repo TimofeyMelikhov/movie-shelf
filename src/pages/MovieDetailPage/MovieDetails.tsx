@@ -95,7 +95,29 @@ export const MovieDetails: React.FC = () => {
   const formatRussianPremier = formatDate(String(premierInRussiaDate))
   const formatDistributionOnBlu = formatDate(String(distributionOnBluDate))
   const formatDistributionOnDvd = formatDate(String(distributionOnDvdDate))
-  
+
+  const trailer = data?.movieTrailers.items.filter(item => item.site === 'YOUTUBE' && item.name.toLocaleLowerCase().includes('трейлер'))[0].url
+
+  function extractVideoToken(url: string | undefined): string | null {
+    if (url === undefined) {
+        return null;
+    }
+
+    let token: string | null = null;
+    
+    if (url.includes('watch?v=')) {
+        token = url.split('watch?v=')[1];
+    } else if (url.includes('youtu.be/')) {
+        token = url.split('youtu.be/')[1].split('?')[0];
+    } else if (url.includes('youtube.com/v/')) {
+        token = url.split('youtube.com/v/')[1];
+    }
+    
+    return token;
+}
+
+const tokenTrailer = extractVideoToken(trailer)
+
   return (
     <>
       { isLoading ? <Preloader /> :
@@ -103,14 +125,14 @@ export const MovieDetails: React.FC = () => {
           <div className=' flex justify-evenly'>
             <div className='flex flex-col'>
               <img src={data?.movieDetails?.posterUrl} alt="poster" className='mb-[25px]'/>
-              {/* <iframe
+              <iframe
                 width="300"
                 height="200"
-                src={`https://www.youtube.com/embed/jfPWtgQdb_Y`}
+                src={`https://www.youtube.com/embed/${tokenTrailer}`}
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-              ></iframe> */}
+              ></iframe>
             </div>
             <div className='flex flex-col ml-[40px] max-w-[55%]'>
               <h1 className={classes.header}>{ data?.movieDetails?.nameRu } ({data?.movieDetails?.year})</h1>
@@ -283,11 +305,55 @@ export const MovieDetails: React.FC = () => {
               </div>
             }
 
-            {
-              data?.reviewsMovie.items.map(review => (
-                <Reviews key={review.kinopoiskId} reviews={review}/>
-              ))
-            }
+
+
+            <div className='flex'>
+              <div>
+              {
+                data?.reviewsMovie.items.map(review => (
+                  <Reviews key={review.kinopoiskId} reviews={review}/>
+                ))
+              }
+              </div>
+              <div className='ml-[15px] text-[28px]'>
+
+                <div className='flex flex-col pl-[5px] border-l-2 border-red-600'>
+                  <div className=''> {data?.reviewsMovie.total} </div>
+                  <span className='text-[12px]'>Всего</span>
+                </div>
+
+                <div className='flex flex-col mt-[10px]'>
+                  <div> 
+                    <span className='text-[#3bb33b]'> {data?.reviewsMovie.totalPositiveReviews} </span>
+                    <span className='text-[14px]'>
+                      {data?.reviewsMovie.totalPositiveReviews && ((data?.reviewsMovie.totalPositiveReviews * 100) / data?.reviewsMovie.total).toFixed(2)}%
+                    </span>
+                  </div>
+                  <span className='text-[12px]'>Положительные</span>
+                </div>
+
+                <div className='flex flex-col mt-[10px]'>
+                  <div>
+                    <span className='text-[#ff0000]'> {data?.reviewsMovie.totalNegativeReviews} </span>
+                    <span className='text-[14px]'>
+                      {data?.reviewsMovie.totalNegativeReviews && ((data?.reviewsMovie.totalNegativeReviews * 100) / data?.reviewsMovie.total).toFixed(2)}%
+                    </span>
+                  </div>
+                  <span className='text-[12px]'>Отрицательные</span>
+                </div>
+
+                <div className='flex flex-col mt-[10px]'>
+                  <div>
+                    <span className='text-[#777]'> {data?.reviewsMovie.totalNeutralReviews} </span>
+                    <span className='text-[14px]'>
+                      {data?.reviewsMovie.totalNeutralReviews && ((data?.reviewsMovie.totalNeutralReviews * 100) / data?.reviewsMovie.total).toFixed(2)}%
+                    </span>
+                  </div>
+                  <span className='text-[12px]'>Нейтральные</span>
+                </div>
+
+              </div>
+            </div>
 
           </div>
         </div>

@@ -1,5 +1,14 @@
 .reviewContainer {
-  @apply bg-[#f2f2f2] mb-[20px] max-w-[60%]
+  @apply bg-[#f2f2f2] mb-[20px] max-w-[577px] overflow-hidden
+}
+.reviewContainerFull {
+  @apply bg-[#f2f2f2] mb-[20px] max-w-[577px] h-auto overflow-auto
+}
+.review {
+  @apply text-[14px] overflow-hidden max-h-[300px] leading-[20px] whitespace-pre-line
+}
+.reviewFull {
+  @apply text-[14px] leading-[20px] whitespace-pre-line overflow-auto h-auto
 }
 .goodReview {
   @apply bg-[#eaf8ec]
