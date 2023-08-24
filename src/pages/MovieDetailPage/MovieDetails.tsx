@@ -7,6 +7,7 @@ import { RelatedFilms } from "./RelatedFilms";
 import { Preloader } from "../../components/preloader/Preloader";
 import { useGetCombineDataOnMovieQuery } from "../../redux/movies.api";
 import { Reviews } from "../../components/reviews/Reviews";
+import { Facts } from "./facts/Facts";
 
 export const MovieDetails: React.FC = () => {
   const { id } = useParams<"id">();
@@ -120,6 +121,10 @@ export const MovieDetails: React.FC = () => {
   const formatRussianPremier = formatDate(String(premierInRussiaDate));
   const formatDistributionOnBlu = formatDate(String(distributionOnBluDate));
   const formatDistributionOnDvd = formatDate(String(distributionOnDvdDate));
+
+  const facts = data?.FactsMovie.items.filter(item => item.type === 'FACT')
+
+  const bloopers = data?.FactsMovie.items.filter(item => item.type === 'BLOOPER')
 
   const trailer = data?.movieTrailers.items.filter(
     (item) =>
@@ -403,10 +408,18 @@ export const MovieDetails: React.FC = () => {
               </div>
             )}
 
-            {data?.FactsMovie?.items.length !== 0 && (
+            {facts?.length !== 0 && (
               <div className="pb-[25px] max-w-[70%]">
                 <h3 className="text-[24px]">Знаете ли вы, что…</h3>
-                {data?.FactsMovie?.items.slice(0, 3).map((fact, index) => (
+                <Facts  facts={facts} />
+              </div>
+            )}
+
+            {bloopers?.length !== 0 && (
+              <div className="pb-[25px] max-w-[70%]">
+                <h3 className="text-[24px]">Ошибки в фильме</h3>
+                <span className="flex justify-center bg-gray-200 py-2 w-[100%] text-[14px]">Внимание! Список ошибок в фильме может содержать спойлеры. Будьте осторожны.</span>
+                {bloopers?.map((fact, index) => (
                   <div
                     key={index}
                     dangerouslySetInnerHTML={{ __html: fact.text }}

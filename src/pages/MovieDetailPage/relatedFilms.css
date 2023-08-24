@@ -2,15 +2,16 @@
   width: 60%;
 }
 
-/* .disabled {
+.disabled {
   visibility: hidden;
-} */
+}
 
 .slider-item {
   flex: 0 0 auto;
+  width: 100%;
   padding: 20px;
   box-sizing: border-box;
-  transition: opacity 0.3s ease-in-out;
+  /* transition: opacity 0.3s ease-in-out; */
   cursor: pointer;
 }
 
