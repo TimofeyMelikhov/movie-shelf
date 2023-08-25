@@ -6,6 +6,7 @@ import { formatDate } from '../../utils/formatter'
 import { NavLink } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { addToFavoritePerson, removeFromFavorites } from '../../redux/slices/favoritePersonSlice'
+import { MoviesWitchPerson } from './moviesWitchPerson/MoviesWitchPerson'
 
 export function PersonDetails() {
 
@@ -93,6 +94,10 @@ export function PersonDetails() {
           {
             personDetail?.facts.map((f, index) => <p key={index} className='mt-[7px] border-b-2'> {f} </p>).slice(0, 5)
           }
+        </div>
+        <div className='mt-[25px]'>
+          <span className='text-[32px]'>Фильмы:</span>
+          <MoviesWitchPerson personMovies={personDetail?.films}/>
         </div>
       </div>
 

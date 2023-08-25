@@ -1,0 +1,12 @@
+.factsButton {
+  display: inline-flex;
+  align-items: center;
+}
+.factsButton::before {
+  content: '';
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  background: url('../../../img/down_arrow.svg') no-repeat center center;
+}

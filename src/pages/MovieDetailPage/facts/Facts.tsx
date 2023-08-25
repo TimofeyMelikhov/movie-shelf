@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { IFacts } from '../../../models/IMovieModels'
+import classes from './facts.module.css'
 
 interface IFactsProp {
 	facts?: IFacts[]
@@ -27,7 +28,9 @@ export const Facts: React.FC<IFactsProp> = ({facts}) => {
     <div>
 			{ listFacts }
 			{ facts && visibleItems < facts?.length && (
-				<div className='cursor-pointer' onClick={showMoreItems}> Показать еще </div>
+				<button className='bg-black bg-opacity-5 rounded-[100px] text-[15px] mt-[15px] px-[14px] py-[4px] hover:scale-105' onClick={showMoreItems}> 
+					<span className={classes.factsButton}> Показать еще </span>
+				</button>
 			)}
 		</div>
   )
