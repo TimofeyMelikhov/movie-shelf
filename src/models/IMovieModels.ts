@@ -86,7 +86,18 @@ export interface IPersonDetail {
   birthplace: string
   profession: string
   facts: [string]
+  spouses: ISpouses[]
   films: IPersonFilms[]
+}
+
+export interface ISpouses {
+  personId: number
+  name: string
+  divorced: boolean
+  divorcedReason: string
+  sex: string
+  children: number
+  relation: string
 }
 
 export interface IResponseReviews<T> extends ServerMoviesResponse<T> {

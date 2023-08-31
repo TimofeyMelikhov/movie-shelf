@@ -164,6 +164,7 @@ export const MovieDetails: React.FC = () => {
                 src={data?.movieDetails?.posterUrl}
                 alt="poster"
                 className="mb-[25px]"
+                width='300px'
               />
               <iframe
                 width="300"
