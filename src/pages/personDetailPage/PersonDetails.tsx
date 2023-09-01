@@ -1,8 +1,8 @@
-import React, { MouseEventHandler, useState } from "react";
+import React, { MouseEventHandler, useState, useEffect } from "react";
 import classes from "./personDetails.module.css";
 import { useParams } from "react-router-dom";
 import { useGetDetailsPersonQuery } from "../../redux/movies.api";
-import { formatDate } from "../../utils/formatter";
+import { formatDate, ageTransformation } from "../../utils/formatter";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import {
@@ -18,7 +18,8 @@ export function PersonDetails() {
     data: personDetail,
     isLoading,
     isError,
-  } = useGetDetailsPersonQuery(id);
+    refetch
+  } = useGetDetailsPersonQuery(id, { skip: !id });
   const favoritePerson = useAppSelector((state) => state.favoritePerson);
   const dispatch = useAppDispatch();
 
@@ -66,13 +67,17 @@ export function PersonDetails() {
           {item.name} {item.divorced && "(развод)"}
         </NavLink>
       </span>
-      <span className="text-[12px]"> {`${item.children} детей`} </span>
+      { item.children > 0 && <span className="text-[12px]"> {`${item.children} детей`} </span> } 
     </span>
   ));
 
   const spouceSex = personDetail?.spouses.map(
     (item) => item.relation.charAt(0).toUpperCase() + item.relation.slice(1)
   )[0];
+
+  useEffect(() => {
+    refetch()
+  }, [id, refetch])
 
   return (
     <>
@@ -81,7 +86,7 @@ export function PersonDetails() {
       {isLoading ? (
         <Preloader />
       ) : (
-        <div className="container mx-auto p-5 max-w-[1024px] bg-white min-h-[100vh]">
+        <div className="container mx-auto p-5 max-w-[1300px] bg-white min-h-[100vh]">
           <div className="flex">
             <div className="flex flex-col">
               <img src={personDetail?.posterUrl} alt="poster" width='300px'/>
@@ -108,23 +113,22 @@ export function PersonDetails() {
 
               <div className="mt-[5px]">
                 <span className="text-gray-600 inline-flex w-[150px]">
-                  Рост:{" "}
+                  Рост:
                 </span>
                 {personDetail?.growth}
               </div>
 
               <div className="mt-[5px]">
                 <span className="text-gray-600 inline-flex w-[150px]">
-                  {" "}
-                  Дата рождения:{" "}
+                  Дата рождения:
                 </span>
-                {formatDate(String(personDetail?.birthday))} •{" "}
+                {formatDate(String(personDetail?.birthday))} • {' '}
                 {personDetail?.age} лет
               </div>
 
               <div className="mt-[5px]">
                 <span className="text-gray-600 inline-flex w-[150px]">
-                  Место рождения:{" "}
+                  Место рождения:
                 </span>
                 {personDetail?.birthplace}
               </div>
@@ -132,8 +136,7 @@ export function PersonDetails() {
               {personDetail?.death && (
                 <div className="mt-[5px] text-gray-400">
                   <span className="text-gray-600 inline-flex w-[150px]">
-                    {" "}
-                    Дата смерти:{" "}
+                    Дата смерти:
                   </span>
                   {formatDate(String(personDetail?.death))}
                 </div>
@@ -142,8 +145,7 @@ export function PersonDetails() {
               {personDetail?.deathplace && (
                 <div className="mt-[5px] text-gray-400">
                   <span className="text-gray-600 inline-flex w-[150px]">
-                    {" "}
-                    Место смерти:{" "}
+                    Место смерти:
                   </span>
                   {personDetail?.deathplace}
                 </div>
@@ -160,8 +162,7 @@ export function PersonDetails() {
 
               <div className="mt-[5px]">
                 <span className="text-gray-600 inline-flex w-[150px]">
-                  {" "}
-                  Всего фильмов:{" "}
+                  Всего фильмов:
                 </span>
                 {personDetail?.films.length}
               </div>
@@ -179,8 +180,7 @@ export function PersonDetails() {
             {personDetail?.facts
               .map((f, index) => (
                 <p key={index} className="mt-[7px] border-b-2">
-                  {" "}
-                  {f}{" "}
+                  {f}
                 </p>
               ))
               .slice(0, 3)}

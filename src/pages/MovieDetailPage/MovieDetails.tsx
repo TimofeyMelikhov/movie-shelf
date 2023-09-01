@@ -448,8 +448,7 @@ export const MovieDetails: React.FC = () => {
                 <div className="flex flex-col mt-[10px]">
                   <div>
                     <span className="text-[#3bb33b]">
-                      {" "}
-                      {data?.reviewsMovie.totalPositiveReviews}{" "}
+                      {data?.reviewsMovie.totalPositiveReviews}
                     </span>
                     <span className="text-[14px]">
                       {data?.reviewsMovie.totalPositiveReviews &&
@@ -466,8 +465,7 @@ export const MovieDetails: React.FC = () => {
                 <div className="flex flex-col mt-[10px]">
                   <div>
                     <span className="text-[#ff0000]">
-                      {" "}
-                      {data?.reviewsMovie.totalNegativeReviews}{" "}
+                      {data?.reviewsMovie.totalNegativeReviews}
                     </span>
                     <span className="text-[14px]">
                       {data?.reviewsMovie.totalNegativeReviews &&
@@ -484,8 +482,7 @@ export const MovieDetails: React.FC = () => {
                 <div className="flex flex-col mt-[10px]">
                   <div>
                     <span className="text-[#777]">
-                      {" "}
-                      {data?.reviewsMovie.totalNeutralReviews}{" "}
+                      {data?.reviewsMovie.totalNeutralReviews}
                     </span>
                     <span className="text-[14px]">
                       {data?.reviewsMovie.totalNeutralReviews &&

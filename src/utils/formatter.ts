@@ -19,3 +19,19 @@ export function convertMinutesToHours(minutes: number) {
 	let mins = minutes % 60;
 	return (hours < 10 ? "0" : "") + hours + ":" + (mins < 10 ? "0" : "") + mins;
 }
+
+export function ageTransformation(age: number) {
+  let count = age % 100
+  if(count >=10 && count <=20) {
+    return 'лет'
+  } else {
+    count = age % 10
+    if(count === 1) {
+      return 'год'
+    } else if(count >= 2 && count <= 4) {
+      return 'года'
+    } else {
+      return 'лет'
+    }
+  }
+}
