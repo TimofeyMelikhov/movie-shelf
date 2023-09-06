@@ -123,7 +123,7 @@ export function PersonDetails() {
                   Дата рождения:
                 </span>
                 {formatDate(String(personDetail?.birthday))} • {' '}
-                {personDetail?.age} лет
+                {personDetail?.age} {ageTransformation(personDetail?.age)}
               </div>
 
               <div className="mt-[5px]">
