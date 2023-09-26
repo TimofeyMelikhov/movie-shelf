@@ -1,17 +1,23 @@
 {
   "files": {
-    "main.css": "/movie-shelf/static/css/main.2744b70b.css",
-    "main.js": "/movie-shelf/static/js/main.350b59b3.js",
+    "main.css": "/movie-shelf/static/css/main.dd3c1dc0.css",
+    "main.js": "/movie-shelf/static/js/main.d2c591fc.js",
+    "static/media/slick.svg": "/movie-shelf/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/movie-shelf/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/movie-shelf/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/movie-shelf/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/movie-shelf/index.html",
+    "static/media/next_arrow.svg": "/movie-shelf/static/media/next_arrow.2022654b169031515d7e.svg",
     "static/media/heart.svg": "/movie-shelf/static/media/heart.51b2beb7de3ee529629c.svg",
     "static/media/like.svg": "/movie-shelf/static/media/like.531c3fa860e557f63ae7.svg",
     "static/media/deslike.svg": "/movie-shelf/static/media/deslike.12bd87f5ecdf18dfbd9a.svg",
     "static/media/heart_active.svg": "/movie-shelf/static/media/heart_active.cff091e8537472243004.svg",
-    "main.2744b70b.css.map": "/movie-shelf/static/css/main.2744b70b.css.map",
-    "main.350b59b3.js.map": "/movie-shelf/static/js/main.350b59b3.js.map"
+    "static/media/down_arrow.svg": "/movie-shelf/static/media/down_arrow.98e350107d4482689a9a.svg",
+    "main.dd3c1dc0.css.map": "/movie-shelf/static/css/main.dd3c1dc0.css.map",
+    "main.d2c591fc.js.map": "/movie-shelf/static/js/main.d2c591fc.js.map"
   },
   "entrypoints": [
-    "static/css/main.2744b70b.css",
-    "static/js/main.350b59b3.js"
+    "static/css/main.dd3c1dc0.css",
+    "static/js/main.d2c591fc.js"
   ]
 }
