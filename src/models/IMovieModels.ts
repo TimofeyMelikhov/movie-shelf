@@ -196,3 +196,18 @@ export interface CombinedData {
 	reviewsMovie: IResponseReviews<IReviews>
 	movieTrailers: ServerResponse<IMovieTrailer>
 }
+
+export interface IFilters {
+	genres: [
+		{
+			id: number
+			genre: string
+		}
+	]
+	countries: [
+		{
+			id: number
+			country: string
+		}
+	]
+}

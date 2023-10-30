@@ -9,6 +9,7 @@ import {
 	IBudget,
 	IDistribution,
 	IFacts,
+	IFilters,
 	IMovie,
 	IMovieDetail,
 	IMovieTrailer,
@@ -116,6 +117,11 @@ export const movieApi = createApi({
 			query: (id: string) => ({
 				url: `/v1/staff/${id}`
 			})
+		}),
+		getFiltersForMovie: build.query<IFilters, void>({
+			query: () => ({
+				url: '/v2.2/films/filters'
+			})
 		})
 	})
 })
@@ -125,5 +131,6 @@ export const {
 	useMoviesSearchQuery,
 	useGetDetailsPersonQuery,
 	useGetCombineDataOnMovieQuery,
-	useSearchPersonQuery
+	useSearchPersonQuery,
+	useGetFiltersForMovieQuery
 } = movieApi
