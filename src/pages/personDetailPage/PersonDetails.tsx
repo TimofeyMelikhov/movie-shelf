@@ -134,6 +134,14 @@ export function PersonDetails() {
 
 							<div className='mt-[5px]'>
 								<span className='text-gray-600 inline-flex w-[150px]'>
+									Дата рождения:
+								</span>
+								{formatDate(String(personDetail?.birthday))} •{' '}
+								{personDetail?.age} {ageTransformation(personDetail?.age)}
+							</div>
+
+							<div className='mt-[5px]'>
+								<span className='text-gray-600 inline-flex w-[150px]'>
 									Место рождения:
 								</span>
 								{personDetail?.birthplace}

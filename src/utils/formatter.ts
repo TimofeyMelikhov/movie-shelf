@@ -27,7 +27,10 @@ export function convertMinutesToHours(minutes: number) {
 	return (hours < 10 ? '0' : '') + hours + ':' + (mins < 10 ? '0' : '') + mins
 }
 
-export function ageTransformation(age: number) {
+export function ageTransformation(age: number | undefined) {
+	if (!age) {
+		return ''
+	}
 	let count = age % 100
 	if (count >= 10 && count <= 20) {
 		return 'лет'
