@@ -25,6 +25,14 @@ import {
 	ServerSearchResponse
 } from '../models/IMovieModels'
 
+interface IFiltersForMovies {
+	title?: string
+	country?: number
+	genre?: number
+	type?: string
+	order?: string
+}
+
 export const movieApi = createApi({
 	reducerPath: 'movieApi',
 	baseQuery: fetchBaseQuery({
@@ -36,19 +44,20 @@ export const movieApi = createApi({
 		}
 	}),
 	endpoints: build => ({
-		mainMovies: build.query<ServerMoviesResponse<IMovie>, string>({
-			query: () => ({
+		mainMovies: build.query<ServerMoviesResponse<IMovie>, IFiltersForMovies>({
+			query: ({ title, country, genre, type, order }) => ({
 				url: `/v2.2/films`,
 				params: {
-					countries: 1,
-					genres: 2,
-					order: 'RATING',
-					type: 'FILM',
+					countries: country,
+					genres: genre,
+					order,
+					type,
 					ratingFrom: 0,
 					ratingTo: 10,
 					yearFrom: 1000,
 					yearTo: 3000,
-					page: 1
+					page: 1,
+					keyword: title
 				}
 			})
 		}),
@@ -128,6 +137,7 @@ export const movieApi = createApi({
 
 export const {
 	useMainMoviesQuery,
+	useLazyMainMoviesQuery,
 	useMoviesSearchQuery,
 	useGetDetailsPersonQuery,
 	useGetCombineDataOnMovieQuery,

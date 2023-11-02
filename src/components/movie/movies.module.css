@@ -1,6 +1,15 @@
 .wrapper {
-  @apply border rounded-md py-4 px-6 mb-2 hover:shadow-md hover:transition-all cursor-pointer w-[360px]
-} 
+	@apply border rounded-md py-4 px-6 mb-2 hover:shadow-md hover:transition-all cursor-pointer w-[360px];
+}
 .wrapper img {
-  @apply w-[300px]
+	@apply w-[300px];
+}
+.high_rating {
+	@apply text-high_rating;
+}
+.low_rating {
+	@apply text-low_rating;
+}
+.medium_rating {
+	@apply text-medium_rating;
 }

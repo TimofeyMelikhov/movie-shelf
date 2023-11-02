@@ -9,7 +9,7 @@
 	"plugins": ["@trivago/prettier-plugin-sort-imports"],
 	"importOrder": [
 		"<THIRD_PARTY_MODULES>",
-		"/ui/",
+		"/mui/",
 		"/hooks/",
 		"/components/",
 		"^../(.*)",
