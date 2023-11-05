@@ -10,6 +10,7 @@ import {
 	IDistribution,
 	IFacts,
 	IFilters,
+	IFiltersForMovies,
 	IMovie,
 	IMovieDetail,
 	IMovieTrailer,
@@ -25,14 +26,6 @@ import {
 	ServerSearchResponse
 } from '../models/IMovieModels'
 
-interface IFiltersForMovies {
-	title?: string
-	country?: number
-	genre?: number
-	type?: string
-	order?: string
-}
-
 export const movieApi = createApi({
 	reducerPath: 'movieApi',
 	baseQuery: fetchBaseQuery({
@@ -45,7 +38,13 @@ export const movieApi = createApi({
 	}),
 	endpoints: build => ({
 		mainMovies: build.query<ServerMoviesResponse<IMovie>, IFiltersForMovies>({
-			query: ({ title, country, genre, type, order }) => ({
+			query: ({
+				title = '',
+				country = '1',
+				genre = '2',
+				type = 'ALL',
+				order = 'RATING'
+			}) => ({
 				url: `/v2.2/films`,
 				params: {
 					countries: country,

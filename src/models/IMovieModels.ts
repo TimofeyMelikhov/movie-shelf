@@ -211,3 +211,11 @@ export interface IFilters {
 		}
 	]
 }
+
+export interface IFiltersForMovies {
+	title?: string
+	country?: number
+	genre?: number
+	type?: string
+	order?: string
+}

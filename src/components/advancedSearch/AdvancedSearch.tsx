@@ -4,17 +4,18 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
 import TextField from '@mui/material/TextField'
-import { useEffect } from 'react'
 
 import { useInput } from '../../hooks/input'
 import { useSelect } from '../../hooks/select'
 
-import {
-	useGetFiltersForMovieQuery,
-	useLazyMainMoviesQuery
-} from '../../redux/movies.api'
+import { IFiltersForMovies } from '../../models/IMovieModels'
+import { useGetFiltersForMovieQuery } from '../../redux/movies.api'
 
-export const AdvancedSearch = () => {
+interface IPropSearch {
+	getMoviesOnfiltres: (params: IFiltersForMovies) => void
+}
+
+export const AdvancedSearch = ({ getMoviesOnfiltres }: IPropSearch) => {
 	const selectForCountry = useSelect()
 	const selectForGenres = useSelect()
 	const selectForType = useSelect()
@@ -22,13 +23,6 @@ export const AdvancedSearch = () => {
 	const searchMovie = useInput()
 
 	const { data } = useGetFiltersForMovieQuery()
-
-	const [getMoviesOnfiltres, { data: moviesOnFilters }] =
-		useLazyMainMoviesQuery()
-
-	useEffect(() => {
-		console.log(moviesOnFilters)
-	}, [getMoviesOnfiltres, moviesOnFilters])
 
 	return (
 		<>
@@ -45,11 +39,11 @@ export const AdvancedSearch = () => {
 
 				<div>
 					<FormControl fullWidth className='flex'>
-						<InputLabel id='country-label'>{selectForCountry.value}</InputLabel>
+						<InputLabel id='country-label'>Выберите страну</InputLabel>
 						<Select
 							labelId='country-label'
 							id='country-label'
-							label={selectForCountry.value}
+							label='Выберите страну'
 							value={selectForCountry.value}
 							onChange={selectForCountry.onChange}
 						>
@@ -65,11 +59,11 @@ export const AdvancedSearch = () => {
 
 				<div>
 					<FormControl fullWidth className='flex'>
-						<InputLabel id='genres-label'>{selectForGenres.value}</InputLabel>
+						<InputLabel id='genres-label'>Выберите жанр</InputLabel>
 						<Select
 							labelId='genres-label'
 							id='genres-label'
-							label={selectForGenres.value}
+							label='Выберите жанр'
 							value={selectForGenres.value}
 							onChange={selectForGenres.onChange}
 						>
