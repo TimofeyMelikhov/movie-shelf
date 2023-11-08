@@ -218,4 +218,5 @@ export interface IFiltersForMovies {
 	genre?: number
 	type?: string
 	order?: string
+	page?: number
 }

@@ -1,21 +1,26 @@
-import { FormControl } from '@mui/material'
+import { FormControl, Pagination } from '@mui/material'
 import Button from '@mui/material/Button'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
 import TextField from '@mui/material/TextField'
+import { useState } from 'react'
 
 import { useInput } from '../../hooks/input'
 import { useSelect } from '../../hooks/select'
 
 import { IFiltersForMovies } from '../../models/IMovieModels'
 import { useGetFiltersForMovieQuery } from '../../redux/movies.api'
+import { MainSelect } from '../ui/MainSelect'
 
 interface IPropSearch {
 	getMoviesOnfiltres: (params: IFiltersForMovies) => void
+	count: number | undefined
 }
 
-export const AdvancedSearch = ({ getMoviesOnfiltres }: IPropSearch) => {
+export const AdvancedSearch = ({ getMoviesOnfiltres, count }: IPropSearch) => {
+	const [page, setPage] = useState(1)
+
 	const selectForCountry = useSelect()
 	const selectForGenres = useSelect()
 	const selectForType = useSelect()
@@ -24,12 +29,25 @@ export const AdvancedSearch = ({ getMoviesOnfiltres }: IPropSearch) => {
 
 	const { data } = useGetFiltersForMovieQuery()
 
+	const handleChange = (e: any, page: number) => {
+		setPage(page)
+		getMoviesOnfiltres({
+			title: searchMovie.value,
+			country: Number(selectForCountry.value),
+			genre: Number(selectForGenres.value),
+			order: selectForSort.value,
+			type: selectForType.value,
+			page
+		})
+	}
+
 	return (
 		<>
 			<div className='flex justify-between mt-4 mb-2'>
 				<div>
 					<TextField
 						id='outlined-basic'
+						type='search'
 						label='Название фильма'
 						variant='outlined'
 						value={searchMovie.value}
@@ -37,27 +55,28 @@ export const AdvancedSearch = ({ getMoviesOnfiltres }: IPropSearch) => {
 					/>
 				</div>
 
-				<div>
-					<FormControl fullWidth className='flex'>
-						<InputLabel id='country-label'>Выберите страну</InputLabel>
-						<Select
-							labelId='country-label'
-							id='country-label'
-							label='Выберите страну'
-							value={selectForCountry.value}
-							onChange={selectForCountry.onChange}
-						>
-							<MenuItem value=''>—</MenuItem>
-							{data?.countries.map(item => (
-								<MenuItem key={item.id} value={item.id}>
-									{item.country}
-								</MenuItem>
-							))}
-						</Select>
-					</FormControl>
-				</div>
+				<MainSelect
+					id='country-label'
+					label='Выберите страну'
+					labelId='country-label'
+					title='Выберите страну'
+					titleId='country-label'
+					value={selectForCountry.value}
+					onChange={selectForCountry.onChange}
+					data={data?.countries || []}
+				/>
+				<MainSelect
+					id='genres-label'
+					label='Выберите жанр'
+					labelId='genres-label'
+					title='Выберите жанр'
+					titleId='genres-label'
+					value={selectForGenres.value}
+					onChange={selectForGenres.onChange}
+					data={data?.genres || []}
+				/>
 
-				<div>
+				{/* <div>
 					<FormControl fullWidth className='flex'>
 						<InputLabel id='genres-label'>Выберите жанр</InputLabel>
 						<Select
@@ -110,31 +129,38 @@ export const AdvancedSearch = ({ getMoviesOnfiltres }: IPropSearch) => {
 							<MenuItem value='NUM_VOTE'>Кол-во оценок</MenuItem>
 							<MenuItem value='YEAR'>Год</MenuItem>
 						</Select>
-					</FormControl>
+					</FormControl> 
+								</div>
+					*/}
 
-					<div className='mt-2'>
-						<Button
-							onClick={() =>
-								getMoviesOnfiltres({
-									title: searchMovie.value,
-									country: Number(selectForCountry.value),
-									genre: Number(selectForGenres.value),
-									order: selectForSort.value,
-									type: selectForType.value
-								})
-							}
-							variant='outlined'
-						>
-							Поиск
-						</Button>
-					</div>
+				<div className='mt-2'>
+					<Button
+						onClick={() =>
+							getMoviesOnfiltres({
+								title: searchMovie.value,
+								country: Number(selectForCountry.value),
+								genre: Number(selectForGenres.value),
+								order: selectForSort.value,
+								type: selectForType.value
+							})
+						}
+						variant='outlined'
+					>
+						Поиск
+					</Button>
 				</div>
 			</div>
-			<div> Выбранная страна: {selectForCountry.value} </div>
-			<div> Выбранный жанр: {selectForGenres.value} </div>
-			<div> Что искать: {selectForType.value} </div>
-			<div> Сортировать по: {selectForSort.value} </div>
-			<div> Введенное название: {searchMovie.value} </div>
+
+			{count && (
+				<div className='flex mt-2 mb-2 justify-center'>
+					<Pagination
+						count={count}
+						variant='outlined'
+						page={page}
+						onChange={handleChange}
+					/>
+				</div>
+			)}
 		</>
 	)
 }

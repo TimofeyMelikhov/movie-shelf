@@ -1,4 +1,4 @@
-import { Container } from '@mui/material'
+import { Container, Pagination } from '@mui/material'
 
 import { AdvancedSearch } from '../../components/advancedSearch/AdvancedSearch'
 import { Movies } from '../../components/movie/Movies'
@@ -20,7 +20,10 @@ export default function Movie() {
 						<h2 className='text-[32px]'>Расширенный поиск</h2>
 						<span>Расширенный поиск фильмов по жанрам, странам и тд.</span>
 					</div>
-					<AdvancedSearch getMoviesOnfiltres={getMoviesOnfiltres} />
+					<AdvancedSearch
+						getMoviesOnfiltres={getMoviesOnfiltres}
+						count={moviesOnFilters?.totalPages}
+					/>
 
 					<div className='flex flex-wrap justify-between'>
 						{isLoading || isFetching ? (

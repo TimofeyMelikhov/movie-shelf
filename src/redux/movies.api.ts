@@ -40,10 +40,11 @@ export const movieApi = createApi({
 		mainMovies: build.query<ServerMoviesResponse<IMovie>, IFiltersForMovies>({
 			query: ({
 				title = '',
-				country = '1',
-				genre = '2',
+				country = 1,
+				genre = 2,
 				type = 'ALL',
-				order = 'RATING'
+				order = 'RATING',
+				page = 1
 			}) => ({
 				url: `/v2.2/films`,
 				params: {
@@ -55,7 +56,7 @@ export const movieApi = createApi({
 					ratingTo: 10,
 					yearFrom: 1000,
 					yearTo: 3000,
-					page: 1,
+					page,
 					keyword: title
 				}
 			})
