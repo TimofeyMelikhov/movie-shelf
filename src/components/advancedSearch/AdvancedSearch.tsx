@@ -56,16 +56,6 @@ export const AdvancedSearch = ({ getMoviesOnfiltres, count }: IPropSearch) => {
 				</div>
 
 				<MainSelect
-					id='country-label'
-					label='Выберите страну'
-					labelId='country-label'
-					title='Выберите страну'
-					titleId='country-label'
-					value={selectForCountry.value}
-					onChange={selectForCountry.onChange}
-					data={data?.countries || []}
-				/>
-				<MainSelect
 					id='genres-label'
 					label='Выберите жанр'
 					labelId='genres-label'
@@ -73,7 +63,25 @@ export const AdvancedSearch = ({ getMoviesOnfiltres, count }: IPropSearch) => {
 					titleId='genres-label'
 					value={selectForGenres.value}
 					onChange={selectForGenres.onChange}
-					data={data?.genres || []}
+					options={
+						data?.countries.map(item => ({
+							id: item.id,
+							options: item.country
+						})) || []
+					}
+				/>
+				<MainSelect
+					id='country-label'
+					label='Выберите страну'
+					labelId='country-label'
+					title='Выберите страну'
+					titleId='country-label'
+					value={selectForCountry.value}
+					onChange={selectForCountry.onChange}
+					options={
+						data?.genres.map(item => ({ id: item.id, options: item.genre })) ||
+						[]
+					}
 				/>
 
 				{/* <div>

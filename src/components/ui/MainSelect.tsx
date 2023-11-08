@@ -6,8 +6,6 @@ import {
 	SelectChangeEvent
 } from '@mui/material'
 
-import { IFilters } from '../../models/IMovieModels'
-
 interface ISelectProps {
 	title: string
 	titleId: string
@@ -16,7 +14,7 @@ interface ISelectProps {
 	label: string
 	value: string
 	onChange: (event: SelectChangeEvent<string>) => void
-	data: { id: number; options: string }[]
+	options: { id: number; options: string }[]
 }
 
 export const MainSelect = ({
@@ -27,7 +25,7 @@ export const MainSelect = ({
 	label,
 	value,
 	onChange,
-	data
+	options
 }: ISelectProps) => {
 	return (
 		<div>
@@ -41,7 +39,7 @@ export const MainSelect = ({
 					onChange={onChange}
 				>
 					<MenuItem value=''>—</MenuItem>
-					{data.map(item => (
+					{options.map(item => (
 						<MenuItem key={item.id} value={item.id}>
 							{item.options}
 						</MenuItem>
