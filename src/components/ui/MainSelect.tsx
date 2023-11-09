@@ -14,7 +14,7 @@ interface ISelectProps {
 	label: string
 	value: string
 	onChange: (event: SelectChangeEvent<string>) => void
-	options: { id: number; options: string }[]
+	options: { id: number | string; options: string }[]
 }
 
 export const MainSelect = ({
@@ -28,7 +28,7 @@ export const MainSelect = ({
 	options
 }: ISelectProps) => {
 	return (
-		<div>
+		<div className='w-[200px]'>
 			<FormControl fullWidth className='flex'>
 				<InputLabel id={titleId}> {title} </InputLabel>
 				<Select
@@ -38,7 +38,6 @@ export const MainSelect = ({
 					value={value}
 					onChange={onChange}
 				>
-					<MenuItem value=''>—</MenuItem>
 					{options.map(item => (
 						<MenuItem key={item.id} value={item.id}>
 							{item.options}

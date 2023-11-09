@@ -1,8 +1,5 @@
-import { FormControl, Pagination } from '@mui/material'
+import { Pagination } from '@mui/material'
 import Button from '@mui/material/Button'
-import InputLabel from '@mui/material/InputLabel'
-import MenuItem from '@mui/material/MenuItem'
-import Select from '@mui/material/Select'
 import TextField from '@mui/material/TextField'
 import { useState } from 'react'
 
@@ -13,13 +10,15 @@ import { IFiltersForMovies } from '../../models/IMovieModels'
 import { useGetFiltersForMovieQuery } from '../../redux/movies.api'
 import { MainSelect } from '../ui/MainSelect'
 
+import { dataSort, dataType } from './menuItemData'
+
 interface IPropSearch {
 	getMoviesOnfiltres: (params: IFiltersForMovies) => void
 	count: number | undefined
 }
 
 export const AdvancedSearch = ({ getMoviesOnfiltres, count }: IPropSearch) => {
-	const [page, setPage] = useState(1)
+	const [page, setPage] = useState<number>(1)
 
 	const selectForCountry = useSelect()
 	const selectForGenres = useSelect()
@@ -32,6 +31,14 @@ export const AdvancedSearch = ({ getMoviesOnfiltres, count }: IPropSearch) => {
 	const handleChange = (e: any, page: number) => {
 		setPage(page)
 		getMoviesOnfiltres({
+			title: searchMovie.value,
+			country: Number(selectForCountry.value),
+			genre: Number(selectForGenres.value),
+			order: selectForSort.value,
+			type: selectForType.value,
+			page
+		})
+		console.log({
 			title: searchMovie.value,
 			country: Number(selectForCountry.value),
 			genre: Number(selectForGenres.value),
@@ -57,12 +64,12 @@ export const AdvancedSearch = ({ getMoviesOnfiltres, count }: IPropSearch) => {
 
 				<MainSelect
 					id='genres-label'
-					label='Выберите жанр'
+					label='Выберите страну'
 					labelId='genres-label'
-					title='Выберите жанр'
+					title='Выберите страну'
 					titleId='genres-label'
-					value={selectForGenres.value}
-					onChange={selectForGenres.onChange}
+					value={selectForCountry.value}
+					onChange={selectForCountry.onChange}
 					options={
 						data?.countries.map(item => ({
 							id: item.id,
@@ -70,80 +77,49 @@ export const AdvancedSearch = ({ getMoviesOnfiltres, count }: IPropSearch) => {
 						})) || []
 					}
 				/>
+
 				<MainSelect
 					id='country-label'
-					label='Выберите страну'
+					label='Выберите жанр'
 					labelId='country-label'
-					title='Выберите страну'
+					title='Выберите жанр'
 					titleId='country-label'
-					value={selectForCountry.value}
-					onChange={selectForCountry.onChange}
+					value={selectForGenres.value}
+					onChange={selectForGenres.onChange}
 					options={
-						data?.genres.map(item => ({ id: item.id, options: item.genre })) ||
-						[]
+						data?.genres.map(item => ({
+							id: item.id,
+							options: item.genre
+						})) || []
 					}
 				/>
 
-				{/* <div>
-					<FormControl fullWidth className='flex'>
-						<InputLabel id='genres-label'>Выберите жанр</InputLabel>
-						<Select
-							labelId='genres-label'
-							id='genres-label'
-							label='Выберите жанр'
-							value={selectForGenres.value}
-							onChange={selectForGenres.onChange}
-						>
-							<MenuItem value=''>—</MenuItem>
-							{data?.genres.map(item => (
-								<MenuItem key={item.id} value={item.id}>
-									{item.genre}
-								</MenuItem>
-							))}
-						</Select>
-					</FormControl>
-				</div>
+				<MainSelect
+					id='content-label'
+					label='Выберите контент'
+					labelId='content-label'
+					title='Выберите контент'
+					titleId='content-label'
+					value={selectForType.value}
+					onChange={selectForType.onChange}
+					options={dataType || []}
+				/>
 
-				<div>
-					<FormControl fullWidth className='flex'>
-						<InputLabel id='type-label'>Что искать?</InputLabel>
-						<Select
-							labelId='type-label'
-							id='type-label'
-							label='Что искать?'
-							value={selectForType.value}
-							onChange={selectForType.onChange}
-						>
-							<MenuItem value='ALL'>Все</MenuItem>
-							<MenuItem value='FILM'>Фильм</MenuItem>
-							<MenuItem value='TV_SHOW'>Тв шоу</MenuItem>
-							<MenuItem value='TV_SERIES'>Сериал</MenuItem>
-							<MenuItem value='MINI_SERIES'>Мини сериал</MenuItem>
-						</Select>
-					</FormControl>
-				</div>
-
-				<div>
-					<FormControl fullWidth className='flex'>
-						<InputLabel id='type-label'>Сортировать по:</InputLabel>
-						<Select
-							labelId='type-label'
-							id='type-label'
-							label='Сортировать по:'
-							value={selectForSort.value}
-							onChange={selectForSort.onChange}
-						>
-							<MenuItem value='RATING'>Рейтинг</MenuItem>
-							<MenuItem value='NUM_VOTE'>Кол-во оценок</MenuItem>
-							<MenuItem value='YEAR'>Год</MenuItem>
-						</Select>
-					</FormControl> 
-								</div>
-					*/}
+				<MainSelect
+					id='type-label'
+					label='Сортировать по:'
+					labelId='type-label'
+					title='Сортировать по:'
+					titleId='type-label'
+					value={selectForSort.value}
+					onChange={selectForSort.onChange}
+					options={dataSort || []}
+				/>
 
 				<div className='mt-2'>
 					<Button
-						onClick={() =>
+						onClick={() => {
+							setPage(0)
 							getMoviesOnfiltres({
 								title: searchMovie.value,
 								country: Number(selectForCountry.value),
@@ -151,7 +127,7 @@ export const AdvancedSearch = ({ getMoviesOnfiltres, count }: IPropSearch) => {
 								order: selectForSort.value,
 								type: selectForType.value
 							})
-						}
+						}}
 						variant='outlined'
 					>
 						Поиск
