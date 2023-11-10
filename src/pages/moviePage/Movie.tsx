@@ -1,4 +1,4 @@
-import { Container, Pagination } from '@mui/material'
+import { Container } from '@mui/material'
 
 import { AdvancedSearch } from '../../components/advancedSearch/AdvancedSearch'
 import { Movies } from '../../components/movie/Movies'

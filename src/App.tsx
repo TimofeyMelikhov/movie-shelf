@@ -1,41 +1,78 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { RouteNames } from './router/routeModel';
-import { MainPage } from './pages/MainPage/Main';
-import { Login } from './pages/loginPage/Login';
-import { MovieDetails } from './pages/MovieDetailPage/MovieDetails';
-import { PersonDetails } from './pages/personDetailPage/PersonDetails';
-import { NotfoundPage } from './pages/notfound/NotfoundPage';
-import { RequireAuth } from './hoc/RequireAuth';
-import { Layout } from './components/layout/Layout';
-import Movie from './pages/moviePage/Movie';
-import Series from './pages/series/Series';
-import { ProfilePage } from './pages/profilePage/ProfilePage';
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+
+import { Layout } from './components/layout/Layout'
+
+import { RequireAuth } from './hoc/RequireAuth'
+import { MainPage } from './pages/MainPage/Main'
+import { MovieDetails } from './pages/MovieDetailPage/MovieDetails'
+import { Series } from './pages/filmFromCollections/ListsOfCollections'
+import { Login } from './pages/loginPage/Login'
+import Movie from './pages/moviePage/Movie'
+import { NotfoundPage } from './pages/notfound/NotfoundPage'
+import { PersonDetails } from './pages/personDetailPage/PersonDetails'
+import { ProfilePage } from './pages/profilePage/ProfilePage'
+import { RouteNames } from './router/routeModel'
 
 const App: React.FC = () => {
-  return (
-    <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route
-            index
-            element={
-              <RequireAuth>
-                <MainPage />
-              </RequireAuth>
-            }
-          />
-          <Route path={RouteNames.LOGIN} element={<Login />} />
-          <Route path={RouteNames.FILM} element={<RequireAuth><Movie /></RequireAuth>} />
-          <Route path={RouteNames.SERIES} element={<RequireAuth><Series /></RequireAuth>} />
-          <Route path={RouteNames.DETAILS} element={<RequireAuth><MovieDetails /></RequireAuth>} />
-          <Route path={RouteNames.PERSON_DETAIL} element={<RequireAuth><PersonDetails /></RequireAuth>} />
-          <Route path={RouteNames.PROFILE} element={<RequireAuth><ProfilePage /></RequireAuth>} />
-          <Route path="*" element={<NotfoundPage />} />
-        </Route>
-      </Routes>
-    </>
-  );
-};
+	return (
+		<>
+			<Routes>
+				<Route path='/' element={<Layout />}>
+					<Route
+						index
+						element={
+							<RequireAuth>
+								<MainPage />
+							</RequireAuth>
+						}
+					/>
+					<Route path={RouteNames.LOGIN} element={<Login />} />
+					<Route
+						path={RouteNames.SEARCH}
+						element={
+							<RequireAuth>
+								<Movie />
+							</RequireAuth>
+						}
+					/>
+					<Route
+						path={RouteNames.LISTS}
+						element={
+							<RequireAuth>
+								<Series />
+							</RequireAuth>
+						}
+					/>
+					<Route
+						path={RouteNames.DETAILS}
+						element={
+							<RequireAuth>
+								<MovieDetails />
+							</RequireAuth>
+						}
+					/>
+					<Route
+						path={RouteNames.PERSON_DETAIL}
+						element={
+							<RequireAuth>
+								<PersonDetails />
+							</RequireAuth>
+						}
+					/>
+					<Route
+						path={RouteNames.PROFILE}
+						element={
+							<RequireAuth>
+								<ProfilePage />
+							</RequireAuth>
+						}
+					/>
+					<Route path='*' element={<NotfoundPage />} />
+				</Route>
+			</Routes>
+		</>
+	)
+}
 
-export default App;
+export default App

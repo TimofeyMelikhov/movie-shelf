@@ -220,3 +220,10 @@ export interface IFiltersForMovies {
 	order?: string
 	page?: number
 }
+
+export interface ICollections {
+	id: number
+	title: string
+	total: number
+	pictures: string
+}

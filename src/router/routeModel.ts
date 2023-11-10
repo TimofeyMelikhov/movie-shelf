@@ -1,9 +1,9 @@
 export enum RouteNames {
-  LOGIN = 'login',
-  MAIN = '/',
-  FILM = 'films',
-  DETAILS = 'film/:id',
-  SERIES = 'series',
-  PERSON_DETAIL = 'name/:id',
-  PROFILE = 'profile'
+	LOGIN = 'login',
+	MAIN = '/',
+	SEARCH = 'search',
+	DETAILS = 'film/:id',
+	LISTS = 'lists',
+	PERSON_DETAIL = 'name/:id',
+	PROFILE = 'profile'
 }
