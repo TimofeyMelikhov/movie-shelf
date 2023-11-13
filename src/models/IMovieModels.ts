@@ -226,4 +226,10 @@ export interface ICollections {
 	title: string
 	total: number
 	pictures: string
+	typeCollection: string
+}
+
+export type TypeForCollection = {
+	id: string | undefined
+	page: number
 }

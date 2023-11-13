@@ -7,6 +7,7 @@ import { RequireAuth } from './hoc/RequireAuth'
 import { MainPage } from './pages/MainPage/Main'
 import { MovieDetails } from './pages/MovieDetailPage/MovieDetails'
 import { Series } from './pages/filmFromCollections/ListsOfCollections'
+import { ListCollection } from './pages/filmFromCollections/listCollection/ListCollection'
 import { Login } from './pages/loginPage/Login'
 import Movie from './pages/moviePage/Movie'
 import { NotfoundPage } from './pages/notfound/NotfoundPage'
@@ -37,7 +38,7 @@ const App: React.FC = () => {
 						}
 					/>
 					<Route
-						path={RouteNames.LISTS}
+						path={RouteNames.COLLECTIONS}
 						element={
 							<RequireAuth>
 								<Series />
@@ -65,6 +66,14 @@ const App: React.FC = () => {
 						element={
 							<RequireAuth>
 								<ProfilePage />
+							</RequireAuth>
+						}
+					/>
+					<Route
+						path={RouteNames.COLLECTION}
+						element={
+							<RequireAuth>
+								<ListCollection />
 							</RequireAuth>
 						}
 					/>

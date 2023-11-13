@@ -3,7 +3,8 @@ export enum RouteNames {
 	MAIN = '/',
 	SEARCH = 'search',
 	DETAILS = 'film/:id',
-	LISTS = 'lists',
+	COLLECTIONS = 'collections',
+	COLLECTION = 'collections/:id',
 	PERSON_DETAIL = 'name/:id',
 	PROFILE = 'profile'
 }

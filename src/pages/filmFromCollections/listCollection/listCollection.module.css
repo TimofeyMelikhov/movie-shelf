@@ -1,0 +1,6 @@
+.main_container {
+	@apply flex container mx-auto;
+}
+.movie_container {
+	@apply flex flex-wrap flex-1 container mx-auto pt-5 justify-around bg-white overflow-hidden sm:flex sm:flex-wrap sm:pt-5 sm:justify-around;
+}

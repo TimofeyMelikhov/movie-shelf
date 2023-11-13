@@ -8,7 +8,7 @@ export function Menu() {
 			<div className='flex flex-col py-2 px-4'>
 				<Link to='/'>Главная</Link>
 				<Link to='/search'>Расширенный поиск</Link>
-				<Link to='/lists'>Топы фильмов</Link>
+				<Link to='/collections'>Топы фильмов</Link>
 			</div>
 		</div>
 	)

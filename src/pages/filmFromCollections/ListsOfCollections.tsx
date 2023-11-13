@@ -12,6 +12,7 @@ export function Series() {
 						title={el.title}
 						pictures={el.pictures}
 						total={el.total}
+						typeCollection={el.typeCollection}
 					/>
 				))}
 			</div>

@@ -23,7 +23,8 @@ import {
 	IStaff,
 	ServerMoviesResponse,
 	ServerResponse,
-	ServerSearchResponse
+	ServerSearchResponse,
+	TypeForCollection
 } from '../models/IMovieModels'
 
 export const movieApi = createApi({
@@ -131,6 +132,18 @@ export const movieApi = createApi({
 			query: () => ({
 				url: '/v2.2/films/filters'
 			})
+		}),
+		getMoviesFromCollection: build.query<
+			ServerMoviesResponse<IMovie>,
+			TypeForCollection
+		>({
+			query: ({ id, page }) => ({
+				url: '/v2.2/films/collections',
+				params: {
+					type: id,
+					page
+				}
+			})
 		})
 	})
 })
@@ -142,5 +155,6 @@ export const {
 	useGetDetailsPersonQuery,
 	useGetCombineDataOnMovieQuery,
 	useSearchPersonQuery,
-	useGetFiltersForMovieQuery
+	useGetFiltersForMovieQuery,
+	useGetMoviesFromCollectionQuery
 } = movieApi
