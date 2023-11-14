@@ -1,7 +1,11 @@
 {
   "files": {
-    "main.css": "/movie-shelf/static/css/main.55c5fcf1.css",
-    "main.js": "/movie-shelf/static/js/main.5f0df691.js",
+    "main.css": "/movie-shelf/static/css/main.80d35ed8.css",
+    "main.js": "/movie-shelf/static/js/main.a3a0e0dc.js",
+    "static/media/comics.png": "/movie-shelf/static/media/comics.f164c35b38550a8060ef.png",
+    "static/media/vampire.png": "/movie-shelf/static/media/vampire.84d7923f468c780d0780.png",
+    "static/media/250.png": "/movie-shelf/static/media/250.a4d636d41f47979a7a2e.png",
+    "static/media/bestMovies.png": "/movie-shelf/static/media/bestMovies.5653fa4773abf8cb15eb.png",
     "static/media/slick.svg": "/movie-shelf/static/media/slick.2630a3e3eab21c607e21.svg",
     "static/media/slick.eot": "/movie-shelf/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/movie-shelf/static/media/slick.c94f7671dcc99dce43e2.ttf",
@@ -13,11 +17,11 @@
     "static/media/deslike.svg": "/movie-shelf/static/media/deslike.12bd87f5ecdf18dfbd9a.svg",
     "static/media/heart_active.svg": "/movie-shelf/static/media/heart_active.cff091e8537472243004.svg",
     "static/media/down_arrow.svg": "/movie-shelf/static/media/down_arrow.98e350107d4482689a9a.svg",
-    "main.55c5fcf1.css.map": "/movie-shelf/static/css/main.55c5fcf1.css.map",
-    "main.5f0df691.js.map": "/movie-shelf/static/js/main.5f0df691.js.map"
+    "main.80d35ed8.css.map": "/movie-shelf/static/css/main.80d35ed8.css.map",
+    "main.a3a0e0dc.js.map": "/movie-shelf/static/js/main.a3a0e0dc.js.map"
   },
   "entrypoints": [
-    "static/css/main.55c5fcf1.css",
-    "static/js/main.5f0df691.js"
+    "static/css/main.80d35ed8.css",
+    "static/js/main.a3a0e0dc.js"
   ]
 }
