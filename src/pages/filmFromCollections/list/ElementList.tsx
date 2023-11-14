@@ -25,15 +25,16 @@ export const ElementList = ({
 
 	return (
 		<div className={classes.container} onClick={clickHandler}>
-			<div className='flex'>
-				<div className='mr-[15px]'>
-					<img src={pictures} alt='image top' />
+			<div className='flex justify-between'>
+				<div className='flex'>
+					<img src={pictures} className='w-[88px]' alt='image top' />
+					<div className='ml-[15px]'>
+						<h2 className='font-bold'>{title}</h2>
+						<p className='font-light'>{total} фильмов</p>
+					</div>
 				</div>
-				<div>
-					<h2 className='font-bold'>{title}</h2>
-					<p className='font-light'>{total} фильмов</p>
-				</div>
-				<div className='ml-[300px] font-light'>
+
+				<div className='flex ml-[300px] font-light'>
 					<p>
 						{moviesWatchedCount} из {total}
 					</p>
