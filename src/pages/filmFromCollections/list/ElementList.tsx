@@ -28,7 +28,7 @@ export const ElementList = ({
 			<div className='flex justify-between'>
 				<div className='flex'>
 					<img src={pictures} className='w-[88px]' alt='image top' />
-					<div className='ml-[15px]'>
+					<div className='flex flex-col items-center ml-[15px]'>
 						<h2 className='font-bold'>{title}</h2>
 						<p className='font-light'>{total} фильмов</p>
 					</div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 
+import { Awards } from '../../components/awards/Awards'
 import { Preloader } from '../../components/preloader/Preloader'
 import { Reviews } from '../../components/reviews/Reviews'
 
@@ -15,7 +16,7 @@ import { Facts } from './facts/Facts'
 export const MovieDetails: React.FC = () => {
 	const { id } = useParams<'id'>()
 
-	const { data, isLoading } = useGetCombineDataOnMovieQuery(id)
+	const { data, isLoading, isFetching } = useGetCombineDataOnMovieQuery(id)
 
 	const [hasSequelsAndPrequels, setHasSequelsAndPrequels] = useState(false)
 
@@ -157,7 +158,7 @@ export const MovieDetails: React.FC = () => {
 
 	return (
 		<>
-			{isLoading ? (
+			{isLoading || isFetching ? (
 				<Preloader />
 			) : (
 				<div className='container mx-auto pt-5 max-w-[1300px] bg-white '>
@@ -383,6 +384,11 @@ export const MovieDetails: React.FC = () => {
 							<h4> В главных ролях ›</h4>
 							<div className='flex flex-col mt-[10px] text-[13px]'>
 								{mainActor}
+							</div>
+							<div className='mt-8'>
+								{data?.awards.items.map((item, index) => (
+									<Awards key={index} awards={item} />
+								))}
 							</div>
 						</div>
 					</div>

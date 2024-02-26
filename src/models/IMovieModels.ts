@@ -195,6 +195,7 @@ export interface CombinedData {
 	SimilarsMovie: ServerResponse<IRelatedFilms>
 	reviewsMovie: IResponseReviews<IReviews>
 	movieTrailers: ServerResponse<IMovieTrailer>
+	awards: ServerResponse<IAwards>
 }
 
 export interface IFilters {
@@ -233,3 +234,14 @@ export type TypeForCollection = {
 	id: string | undefined
 	page: number
 }
+
+export interface IAwards {
+	name: string
+	win: boolean
+	imageUrl: string | null
+	nominationName: string
+	year: number
+	persons: AwardsPerosn[] | []
+}
+
+type AwardsPerosn = Omit<IPersonDetail, 'facts' | 'spouses' | 'films'>

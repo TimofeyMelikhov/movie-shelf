@@ -38,14 +38,6 @@ export const AdvancedSearch = ({ getMoviesOnfiltres, count }: IPropSearch) => {
 			type: selectForType.value,
 			page
 		})
-		console.log({
-			title: searchMovie.value,
-			country: Number(selectForCountry.value),
-			genre: Number(selectForGenres.value),
-			order: selectForSort.value,
-			type: selectForType.value,
-			page
-		})
 	}
 
 	return (

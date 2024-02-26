@@ -6,6 +6,7 @@ import {
 
 import {
 	CombinedData,
+	IAwards,
 	IBudget,
 	IDistribution,
 	IFacts,
@@ -103,6 +104,7 @@ export const movieApi = createApi({
 					} catch (error) {
 						PrequelMovies = undefined
 					}
+					const AwardsMovie = await fetchWithBQ(`/v2.2/films/${id}/awards`)
 
 					const combinedData: CombinedData = {
 						movieDetails: baseDetailMovie.data as IMovieDetail,
@@ -114,7 +116,8 @@ export const movieApi = createApi({
 						PrequelMovies: PrequelMovies?.data as IRelatedFilms[],
 						SimilarsMovie: SimilarsMovie.data as ServerResponse<IRelatedFilms>,
 						reviewsMovie: reviews.data as IResponseReviews<IReviews>,
-						movieTrailers: trailer.data as ServerResponse<IMovieTrailer>
+						movieTrailers: trailer.data as ServerResponse<IMovieTrailer>,
+						awards: AwardsMovie.data as ServerResponse<IAwards>
 					}
 
 					return { data: combinedData }
@@ -156,5 +159,5 @@ export const {
 	useGetCombineDataOnMovieQuery,
 	useSearchPersonQuery,
 	useGetFiltersForMovieQuery,
-	useGetMoviesFromCollectionQuery
+	useLazyGetMoviesFromCollectionQuery
 } = movieApi

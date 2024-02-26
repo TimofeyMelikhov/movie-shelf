@@ -31,7 +31,7 @@ export const Movies = ({ movie }: moviesProps) => {
 			className={classes.wrapper}
 			onClick={() => clickHandler(movie.kinopoiskId)}
 		>
-			<p style={{ fontSize: '28px', fontWeight: '700', cursor: 'pointer' }}>
+			<p style={{ fontSize: '20px', fontWeight: '700', cursor: 'pointer' }}>
 				{movie.nameRu}
 			</p>
 			<img src={movie.posterUrlPreview} alt='poster' />

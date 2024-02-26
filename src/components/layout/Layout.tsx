@@ -1,11 +1,13 @@
-import { Outlet } from "react-router-dom"
-import { Navigation } from "../navbar/Navigation"
+import { Outlet } from 'react-router-dom'
+
+import { Menu } from '../menu/Menu'
+import { Navigation } from '../navbar/Navigation'
 
 export const Layout = () => {
-  return (
-    <>
-      <Navigation/>
-      <Outlet />
-    </>
-  )
+	return (
+		<>
+			<Navigation />
+			<Outlet />
+		</>
+	)
 }
