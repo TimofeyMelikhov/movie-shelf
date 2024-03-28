@@ -1,0 +1,29 @@
+.inputWrapper {
+	display: flex;
+	position: relative;
+	min-width: 100%;
+	margin-bottom: 10px;
+	height: 42px;
+	font-size: 16px;
+	padding: 0px 8px 0px 16px;
+	border: 2px solid #dadada;
+	border-radius: 50px;
+	& input {
+		outline: none;
+		color: #161616;
+		font-weight: 500;
+		width: 85%;
+	}
+}
+
+.resetInput {
+	background: url('../../../assets/img/Cross.svg') no-repeat;
+	background-size: 20px;
+	height: 20px;
+	width: 20px;
+	position: absolute;
+	top: 50%;
+	transform: translate(0%, -50%);
+	cursor: pointer;
+	right: 15px;
+}

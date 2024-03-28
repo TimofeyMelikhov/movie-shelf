@@ -8,12 +8,14 @@ export function ProfilePage() {
 	return (
 		<div className='container m-auto'>
 			<div className='text-center mt-[20px] text-xl'>
-				Любимые звезды({favoritePersons.length})
-				<div>
-					{favoritePersons.map(p => (
-						<FavoritesPerson key={p.personId} person={p} />
-					))}
-				</div>
+				Любимые звезды
+				{favoritePersons.length ? (
+					<div>
+						<FavoritesPerson person={favoritePersons} />
+					</div>
+				) : (
+					<div>Данные отсутствуют...</div>
+				)}
 			</div>
 		</div>
 	)

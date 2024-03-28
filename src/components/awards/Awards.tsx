@@ -11,7 +11,7 @@ export const Awards = ({ awards }: IAwardsProps) => {
 				<div>
 					<div>{awards.name}</div>
 					<div className='w-10'>
-						{<img src={awards.imageUrl} alt='award' />}
+						{<img src={awards.imageUrl} alt={awards.nominationName} />}
 					</div>
 					<div>{awards.nominationName}</div>
 					<div>{awards.year}</div>
